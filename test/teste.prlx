@@ -1,0 +1,18 @@
+This is program ExemploUm.
+
+It presents:
+    unalterable number Idade = 18;
+    unalterable answer MaiorIdade;
+    alterable number AnoAtual;
+    vector of symbol(5) Nome;
+
+Let us begin:
+    capture(AnoAtual, Nome);
+    MaiorIdade = Idade >= 18;
+    show("Ano atual:", AnoAtual, " | Maior de idade?", MaiorIdade);
+
+    just in case that (MaiorIdade == yes) do
+        show("Você é maior de idade.");
+    otherwise do
+        show("Você ainda não atingiu a maioridade.");
+That would be all.
