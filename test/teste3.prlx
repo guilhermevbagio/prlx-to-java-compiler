@@ -1,0 +1,50 @@
+This is program ExemploTres.
+
+It presents:
+    vector of number(2x2) Matriz;
+    alterable number i;
+    alterable number j;
+    alterable answer Controle;
+    alterable number Soma;
+    alterable answer Resultado;
+    unalterable answer Verdade = yes;
+
+Let us begin:
+    i := 1;
+    Soma := 0;
+
+    show("Preencha a matriz 2x2:");
+
+    considering i from 1 to 2 by 1 do [
+        j := 1;
+        considering j from 1 to 2 by 1 do [
+            capture(Matriz(i, j));
+        ];
+    ];
+
+    i := 2;
+    j := 2;
+
+    as long as (i >= 1) do [
+        as long as (j >= 1) do [
+            if ((Matriz(i, j) < 0) or !(Matriz(i, j) >= 0)) then abandon;
+            Soma := Soma + Matriz(i, j);
+            j := j - 1;
+        ];
+        i := i - 1;
+        j := 2;
+    ];
+
+    Resultado := (Soma > 10) xor (Verdade == yes);
+
+    just in case that (Resultado == yes) do [
+        show("Soma relevante:", Soma);
+    ] otherwise do [
+        show("Soma baixa ou condição não exclusiva.");
+    ];
+
+    considering i from 5 to 1 by -1 do [
+        if (i == 3) then go to next iteration;
+        show("Contagem reversa:", i);
+    ];
+That would be all.

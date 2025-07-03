@@ -1,0 +1,30 @@
+This is program ExemploDois.
+
+It presents:
+    vector of number(5) Notas;
+    alterable number i;
+    alterable number Soma;
+    alterable number Media;
+    unalterable answer Aprovado;
+
+Let us begin:
+    Soma := 0;
+    i := 1;
+
+    show("Digite as 5 notas:");
+
+    as long as (i <= 5) do [
+        capture(Notas(i));
+        Soma := Soma + Notas(i);
+        i := i + 1;
+    ];
+
+    Media := Soma / 5;
+
+    Aprovado = Media >= 6;
+
+    just in case that (Aprovado == yes) do
+        show("Aprovado com média:", Media);
+    otherwise do
+        show("Reprovado com média:", Media);
+That would be all.
