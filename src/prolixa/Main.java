@@ -13,16 +13,14 @@ public class Main
 			File[] files = folder.listFiles();
 			
 			for(File file : files) {
-				
-				String arquivo = file.getName();
 
 				Lexer lexer =
 						new Lexer(
 								new PushbackReader(  
-										new FileReader(arquivo), 1024)); 
+										new FileReader(file), 1024)); 
 				Token token;
 				
-				System.out.println("-------------" + file.getName().toUpperCase() + "-------------");
+				System.out.println("\n -------------" + file.getName().toUpperCase() + "------------- \n");
 				
 				while(!((token = lexer.next()) instanceof EOF)) {
 					System.out.println(token.getClass());

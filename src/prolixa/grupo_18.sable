@@ -1,5 +1,3 @@
-Package prolixa;
-
 Helpers
  digito = ['0' .. '9'];
  espaco = ' ';
