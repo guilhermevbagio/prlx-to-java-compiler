@@ -7,44 +7,94 @@ Helpers
  letra_minuscula = ['a' .. 'z'];
  char = [[31 .. 255] - 34];
  letra = (letra_minuscula | letra_maiuscula);
- rc = 13;
- nl = 10;
- 
- 
+ rc = 13;        
+ nl = 10;        			
+ underline = '_';
+
 Tokens
- numero = digito+;
- identificador = letra+;
- 
- 
+ numero = digito+ ('.' digito+)?; 
+ identificador = letra_maiuscula (letra_maiuscula | letra_minuscula | underline)*;
+
  ponto = '.';
  dois_pontos = ':';
  virgula = ',';
  ponto_e_virgula = ';';
- 
- 
+ simbolo = '\'' (char | '\\n' | '\\t') '\'';
+ booleano = 'yes' | 'no';
+
+ this = 'This';
+ is = 'is';
+ program = 'program';
+ it = 'It';
+ presents = 'presents';
+ let = 'Let';
+ us = 'us';
+ begin = 'begin';
+ that = 'That';
+ would = 'would';
+ be = 'be';
+ all = 'all';
+
+ alterable = 'alterable';
+ unalterable = 'unalterable';
+ vector = 'vector';
+ of = 'of';
+ number = 'number';
+ answer = 'answer';
+ symbol = 'symbol';
+
+ capture = 'capture';
+ show = 'show';
+
+ just = 'just';
+ in = 'in';
+ case = 'case';
+ that_kw = 'that';
+ do = 'do';
+ otherwise = 'otherwise';
+ as = 'as';
+ long = 'long';
+ considering = 'considering';
+ from = 'from';
+ to = 'to';
+ by = 'by';
+
+ abandon = 'abandon';
+ go = 'go';
+ next = 'next';
+ iteration = 'iteration';
+
  inicializacao = '=';
  atribuicao = ':=';
  igual = '==';
+ diferente = '!=';
  maiorigual = '>=';
  menorigual = '<=';
- 
-  
+ maior = '>';
+ menor = '<';
+
  soma = '+';
  menos = '-';
  mult = '*';
  div = '/';
- mod = '%';
- 
- 
+ mod = '//';
+
+ and = 'and';
+ or = 'or';
+ not = '!';
+ xor = 'xor';
+
  literal = '"' char* '"';
 
  par_esq = '(';
  par_dir = ')';
- 
- 
- vazio = (espaco | rc | nl)+;
+ colchete_esq = '[';
+ colchete_dir = ']';
 
+ comentario_inicio = '{';
+ comentario_fim = '}';
+
+ vazio = (espaco | rc | nl)+;
 
 Ignored Tokens
  vazio;
-
