@@ -20,11 +20,12 @@ public class Main
 										new FileReader(file), 1024)); 
 				Token token;
 				
-				System.out.println("\n -------------" + file.getName().toUpperCase() + "------------- \n");
+				System.out.println("\n ---------------" + file.getName().toUpperCase() + "--------------- \n");
 				
 				while(!((token = lexer.next()) instanceof EOF)) {
-					System.out.println(token.getClass());
-					System.out.println(" ( "+token.toString()+")");
+					System.out.println("\n->	" + token.getClass());
+					if(token.getClass() != TVazio.class)
+						System.out.println(" 		( "+token.toString()+")\n");
 				}
 			}
 		}

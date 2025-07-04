@@ -1,3 +1,5 @@
+Package prolixa;
+
 Helpers
  digito = ['0' .. '9'];
  espaco = ' ';
@@ -10,15 +12,14 @@ Helpers
  underline = '_';
 
 Tokens
- numero = digito+ ('.' digito+)?; 
- identificador = letra_maiuscula (letra_maiuscula | letra_minuscula | underline)*;
+
 
  ponto = '.';
  dois_pontos = ':';
  virgula = ',';
  ponto_e_virgula = ';';
  simbolo = '\' (char | '\\n' | '\\t') '\';
- booleano = 'yes' | 'no';
+ valor_booleano = 'yes' | 'no';
 
  this = 'This';
  is = 'is';
@@ -91,8 +92,12 @@ Tokens
 
  comentario_inicio = '{';
  comentario_fim = '}';
+ comentario = comentario_inicio char* comentario_fim
+ 
+ numero = digito+ ('.' digito+)?; 
+ identificador = letra_maiuscula (letra_maiuscula | letra_minuscula | underline)*;
 
  vazio = (espaco | rc | nl)+;
 
 Ignored Tokens
- vazio;
+ vazio, comentario;
