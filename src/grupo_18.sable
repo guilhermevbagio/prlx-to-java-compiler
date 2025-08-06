@@ -101,3 +101,75 @@ Tokens
 
 Ignored Tokens
  vazio, comentario;
+ 
+Productions
+
+ programa =
+    this is program identificador ponto
+    [declaracoes]
+    [comandos];
+
+ declaracoes =
+    it presents dois_pontos declaracao+;
+
+ comandos =
+    let us begin dois_pontos comando+ that would be all ponto;
+
+ declaracao =
+    alterable tipo identificador ponto_e_virgula
+  | unalterable tipo identificador [inicializacao valor] ponto_e_virgula
+  | vector of tipo par_esq exp { 'x' exp } par_dir identificador ponto_e_virgula;
+
+ tipo =
+    number
+  | answer
+  | symbol;
+
+ var =
+    identificador
+  | identificador par_esq exp { virgula exp } par_dir;
+
+ unalt =
+    identificador;
+
+ valor =
+    simbolo
+  | booleano
+  | numero
+  | literal;
+
+ comando =
+    var atribuicao exp ponto_e_virgula
+  | unalt inicializacao exp ponto_e_virgula
+  | capture par_esq { var virgula } var par_dir ponto_e_virgula
+  | show par_esq { exp virgula } exp par_dir ponto_e_virgula
+  | just in case that_kw par_esq exp par_dir do comando [otherwise do comando]
+  | as long as par_esq exp par_dir do comando
+  | considering var from exp to exp by exp do comando
+  | abandon ponto_e_virgula
+  | go to next iteration ponto_e_virgula
+  | bloco;
+
+ bloco =
+    colchete_esq { declaracao } { comando } colchete_dir;
+
+ exp =
+    valor
+  | var
+  | par_esq exp par_dir
+  | menos exp
+  | exp soma exp
+  | exp menos exp
+  | exp mult exp
+  | exp div exp
+  | exp mod exp
+  | exp igual exp
+  | exp diferente exp
+  | exp menorigual exp
+  | exp maiorigual exp
+  | exp menor exp
+  | exp maior exp
+  | not exp
+  | exp and exp
+  | exp or exp
+  | exp xor exp;
