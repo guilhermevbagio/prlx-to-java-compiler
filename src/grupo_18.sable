@@ -1,4 +1,4 @@
-Package prolixa;
+Package grupo_18;
 
 Helpers
  digito = ['0' .. '9'];
@@ -92,6 +92,10 @@ Tokens
  colchete_esq = '[';
  colchete_dir = ']';
 
+ vezes = 'x';
+
+
+ comentario = comentario_inicio char* comentario_fim;
  comentario = comentario_inicio (char | vazio)* comentario_fim;
  
  numero = digito+ ('.' digito+)?; 
@@ -107,72 +111,221 @@ Ignored Tokens
  
 Productions
 
- programa =
-    this is program identificador ponto
-    [declaracoes]
-    [comandos];
+programa =
+    {programa_alt1} this is program identificador ponto declaracoes comandos
+  | {programa_alt2} this is program identificador ponto declaracoes
+  | {programa_alt3} this is program identificador ponto comandos
+  | {programa_alt4} this is program identificador ponto
+  ;
 
- declaracoes =
-    it presents dois_pontos declaracao+;
+declaracoes =
+    {declaracoes_head} it presents dois_pontos lista_declaracao
+  ;
 
- comandos =
-    let us begin dois_pontos comando+ that would be all ponto;
+lista_declaracao =
+    {lista_declaracao_unica} declaracao
+  | {lista_declaracao_rec}   lista_declaracao declaracao
+  ;
 
- declaracao =
-    alterable tipo identificador ponto_e_virgula
-  | unalterable tipo identificador [inicializacao valor] ponto_e_virgula
-  | vector of tipo par_esq exp { 'x' exp } par_dir identificador ponto_e_virgula;
+comandos =
+    {comandos_head} let us begin dois_pontos lista_comando that_kw would be all ponto
+  ;
 
- tipo =
-    number
-  | answer
-  | symbol;
+lista_comando =
+    {lista_comando_unico} comando
+  | {lista_comando_rec}   lista_comando comando
+  ;
 
- var =
-    identificador
-  | identificador par_esq exp { virgula exp } par_dir;
+declaracao =
+    {declaracao_mut}         alterable   tipo identificador ponto_e_virgula
+  | {declaracao_unalt}       unalterable tipo identificador ponto_e_virgula
+  | {declaracao_unalt_init}  unalterable tipo identificador inicializacao valor ponto_e_virgula
+  | {declaracao_vec}         vector of tipo tamanhos identificador ponto_e_virgula
+  ;
 
- unalt =
-    identificador;
+tamanhos =
+    {tamanhos_um} par_esq dimensao_vetor par_dir
+  ;
 
- valor =
-    simbolo
-  | booleano
-  | numero
-  | literal;
+dimensao_vetor =
+    {dimensao_single} exp
+  | {dimensao_mult}   dimensao_vetor vezes exp
+  ;
 
- comando =
-    var atribuicao exp ponto_e_virgula
-  | unalt inicializacao exp ponto_e_virgula
-  | capture par_esq { var virgula } var par_dir ponto_e_virgula
-  | show par_esq { exp virgula } exp par_dir ponto_e_virgula
-  | just in case that_kw par_esq exp par_dir do comando [otherwise do comando]
-  | as long as par_esq exp par_dir do comando
-  | considering var from exp to exp by exp do comando
-  | abandon ponto_e_virgula
-  | go to next iteration ponto_e_virgula
-  | bloco;
+tipo =
+    {tipo_number} number
+  | {tipo_answer} answer
+  | {tipo_symbol} symbol
+  ;
 
- bloco =
-    colchete_esq { declaracao } { comando } colchete_dir;
+var =
+    {var_id}   identificador
+  | {var_call} identificador par_esq lista_arg_rparen
+  ;
 
- exp =
-    valor
-  | var
-  | par_esq exp par_dir
-  | menos exp
-  | exp soma exp
-  | exp menos exp
-  | exp mult exp
-  | exp div exp
-  | exp mod exp
-  | exp igual exp
-  | exp diferente exp
-  | exp menorigual exp
-  | exp maiorigual exp
-  | exp menor exp
-  | exp maior exp
-  | not exp
-  | exp and exp
-  | exp or exp
-  | exp xor exp;
+lista_arg_rparen =
+    {larg_head} or_exp_rparen   /* reaproveita o mesmo “fechamento lógico” */
+  ;
+lista_arg =
+    {lista_arg_primeiro} exp lista_arg_tail
+  ;
+
+lista_arg_tail =
+    {lista_arg_cont} virgula exp lista_arg_tail
+  | {lista_arg_fim}
+  ;
+
+unalt =
+    {unalt_id} identificador
+  ;
+
+valor =
+    {valor_symb} simbolo
+  | {valor_bool} valor_booleano
+  | {valor_num}  numero
+  | {valor_str}  literal
+  ;
+
+comando =
+    {comando_atr}      var atribuicao exp ponto_e_virgula
+  | {comando_init}     unalt inicializacao exp ponto_e_virgula
+  | {comando_capture}  capture par_esq lista_var par_dir ponto_e_virgula
+  | {comando_show}     show par_esq lista_exp_rparen ponto_e_virgula
+  | {comando_if}       if_then
+  | {comando_ifelse}   if_then else_tail
+  | {comando_while}    while_stmt
+  | {comando_for}      for_stmt
+  | {comando_break}    abandon ponto_e_virgula
+  | {comando_continue} go to next iteration ponto_e_virgula
+  | {comando_bloco}    bloco
+  ;
+
+if_then =
+    {if_then} just in case that_kw par_esq exp par_dir do comando
+  ;
+
+else_tail =
+    {else_tail} otherwise do comando
+  ;
+as_long =
+    {as_long_kw} as long
+  ;
+while_stmt =
+    {while_stmt_kw} as_long as par_esq exp par_dir do comando
+  ;
+
+for_stmt =
+    {for_stmt_kw} considering var for_from
+  ;
+
+for_from =
+    {for_from_kw} from exp for_to
+  ;
+
+for_to =
+    {for_to_kw} to exp for_by
+  ;
+
+for_by =
+    {for_by_kw} by exp do comando
+  ;
+
+lista_var =
+    {lista_var_primeira} var lista_var_tail
+  ;
+
+lista_var_tail =
+    {lista_var_cont} virgula var lista_var_tail
+  | {lista_var_fim}
+  ;
+
+lista_exp_rparen =
+    {lexp_head} or_exp_rparen
+  ;
+bloco =
+    {bloco_blk} colchete_esq decls_opt cmds_opt colchete_dir
+  ;
+
+decls_opt =
+    {decls_opt_vazio}
+  | {decls_opt_com} lista_declaracao
+  ;
+
+cmds_opt =
+    {cmds_opt_vazio}
+  | {cmds_opt_com} lista_comando
+  ;
+
+exp = or_exp ;
+
+or_exp        = {or_norm} and_exp or_tail ;
+or_exp_rparen = {or_rpar} and_exp_rparen or_tail_rparen ;
+
+or_tail =
+    {or_more} or  and_exp or_tail
+  | {xor_more} xor and_exp or_tail
+  | {or_end}
+  ;
+
+or_tail_rparen =
+    {or_r_more}  or  and_exp_rparen or_tail_rparen
+  | {xor_r_more} xor and_exp_rparen or_tail_rparen
+  | {or_r_par}   par_dir                  /* fecha a lista */
+  | {or_r_com}   virgula lista_exp_rparen /* próxima expressão */
+  ;
+
+and_exp =
+    {and_term} rel_exp
+  | {and_more} rel_exp and and_exp
+  ;
+
+and_exp_rparen =
+    {and_r_term} rel_exp
+  | {and_r_more} rel_exp and and_exp_rparen
+  ;
+and_tail_rparen =
+    {and_r_more} and rel_exp and_tail_rparen
+  | {and_r_par}  par_dir                  
+  | {and_r_com}  virgula lista_exp_rparen 
+  ;
+
+rel_exp =
+    {rel_head} add_exp rel_tail
+  ;
+
+rel_tail =
+    {rel_gt}  maior      add_exp
+  | {rel_lt}  menor      add_exp
+  | {rel_ge}  maiorigual add_exp
+  | {rel_le}  menorigual add_exp
+  | {rel_eq}  igual      add_exp
+  | {rel_ne}  diferente  add_exp
+  | {rel_end}
+  ;
+
+add_exp =
+    {add_term}  mul_exp
+  | {add_plus}  mul_exp soma  add_exp
+  | {add_minus} mul_exp menos add_exp
+  ;
+
+mul_exp =
+    {mul_term} unary_exp
+  | {mul_times} unary_exp mult mul_exp
+  | {mul_div}   unary_exp div  mul_exp
+  | {mul_mod}   unary_exp mod  mul_exp
+  ;
+
+mul_tail =
+    {mul_times} mult unary_exp mul_tail
+  | {mul_div}   div  unary_exp mul_tail
+  | {mul_mod}   mod  unary_exp mul_tail
+  | {mul_end}
+  ;
+
+unary_exp =
+    {un_neg}   menos unary_exp
+  | {un_paren} par_esq exp par_dir
+  | {un_var}   var
+  | {un_val}   valor
+  ;
