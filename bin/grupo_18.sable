@@ -12,9 +12,9 @@ Helpers
  underline = '_';
  comentario_inicio = '{';
  comentario_fim = '}';
+ single_quote = 39;
 
 Tokens
-
 
  ponto = '.';
  dois_pontos = ':';
@@ -93,14 +93,15 @@ Tokens
  colchete_dir = ']';
 
  vezes = 'x';
-
-
- comentario = comentario_inicio char* comentario_fim;
+ comentario = comentario_inicio (char | vazio)* comentario_fim;
  
  numero = digito+ ('.' digito+)?; 
  identificador = letra_maiuscula (letra_maiuscula | letra_minuscula | underline)*;
 
  vazio = (espaco | rc | nl)+;
+ 
+ symbol_value = single_quote char single_quote;
+ vector_matrix = digito 'x' digito;
 
 Ignored Tokens
  vazio, comentario;
