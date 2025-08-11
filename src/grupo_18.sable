@@ -94,14 +94,12 @@ Tokens
 
  vezes = 'x';
 
-
- comentario = comentario_inicio char* comentario_fim;
- comentario = comentario_inicio (char | vazio)* comentario_fim;
+ vazio = (espaco | rc | nl)+;
+ comentario = comentario_inicio (char | espaco )* comentario_fim;
  
  numero = digito+ ('.' digito+)?; 
  identificador = letra_maiuscula (letra_maiuscula | letra_minuscula | underline)*;
 
- vazio = (espaco | rc | nl)+;
  
  symbol_value = single_quote char single_quote;
  vector_matrix = digito 'x' digito;
@@ -112,10 +110,7 @@ Ignored Tokens
 Productions
 
 programa =
-    {programa_alt1} this is program identificador ponto declaracoes comandos
-  | {programa_alt2} this is program identificador ponto declaracoes
-  | {programa_alt3} this is program identificador ponto comandos
-  | {programa_alt4} this is program identificador ponto
+    {programa} this is program identificador ponto declaracoes? comandos?
   ;
 
 declaracoes =
@@ -186,30 +181,41 @@ valor =
   | {valor_str}  literal
   ;
 
+
 comando =
-    {comando_atr}      var atribuicao exp ponto_e_virgula
+    {comando_cond}     condicional
+  | {comando_atr}      var atribuicao exp ponto_e_virgula
   | {comando_init}     unalt inicializacao exp ponto_e_virgula
   | {comando_capture}  capture par_esq lista_var par_dir ponto_e_virgula
   | {comando_show}     show par_esq lista_exp_rparen ponto_e_virgula
-  | {comando_if}       if_then
-  | {comando_ifelse}   if_then else_tail
   | {comando_while}    while_stmt
   | {comando_for}      for_stmt
   | {comando_break}    abandon ponto_e_virgula
   | {comando_continue} go to next iteration ponto_e_virgula
   | {comando_bloco}    bloco
-  ;
+;
 
-if_then =
-    {if_then} just in case that_kw par_esq exp par_dir do comando
-  ;
+condicional =
+    {matched_cond} matched
+  | {unmatched_cond} unmatched
+;
 
-else_tail =
-    {else_tail} otherwise do comando
-  ;
+matched =
+    {matched_if_else} just in case that_kw par_esq exp par_dir do lista_comando matched_tail
+;
+
+matched_tail =
+	otherwise lista_comando
+;
+
+unmatched =
+    {unmatched_cmd} just in case that_kw par_esq exp par_dir do lista_comando
+;
+
 as_long =
     {as_long_kw} as long
   ;
+  
 while_stmt =
     {while_stmt_kw} as_long as par_esq exp par_dir do comando
   ;
@@ -280,8 +286,8 @@ and_exp =
   ;
 
 and_exp_rparen =
-    {and_r_term} rel_exp
-  | {and_r_more} rel_exp and and_exp_rparen
+    {and_exp_r_term} rel_exp
+  | {and_exp_r_more} rel_exp and and_exp_rparen
   ;
 and_tail_rparen =
     {and_r_more} and rel_exp and_tail_rparen
@@ -310,10 +316,10 @@ add_exp =
   ;
 
 mul_exp =
-    {mul_term} unary_exp
-  | {mul_times} unary_exp mult mul_exp
-  | {mul_div}   unary_exp div  mul_exp
-  | {mul_mod}   unary_exp mod  mul_exp
+    {mul_exp_term}  unary_exp
+  | {mul_exp_times} unary_exp mult mul_exp
+  | {mul_exp_div}   unary_exp div  mul_exp
+  | {mul_exp_mod}   unary_exp mod  mul_exp
   ;
 
 mul_tail =

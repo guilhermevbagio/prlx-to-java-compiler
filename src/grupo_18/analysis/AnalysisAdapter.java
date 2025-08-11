@@ -75,25 +75,7 @@ public class AnalysisAdapter implements Analysis
     }
 
     @Override
-    public void caseAProgramaAlt1Programa(AProgramaAlt1Programa node)
-    {
-        defaultCase(node);
-    }
-
-    @Override
-    public void caseAProgramaAlt2Programa(AProgramaAlt2Programa node)
-    {
-        defaultCase(node);
-    }
-
-    @Override
-    public void caseAProgramaAlt3Programa(AProgramaAlt3Programa node)
-    {
-        defaultCase(node);
-    }
-
-    @Override
-    public void caseAProgramaAlt4Programa(AProgramaAlt4Programa node)
+    public void caseAProgramaPrograma(AProgramaPrograma node)
     {
         defaultCase(node);
     }
@@ -261,6 +243,12 @@ public class AnalysisAdapter implements Analysis
     }
 
     @Override
+    public void caseAComandoCondComando(AComandoCondComando node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
     public void caseAComandoAtrComando(AComandoAtrComando node)
     {
         defaultCase(node);
@@ -280,18 +268,6 @@ public class AnalysisAdapter implements Analysis
 
     @Override
     public void caseAComandoShowComando(AComandoShowComando node)
-    {
-        defaultCase(node);
-    }
-
-    @Override
-    public void caseAComandoIfComando(AComandoIfComando node)
-    {
-        defaultCase(node);
-    }
-
-    @Override
-    public void caseAComandoIfelseComando(AComandoIfelseComando node)
     {
         defaultCase(node);
     }
@@ -327,13 +303,31 @@ public class AnalysisAdapter implements Analysis
     }
 
     @Override
-    public void caseAIfThenIfThen(AIfThenIfThen node)
+    public void caseAMatchedCondCondicional(AMatchedCondCondicional node)
     {
         defaultCase(node);
     }
 
     @Override
-    public void caseAElseTailElseTail(AElseTailElseTail node)
+    public void caseAUnmatchedCondCondicional(AUnmatchedCondCondicional node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseAMatchedIfElseMatched(AMatchedIfElseMatched node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseAMatchedTail(AMatchedTail node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseAUnmatchedCmdUnmatched(AUnmatchedCmdUnmatched node)
     {
         defaultCase(node);
     }
@@ -501,13 +495,13 @@ public class AnalysisAdapter implements Analysis
     }
 
     @Override
-    public void caseAAndRTermAndExpRparen(AAndRTermAndExpRparen node)
+    public void caseAAndExpRTermAndExpRparen(AAndExpRTermAndExpRparen node)
     {
         defaultCase(node);
     }
 
     @Override
-    public void caseAAndRMoreAndExpRparen(AAndRMoreAndExpRparen node)
+    public void caseAAndExpRMoreAndExpRparen(AAndExpRMoreAndExpRparen node)
     {
         defaultCase(node);
     }
@@ -597,25 +591,25 @@ public class AnalysisAdapter implements Analysis
     }
 
     @Override
-    public void caseAMulTermMulExp(AMulTermMulExp node)
+    public void caseAMulExpTermMulExp(AMulExpTermMulExp node)
     {
         defaultCase(node);
     }
 
     @Override
-    public void caseAMulTimesMulExp(AMulTimesMulExp node)
+    public void caseAMulExpTimesMulExp(AMulExpTimesMulExp node)
     {
         defaultCase(node);
     }
 
     @Override
-    public void caseAMulDivMulExp(AMulDivMulExp node)
+    public void caseAMulExpDivMulExp(AMulExpDivMulExp node)
     {
         defaultCase(node);
     }
 
     @Override
-    public void caseAMulModMulExp(AMulModMulExp node)
+    public void caseAMulExpModMulExp(AMulExpModMulExp node)
     {
         defaultCase(node);
     }
@@ -1065,6 +1059,12 @@ public class AnalysisAdapter implements Analysis
     }
 
     @Override
+    public void caseTVazio(TVazio node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
     public void caseTComentario(TComentario node)
     {
         defaultCase(node);
@@ -1083,7 +1083,13 @@ public class AnalysisAdapter implements Analysis
     }
 
     @Override
-    public void caseTVazio(TVazio node)
+    public void caseTSymbolValue(TSymbolValue node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseTVectorMatrix(TVectorMatrix node)
     {
         defaultCase(node);
     }

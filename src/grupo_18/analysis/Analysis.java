@@ -12,10 +12,7 @@ public interface Analysis extends Switch
     void setOut(Node node, Object o);
 
     void caseStart(Start node);
-    void caseAProgramaAlt1Programa(AProgramaAlt1Programa node);
-    void caseAProgramaAlt2Programa(AProgramaAlt2Programa node);
-    void caseAProgramaAlt3Programa(AProgramaAlt3Programa node);
-    void caseAProgramaAlt4Programa(AProgramaAlt4Programa node);
+    void caseAProgramaPrograma(AProgramaPrograma node);
     void caseADeclaracoesHeadDeclaracoes(ADeclaracoesHeadDeclaracoes node);
     void caseAListaDeclaracaoUnicaListaDeclaracao(AListaDeclaracaoUnicaListaDeclaracao node);
     void caseAListaDeclaracaoRecListaDeclaracao(AListaDeclaracaoRecListaDeclaracao node);
@@ -43,19 +40,21 @@ public interface Analysis extends Switch
     void caseAValorBoolValor(AValorBoolValor node);
     void caseAValorNumValor(AValorNumValor node);
     void caseAValorStrValor(AValorStrValor node);
+    void caseAComandoCondComando(AComandoCondComando node);
     void caseAComandoAtrComando(AComandoAtrComando node);
     void caseAComandoInitComando(AComandoInitComando node);
     void caseAComandoCaptureComando(AComandoCaptureComando node);
     void caseAComandoShowComando(AComandoShowComando node);
-    void caseAComandoIfComando(AComandoIfComando node);
-    void caseAComandoIfelseComando(AComandoIfelseComando node);
     void caseAComandoWhileComando(AComandoWhileComando node);
     void caseAComandoForComando(AComandoForComando node);
     void caseAComandoBreakComando(AComandoBreakComando node);
     void caseAComandoContinueComando(AComandoContinueComando node);
     void caseAComandoBlocoComando(AComandoBlocoComando node);
-    void caseAIfThenIfThen(AIfThenIfThen node);
-    void caseAElseTailElseTail(AElseTailElseTail node);
+    void caseAMatchedCondCondicional(AMatchedCondCondicional node);
+    void caseAUnmatchedCondCondicional(AUnmatchedCondCondicional node);
+    void caseAMatchedIfElseMatched(AMatchedIfElseMatched node);
+    void caseAMatchedTail(AMatchedTail node);
+    void caseAUnmatchedCmdUnmatched(AUnmatchedCmdUnmatched node);
     void caseAAsLongKwAsLong(AAsLongKwAsLong node);
     void caseAWhileStmtKwWhileStmt(AWhileStmtKwWhileStmt node);
     void caseAForStmtKwForStmt(AForStmtKwForStmt node);
@@ -83,8 +82,8 @@ public interface Analysis extends Switch
     void caseAOrRComOrTailRparen(AOrRComOrTailRparen node);
     void caseAAndTermAndExp(AAndTermAndExp node);
     void caseAAndMoreAndExp(AAndMoreAndExp node);
-    void caseAAndRTermAndExpRparen(AAndRTermAndExpRparen node);
-    void caseAAndRMoreAndExpRparen(AAndRMoreAndExpRparen node);
+    void caseAAndExpRTermAndExpRparen(AAndExpRTermAndExpRparen node);
+    void caseAAndExpRMoreAndExpRparen(AAndExpRMoreAndExpRparen node);
     void caseAAndRMoreAndTailRparen(AAndRMoreAndTailRparen node);
     void caseAAndRParAndTailRparen(AAndRParAndTailRparen node);
     void caseAAndRComAndTailRparen(AAndRComAndTailRparen node);
@@ -99,10 +98,10 @@ public interface Analysis extends Switch
     void caseAAddTermAddExp(AAddTermAddExp node);
     void caseAAddPlusAddExp(AAddPlusAddExp node);
     void caseAAddMinusAddExp(AAddMinusAddExp node);
-    void caseAMulTermMulExp(AMulTermMulExp node);
-    void caseAMulTimesMulExp(AMulTimesMulExp node);
-    void caseAMulDivMulExp(AMulDivMulExp node);
-    void caseAMulModMulExp(AMulModMulExp node);
+    void caseAMulExpTermMulExp(AMulExpTermMulExp node);
+    void caseAMulExpTimesMulExp(AMulExpTimesMulExp node);
+    void caseAMulExpDivMulExp(AMulExpDivMulExp node);
+    void caseAMulExpModMulExp(AMulExpModMulExp node);
     void caseAMulTimesMulTail(AMulTimesMulTail node);
     void caseAMulDivMulTail(AMulDivMulTail node);
     void caseAMulModMulTail(AMulModMulTail node);
@@ -178,10 +177,12 @@ public interface Analysis extends Switch
     void caseTColcheteEsq(TColcheteEsq node);
     void caseTColcheteDir(TColcheteDir node);
     void caseTVezes(TVezes node);
+    void caseTVazio(TVazio node);
     void caseTComentario(TComentario node);
     void caseTNumero(TNumero node);
     void caseTIdentificador(TIdentificador node);
-    void caseTVazio(TVazio node);
+    void caseTSymbolValue(TSymbolValue node);
+    void caseTVectorMatrix(TVectorMatrix node);
     void caseEOF(EOF node);
     void caseInvalidToken(InvalidToken node);
 }
