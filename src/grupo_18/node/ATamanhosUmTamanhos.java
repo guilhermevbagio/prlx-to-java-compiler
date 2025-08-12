@@ -8,7 +8,7 @@ import grupo_18.analysis.*;
 public final class ATamanhosUmTamanhos extends PTamanhos
 {
     private TParEsq _parEsq_;
-    private PDimensaoVetor _dimensaoVetor_;
+    private TVectorMatrix _vectorMatrix_;
     private TParDir _parDir_;
 
     public ATamanhosUmTamanhos()
@@ -18,13 +18,13 @@ public final class ATamanhosUmTamanhos extends PTamanhos
 
     public ATamanhosUmTamanhos(
         @SuppressWarnings("hiding") TParEsq _parEsq_,
-        @SuppressWarnings("hiding") PDimensaoVetor _dimensaoVetor_,
+        @SuppressWarnings("hiding") TVectorMatrix _vectorMatrix_,
         @SuppressWarnings("hiding") TParDir _parDir_)
     {
         // Constructor
         setParEsq(_parEsq_);
 
-        setDimensaoVetor(_dimensaoVetor_);
+        setVectorMatrix(_vectorMatrix_);
 
         setParDir(_parDir_);
 
@@ -35,7 +35,7 @@ public final class ATamanhosUmTamanhos extends PTamanhos
     {
         return new ATamanhosUmTamanhos(
             cloneNode(this._parEsq_),
-            cloneNode(this._dimensaoVetor_),
+            cloneNode(this._vectorMatrix_),
             cloneNode(this._parDir_));
     }
 
@@ -70,16 +70,16 @@ public final class ATamanhosUmTamanhos extends PTamanhos
         this._parEsq_ = node;
     }
 
-    public PDimensaoVetor getDimensaoVetor()
+    public TVectorMatrix getVectorMatrix()
     {
-        return this._dimensaoVetor_;
+        return this._vectorMatrix_;
     }
 
-    public void setDimensaoVetor(PDimensaoVetor node)
+    public void setVectorMatrix(TVectorMatrix node)
     {
-        if(this._dimensaoVetor_ != null)
+        if(this._vectorMatrix_ != null)
         {
-            this._dimensaoVetor_.parent(null);
+            this._vectorMatrix_.parent(null);
         }
 
         if(node != null)
@@ -92,7 +92,7 @@ public final class ATamanhosUmTamanhos extends PTamanhos
             node.parent(this);
         }
 
-        this._dimensaoVetor_ = node;
+        this._vectorMatrix_ = node;
     }
 
     public TParDir getParDir()
@@ -125,7 +125,7 @@ public final class ATamanhosUmTamanhos extends PTamanhos
     {
         return ""
             + toString(this._parEsq_)
-            + toString(this._dimensaoVetor_)
+            + toString(this._vectorMatrix_)
             + toString(this._parDir_);
     }
 
@@ -139,9 +139,9 @@ public final class ATamanhosUmTamanhos extends PTamanhos
             return;
         }
 
-        if(this._dimensaoVetor_ == child)
+        if(this._vectorMatrix_ == child)
         {
-            this._dimensaoVetor_ = null;
+            this._vectorMatrix_ = null;
             return;
         }
 
@@ -164,9 +164,9 @@ public final class ATamanhosUmTamanhos extends PTamanhos
             return;
         }
 
-        if(this._dimensaoVetor_ == oldChild)
+        if(this._vectorMatrix_ == oldChild)
         {
-            setDimensaoVetor((PDimensaoVetor) newChild);
+            setVectorMatrix((TVectorMatrix) newChild);
             return;
         }
 

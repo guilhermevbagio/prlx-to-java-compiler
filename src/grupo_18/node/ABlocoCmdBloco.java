@@ -2,14 +2,15 @@
 
 package grupo_18.node;
 
+import java.util.*;
 import grupo_18.analysis.*;
 
 @SuppressWarnings("nls")
 public final class ABlocoCmdBloco extends PBloco
 {
     private TColcheteEsq _colcheteEsq_;
-    private PDeclsOpt _declsOpt_;
-    private PListaComando _listaComando_;
+    private final LinkedList<PDeclaracao> _declaracao_ = new LinkedList<PDeclaracao>();
+    private final LinkedList<PComando> _comando_ = new LinkedList<PComando>();
     private TColcheteDir _colcheteDir_;
 
     public ABlocoCmdBloco()
@@ -19,16 +20,16 @@ public final class ABlocoCmdBloco extends PBloco
 
     public ABlocoCmdBloco(
         @SuppressWarnings("hiding") TColcheteEsq _colcheteEsq_,
-        @SuppressWarnings("hiding") PDeclsOpt _declsOpt_,
-        @SuppressWarnings("hiding") PListaComando _listaComando_,
+        @SuppressWarnings("hiding") List<?> _declaracao_,
+        @SuppressWarnings("hiding") List<?> _comando_,
         @SuppressWarnings("hiding") TColcheteDir _colcheteDir_)
     {
         // Constructor
         setColcheteEsq(_colcheteEsq_);
 
-        setDeclsOpt(_declsOpt_);
+        setDeclaracao(_declaracao_);
 
-        setListaComando(_listaComando_);
+        setComando(_comando_);
 
         setColcheteDir(_colcheteDir_);
 
@@ -39,8 +40,8 @@ public final class ABlocoCmdBloco extends PBloco
     {
         return new ABlocoCmdBloco(
             cloneNode(this._colcheteEsq_),
-            cloneNode(this._declsOpt_),
-            cloneNode(this._listaComando_),
+            cloneList(this._declaracao_),
+            cloneList(this._comando_),
             cloneNode(this._colcheteDir_));
     }
 
@@ -75,54 +76,56 @@ public final class ABlocoCmdBloco extends PBloco
         this._colcheteEsq_ = node;
     }
 
-    public PDeclsOpt getDeclsOpt()
+    public LinkedList<PDeclaracao> getDeclaracao()
     {
-        return this._declsOpt_;
+        return this._declaracao_;
     }
 
-    public void setDeclsOpt(PDeclsOpt node)
+    public void setDeclaracao(List<?> list)
     {
-        if(this._declsOpt_ != null)
+        for(PDeclaracao e : this._declaracao_)
         {
-            this._declsOpt_.parent(null);
+            e.parent(null);
         }
+        this._declaracao_.clear();
 
-        if(node != null)
+        for(Object obj_e : list)
         {
-            if(node.parent() != null)
+            PDeclaracao e = (PDeclaracao) obj_e;
+            if(e.parent() != null)
             {
-                node.parent().removeChild(node);
+                e.parent().removeChild(e);
             }
 
-            node.parent(this);
+            e.parent(this);
+            this._declaracao_.add(e);
         }
-
-        this._declsOpt_ = node;
     }
 
-    public PListaComando getListaComando()
+    public LinkedList<PComando> getComando()
     {
-        return this._listaComando_;
+        return this._comando_;
     }
 
-    public void setListaComando(PListaComando node)
+    public void setComando(List<?> list)
     {
-        if(this._listaComando_ != null)
+        for(PComando e : this._comando_)
         {
-            this._listaComando_.parent(null);
+            e.parent(null);
         }
+        this._comando_.clear();
 
-        if(node != null)
+        for(Object obj_e : list)
         {
-            if(node.parent() != null)
+            PComando e = (PComando) obj_e;
+            if(e.parent() != null)
             {
-                node.parent().removeChild(node);
+                e.parent().removeChild(e);
             }
 
-            node.parent(this);
+            e.parent(this);
+            this._comando_.add(e);
         }
-
-        this._listaComando_ = node;
     }
 
     public TColcheteDir getColcheteDir()
@@ -155,8 +158,8 @@ public final class ABlocoCmdBloco extends PBloco
     {
         return ""
             + toString(this._colcheteEsq_)
-            + toString(this._declsOpt_)
-            + toString(this._listaComando_)
+            + toString(this._declaracao_)
+            + toString(this._comando_)
             + toString(this._colcheteDir_);
     }
 
@@ -170,15 +173,13 @@ public final class ABlocoCmdBloco extends PBloco
             return;
         }
 
-        if(this._declsOpt_ == child)
+        if(this._declaracao_.remove(child))
         {
-            this._declsOpt_ = null;
             return;
         }
 
-        if(this._listaComando_ == child)
+        if(this._comando_.remove(child))
         {
-            this._listaComando_ = null;
             return;
         }
 
@@ -201,16 +202,40 @@ public final class ABlocoCmdBloco extends PBloco
             return;
         }
 
-        if(this._declsOpt_ == oldChild)
+        for(ListIterator<PDeclaracao> i = this._declaracao_.listIterator(); i.hasNext();)
         {
-            setDeclsOpt((PDeclsOpt) newChild);
-            return;
+            if(i.next() == oldChild)
+            {
+                if(newChild != null)
+                {
+                    i.set((PDeclaracao) newChild);
+                    newChild.parent(this);
+                    oldChild.parent(null);
+                    return;
+                }
+
+                i.remove();
+                oldChild.parent(null);
+                return;
+            }
         }
 
-        if(this._listaComando_ == oldChild)
+        for(ListIterator<PComando> i = this._comando_.listIterator(); i.hasNext();)
         {
-            setListaComando((PListaComando) newChild);
-            return;
+            if(i.next() == oldChild)
+            {
+                if(newChild != null)
+                {
+                    i.set((PComando) newChild);
+                    newChild.parent(this);
+                    oldChild.parent(null);
+                    return;
+                }
+
+                i.remove();
+                oldChild.parent(null);
+                return;
+            }
         }
 
         if(this._colcheteDir_ == oldChild)

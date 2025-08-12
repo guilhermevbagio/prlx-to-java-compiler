@@ -1,4 +1,4 @@
-Package grupo_18;
+Package prolixa;
 
 Helpers
  digito = ['0' .. '9'];
@@ -23,6 +23,9 @@ Tokens
  simbolo = '\' (char | '\\n' | '\\t') '\';
  valor_booleano = 'yes' | 'no';
 
+ vector_matrix = digito 'x' digito;
+ vezes = 'x';
+ 
  this = 'This';
  is = 'is';
  program = 'program';
@@ -92,7 +95,6 @@ Tokens
  colchete_esq = '[';
  colchete_dir = ']';
 
- vezes = 'x';
 
  vazio = (espaco | rc | nl)+;
  comentario = comentario_inicio (char | espaco )* comentario_fim;
@@ -102,7 +104,7 @@ Tokens
 
  
  symbol_value = single_quote char single_quote;
- vector_matrix = digito 'x' digito;
+
 
 Ignored Tokens
  vazio, comentario;
@@ -114,29 +116,12 @@ programa =
   ;
 
 declaracoes =
-    {declaracoes_head} it presents dois_pontos lista_declaracao
-  ;
-
-lista_declaracao =
-    {lista_declaracao_unica} declaracao
-  | {lista_declaracao_rec}   lista_declaracao declaracao
+    {declaracoes_head} it presents dois_pontos declaracao*
   ;
 
 comandos =
-    {comandos_head} let us begin dois_pontos lista_comando that_kw would be all ponto
-  | {comandos_head_vazio} let us begin dois_pontos that_kw would be all ponto
+    {comandos_head} let us begin dois_pontos comando+ that would be all ponto
   ;
-
-lista_comando =
-    {lista_head} comando lista_comando_tail lista_fim
-  ;
-
-lista_comando_tail =
-	  {lista_ct} comando lista_comando_tail
-
-;
-
-lista_fim = ;
 
 declaracao =
     {declaracao_mut}         alterable   tipo identificador ponto_e_virgula
@@ -146,13 +131,10 @@ declaracao =
   ;
 
 tamanhos =
-    {tamanhos_um} par_esq dimensao_vetor par_dir
+    {tamanhos_matriz} par_esq vector_matrix par_dir
+  | {tamanhos_unit}   par_esq numero par_dir
   ;
 
-dimensao_vetor =
-    {dimensao_single} exp
-  | {dimensao_mult}   dimensao_vetor vezes exp
-  ;
 
 tipo =
     {tipo_number} number
@@ -188,7 +170,7 @@ valor =
   | {valor_str}  literal
   ;
 
-comando_sem_if =
+comando =
     {comando_atr}      var atribuicao exp ponto_e_virgula
   | {comando_init}     unalt inicializacao exp ponto_e_virgula
   | {comando_capture}  capture par_esq lista_var par_dir ponto_e_virgula
@@ -198,40 +180,18 @@ comando_sem_if =
   | {comando_break}    abandon ponto_e_virgula
   | {comando_continue} go to next iteration ponto_e_virgula
   | {comando_bloco}    bloco
+  | {comando_cond}     just_stmt
 ;
 
-comando =
-    {comando_cond}     pre_condicional
-	| comando_sem_if
-
+just_stmt = 
+    {just_cond} just in case that_kw par_esq exp par_dir do bloco
+  | {just_cond_else} just in case that_kw par_esq exp par_dir do bloco else_stms
 ;
 
-pre_condicional =
-	 condicional
- ;
- 
-condicional =
-    {matched_cond} matched
-  | {unmatched_cond} unmatched
+else_stms =
+	otherwise do bloco
 ;
 
-matched =
-    {matched_if_else} just in case that_kw par_esq exp par_dir do matched_tail
-  | {matched_base} comando_sem_if
-;
-
-matched_tail =
-	matched otherwise matched_tail_end
-;
-
-matched_tail_end =
-    matched
-;
-
-unmatched =
-    {unmatched_cmd} just in case that_kw par_esq exp par_dir do comando
-  | {unmatched_bs}  just in case that_kw par_esq exp par_dir do matched otherwise unmatched
-;
 
 as_long =
     {as_long_kw} as long
@@ -271,13 +231,8 @@ lista_exp_rparen =
   ;
   
 bloco =
-    {bloco_sem_cmd} colchete_esq decls_opt colchete_dir
-  | {bloco_cmd}     colchete_esq decls_opt lista_comando colchete_dir
-  ;
-
-decls_opt =
-    {decls_opt_vazio}
-  | {decls_opt_com} lista_declaracao
+	{bloco_dec} colchete_esq declaracao* colchete_dir
+  | {bloco_cmd} colchete_esq declaracao* comando+ colchete_dir
   ;
 
 exp = or_exp ;

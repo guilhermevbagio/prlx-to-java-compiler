@@ -7,7 +7,7 @@ import grupo_18.analysis.*;
 @SuppressWarnings("nls")
 public final class AComandoCondComando extends PComando
 {
-    private PPreCondicional _preCondicional_;
+    private PJustStmt _justStmt_;
 
     public AComandoCondComando()
     {
@@ -15,10 +15,10 @@ public final class AComandoCondComando extends PComando
     }
 
     public AComandoCondComando(
-        @SuppressWarnings("hiding") PPreCondicional _preCondicional_)
+        @SuppressWarnings("hiding") PJustStmt _justStmt_)
     {
         // Constructor
-        setPreCondicional(_preCondicional_);
+        setJustStmt(_justStmt_);
 
     }
 
@@ -26,7 +26,7 @@ public final class AComandoCondComando extends PComando
     public Object clone()
     {
         return new AComandoCondComando(
-            cloneNode(this._preCondicional_));
+            cloneNode(this._justStmt_));
     }
 
     @Override
@@ -35,16 +35,16 @@ public final class AComandoCondComando extends PComando
         ((Analysis) sw).caseAComandoCondComando(this);
     }
 
-    public PPreCondicional getPreCondicional()
+    public PJustStmt getJustStmt()
     {
-        return this._preCondicional_;
+        return this._justStmt_;
     }
 
-    public void setPreCondicional(PPreCondicional node)
+    public void setJustStmt(PJustStmt node)
     {
-        if(this._preCondicional_ != null)
+        if(this._justStmt_ != null)
         {
-            this._preCondicional_.parent(null);
+            this._justStmt_.parent(null);
         }
 
         if(node != null)
@@ -57,23 +57,23 @@ public final class AComandoCondComando extends PComando
             node.parent(this);
         }
 
-        this._preCondicional_ = node;
+        this._justStmt_ = node;
     }
 
     @Override
     public String toString()
     {
         return ""
-            + toString(this._preCondicional_);
+            + toString(this._justStmt_);
     }
 
     @Override
     void removeChild(@SuppressWarnings("unused") Node child)
     {
         // Remove child
-        if(this._preCondicional_ == child)
+        if(this._justStmt_ == child)
         {
-            this._preCondicional_ = null;
+            this._justStmt_ = null;
             return;
         }
 
@@ -84,9 +84,9 @@ public final class AComandoCondComando extends PComando
     void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
     {
         // Replace child
-        if(this._preCondicional_ == oldChild)
+        if(this._justStmt_ == oldChild)
         {
-            setPreCondicional((PPreCondicional) newChild);
+            setJustStmt((PJustStmt) newChild);
             return;
         }
 

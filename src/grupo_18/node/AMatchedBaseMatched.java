@@ -7,7 +7,7 @@ import grupo_18.analysis.*;
 @SuppressWarnings("nls")
 public final class AMatchedBaseMatched extends PMatched
 {
-    private PComandoSemIf _comandoSemIf_;
+    private PComando _comando_;
 
     public AMatchedBaseMatched()
     {
@@ -15,10 +15,10 @@ public final class AMatchedBaseMatched extends PMatched
     }
 
     public AMatchedBaseMatched(
-        @SuppressWarnings("hiding") PComandoSemIf _comandoSemIf_)
+        @SuppressWarnings("hiding") PComando _comando_)
     {
         // Constructor
-        setComandoSemIf(_comandoSemIf_);
+        setComando(_comando_);
 
     }
 
@@ -26,7 +26,7 @@ public final class AMatchedBaseMatched extends PMatched
     public Object clone()
     {
         return new AMatchedBaseMatched(
-            cloneNode(this._comandoSemIf_));
+            cloneNode(this._comando_));
     }
 
     @Override
@@ -35,16 +35,16 @@ public final class AMatchedBaseMatched extends PMatched
         ((Analysis) sw).caseAMatchedBaseMatched(this);
     }
 
-    public PComandoSemIf getComandoSemIf()
+    public PComando getComando()
     {
-        return this._comandoSemIf_;
+        return this._comando_;
     }
 
-    public void setComandoSemIf(PComandoSemIf node)
+    public void setComando(PComando node)
     {
-        if(this._comandoSemIf_ != null)
+        if(this._comando_ != null)
         {
-            this._comandoSemIf_.parent(null);
+            this._comando_.parent(null);
         }
 
         if(node != null)
@@ -57,23 +57,23 @@ public final class AMatchedBaseMatched extends PMatched
             node.parent(this);
         }
 
-        this._comandoSemIf_ = node;
+        this._comando_ = node;
     }
 
     @Override
     public String toString()
     {
         return ""
-            + toString(this._comandoSemIf_);
+            + toString(this._comando_);
     }
 
     @Override
     void removeChild(@SuppressWarnings("unused") Node child)
     {
         // Remove child
-        if(this._comandoSemIf_ == child)
+        if(this._comando_ == child)
         {
-            this._comandoSemIf_ = null;
+            this._comando_ = null;
             return;
         }
 
@@ -84,9 +84,9 @@ public final class AMatchedBaseMatched extends PMatched
     void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
     {
         // Replace child
-        if(this._comandoSemIf_ == oldChild)
+        if(this._comando_ == oldChild)
         {
-            setComandoSemIf((PComandoSemIf) newChild);
+            setComando((PComando) newChild);
             return;
         }
 

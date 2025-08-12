@@ -2,6 +2,7 @@
 
 package grupo_18.node;
 
+import java.util.*;
 import grupo_18.analysis.*;
 
 @SuppressWarnings("nls")
@@ -11,7 +12,7 @@ public final class AComandosHeadComandos extends PComandos
     private TUs _us_;
     private TBegin _begin_;
     private TDoisPontos _doisPontos_;
-    private PListaComando _listaComando_;
+    private final LinkedList<PComando> _comando_ = new LinkedList<PComando>();
     private TThatKw _thatKw_;
     private TWould _would_;
     private TBe _be_;
@@ -28,7 +29,7 @@ public final class AComandosHeadComandos extends PComandos
         @SuppressWarnings("hiding") TUs _us_,
         @SuppressWarnings("hiding") TBegin _begin_,
         @SuppressWarnings("hiding") TDoisPontos _doisPontos_,
-        @SuppressWarnings("hiding") PListaComando _listaComando_,
+        @SuppressWarnings("hiding") List<?> _comando_,
         @SuppressWarnings("hiding") TThatKw _thatKw_,
         @SuppressWarnings("hiding") TWould _would_,
         @SuppressWarnings("hiding") TBe _be_,
@@ -44,7 +45,7 @@ public final class AComandosHeadComandos extends PComandos
 
         setDoisPontos(_doisPontos_);
 
-        setListaComando(_listaComando_);
+        setComando(_comando_);
 
         setThatKw(_thatKw_);
 
@@ -66,7 +67,7 @@ public final class AComandosHeadComandos extends PComandos
             cloneNode(this._us_),
             cloneNode(this._begin_),
             cloneNode(this._doisPontos_),
-            cloneNode(this._listaComando_),
+            cloneList(this._comando_),
             cloneNode(this._thatKw_),
             cloneNode(this._would_),
             cloneNode(this._be_),
@@ -180,29 +181,30 @@ public final class AComandosHeadComandos extends PComandos
         this._doisPontos_ = node;
     }
 
-    public PListaComando getListaComando()
+    public LinkedList<PComando> getComando()
     {
-        return this._listaComando_;
+        return this._comando_;
     }
 
-    public void setListaComando(PListaComando node)
+    public void setComando(List<?> list)
     {
-        if(this._listaComando_ != null)
+        for(PComando e : this._comando_)
         {
-            this._listaComando_.parent(null);
+            e.parent(null);
         }
+        this._comando_.clear();
 
-        if(node != null)
+        for(Object obj_e : list)
         {
-            if(node.parent() != null)
+            PComando e = (PComando) obj_e;
+            if(e.parent() != null)
             {
-                node.parent().removeChild(node);
+                e.parent().removeChild(e);
             }
 
-            node.parent(this);
+            e.parent(this);
+            this._comando_.add(e);
         }
-
-        this._listaComando_ = node;
     }
 
     public TThatKw getThatKw()
@@ -338,7 +340,7 @@ public final class AComandosHeadComandos extends PComandos
             + toString(this._us_)
             + toString(this._begin_)
             + toString(this._doisPontos_)
-            + toString(this._listaComando_)
+            + toString(this._comando_)
             + toString(this._thatKw_)
             + toString(this._would_)
             + toString(this._be_)
@@ -374,9 +376,8 @@ public final class AComandosHeadComandos extends PComandos
             return;
         }
 
-        if(this._listaComando_ == child)
+        if(this._comando_.remove(child))
         {
-            this._listaComando_ = null;
             return;
         }
 
@@ -441,10 +442,22 @@ public final class AComandosHeadComandos extends PComandos
             return;
         }
 
-        if(this._listaComando_ == oldChild)
+        for(ListIterator<PComando> i = this._comando_.listIterator(); i.hasNext();)
         {
-            setListaComando((PListaComando) newChild);
-            return;
+            if(i.next() == oldChild)
+            {
+                if(newChild != null)
+                {
+                    i.set((PComando) newChild);
+                    newChild.parent(this);
+                    oldChild.parent(null);
+                    return;
+                }
+
+                i.remove();
+                oldChild.parent(null);
+                return;
+            }
         }
 
         if(this._thatKw_ == oldChild)

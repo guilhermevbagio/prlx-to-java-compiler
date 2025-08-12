@@ -2,12 +2,13 @@
 
 package grupo_18.node;
 
+import java.util.*;
 import grupo_18.analysis.*;
 
 @SuppressWarnings("nls")
 public final class ADeclsOptComDeclsOpt extends PDeclsOpt
 {
-    private PListaDeclaracao _listaDeclaracao_;
+    private final LinkedList<PDeclaracao> _declaracao_ = new LinkedList<PDeclaracao>();
 
     public ADeclsOptComDeclsOpt()
     {
@@ -15,10 +16,10 @@ public final class ADeclsOptComDeclsOpt extends PDeclsOpt
     }
 
     public ADeclsOptComDeclsOpt(
-        @SuppressWarnings("hiding") PListaDeclaracao _listaDeclaracao_)
+        @SuppressWarnings("hiding") List<?> _declaracao_)
     {
         // Constructor
-        setListaDeclaracao(_listaDeclaracao_);
+        setDeclaracao(_declaracao_);
 
     }
 
@@ -26,7 +27,7 @@ public final class ADeclsOptComDeclsOpt extends PDeclsOpt
     public Object clone()
     {
         return new ADeclsOptComDeclsOpt(
-            cloneNode(this._listaDeclaracao_));
+            cloneList(this._declaracao_));
     }
 
     @Override
@@ -35,45 +36,45 @@ public final class ADeclsOptComDeclsOpt extends PDeclsOpt
         ((Analysis) sw).caseADeclsOptComDeclsOpt(this);
     }
 
-    public PListaDeclaracao getListaDeclaracao()
+    public LinkedList<PDeclaracao> getDeclaracao()
     {
-        return this._listaDeclaracao_;
+        return this._declaracao_;
     }
 
-    public void setListaDeclaracao(PListaDeclaracao node)
+    public void setDeclaracao(List<?> list)
     {
-        if(this._listaDeclaracao_ != null)
+        for(PDeclaracao e : this._declaracao_)
         {
-            this._listaDeclaracao_.parent(null);
+            e.parent(null);
         }
+        this._declaracao_.clear();
 
-        if(node != null)
+        for(Object obj_e : list)
         {
-            if(node.parent() != null)
+            PDeclaracao e = (PDeclaracao) obj_e;
+            if(e.parent() != null)
             {
-                node.parent().removeChild(node);
+                e.parent().removeChild(e);
             }
 
-            node.parent(this);
+            e.parent(this);
+            this._declaracao_.add(e);
         }
-
-        this._listaDeclaracao_ = node;
     }
 
     @Override
     public String toString()
     {
         return ""
-            + toString(this._listaDeclaracao_);
+            + toString(this._declaracao_);
     }
 
     @Override
     void removeChild(@SuppressWarnings("unused") Node child)
     {
         // Remove child
-        if(this._listaDeclaracao_ == child)
+        if(this._declaracao_.remove(child))
         {
-            this._listaDeclaracao_ = null;
             return;
         }
 
@@ -84,10 +85,22 @@ public final class ADeclsOptComDeclsOpt extends PDeclsOpt
     void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
     {
         // Replace child
-        if(this._listaDeclaracao_ == oldChild)
+        for(ListIterator<PDeclaracao> i = this._declaracao_.listIterator(); i.hasNext();)
         {
-            setListaDeclaracao((PListaDeclaracao) newChild);
-            return;
+            if(i.next() == oldChild)
+            {
+                if(newChild != null)
+                {
+                    i.set((PDeclaracao) newChild);
+                    newChild.parent(this);
+                    oldChild.parent(null);
+                    return;
+                }
+
+                i.remove();
+                oldChild.parent(null);
+                return;
+            }
         }
 
         throw new RuntimeException("Not a child.");

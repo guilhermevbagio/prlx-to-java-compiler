@@ -2,21 +2,21 @@ This is program ExemploDois.
 
 It presents:
     vector of number(5) Notas;
-    alterable number i;
+    alterable number I_;
     alterable number Soma;
     alterable number Media;
     unalterable answer Aprovado;
 
 Let us begin:
     Soma := 0;
-    i := 1;
+    I_ := 1;
 
     show("Digite as 5 notas:");
 
-    as long as (i <= 5) do [
-        capture(Notas(i));
-        Soma := Soma + Notas(i);
-        i := i + 1;
+    as long as (I_ <= 5) do [
+        capture(Notas(I_));
+        Soma := Soma + Notas(I_);
+        I_ := I_ + 1;
     ];
 
     Media := Soma / 5;

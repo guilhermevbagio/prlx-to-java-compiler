@@ -2,7 +2,7 @@ This is program ExemploTres.
 
 It presents:
     vector of number(2x2) Matriz;
-    alterable number i;
+    alterable number I_;
     alterable number j;
     alterable answer Controle;
     alterable number Soma;
@@ -10,28 +10,28 @@ It presents:
     unalterable answer Verdade = yes;
 
 Let us begin:
-    i := 1;
+    I_ := 1;
     Soma := 0;
 
     show("Preencha a matriz 2x2:");
 
-    considering i from 1 to 2 by 1 do [
+    considering I_ from 1 to 2 by 1 do [
         j := 1;
         considering j from 1 to 2 by 1 do [
-            capture(Matriz(i, j));
+            capture(Matriz(I_, j));
         ];
     ];
 
-    i := 2;
+    I_ := 2;
     j := 2;
 
-    as long as (i >= 1) do [
+    as long as (I_ >= 1) do [
         as long as (j >= 1) do [
-            if ((Matriz(i, j) < 0) or !(Matriz(i, j) >= 0)) then abandon;
-            Soma := Soma + Matriz(i, j);
+            if ((Matriz(I_, j) < 0) or !(Matriz(I_, j) >= 0)) then abandon;
+            Soma := Soma + Matriz(I_, j);
             j := j - 1;
         ];
-        i := i - 1;
+        I_ := I_ - 1;
         j := 2;
     ];
 
@@ -43,8 +43,8 @@ Let us begin:
         show("Soma baixa ou condição não exclusiva.");
     ];
 
-    considering i from 5 to 1 by -1 do [
-        if (i == 3) then go to next iteration;
-        show("Contagem reversa:", i);
+    considering I_ from 5 to 1 by -1 do [
+        if (I_ == 3) then go to next iteration;
+        show("Contagem reversa:", I_);
     ];
 That would be all.
