@@ -1703,27 +1703,23 @@ public class ReversedDepthFirstAdapter extends AnalysisAdapter
         outALexpHeadListaExpRparen(node);
     }
 
-    public void inABlocoBlkBloco(ABlocoBlkBloco node)
+    public void inABlocoSemCmdBloco(ABlocoSemCmdBloco node)
     {
         defaultIn(node);
     }
 
-    public void outABlocoBlkBloco(ABlocoBlkBloco node)
+    public void outABlocoSemCmdBloco(ABlocoSemCmdBloco node)
     {
         defaultOut(node);
     }
 
     @Override
-    public void caseABlocoBlkBloco(ABlocoBlkBloco node)
+    public void caseABlocoSemCmdBloco(ABlocoSemCmdBloco node)
     {
-        inABlocoBlkBloco(node);
+        inABlocoSemCmdBloco(node);
         if(node.getColcheteDir() != null)
         {
             node.getColcheteDir().apply(this);
-        }
-        if(node.getCmdsOpt() != null)
-        {
-            node.getCmdsOpt().apply(this);
         }
         if(node.getDeclsOpt() != null)
         {
@@ -1733,7 +1729,40 @@ public class ReversedDepthFirstAdapter extends AnalysisAdapter
         {
             node.getColcheteEsq().apply(this);
         }
-        outABlocoBlkBloco(node);
+        outABlocoSemCmdBloco(node);
+    }
+
+    public void inABlocoCmdBloco(ABlocoCmdBloco node)
+    {
+        defaultIn(node);
+    }
+
+    public void outABlocoCmdBloco(ABlocoCmdBloco node)
+    {
+        defaultOut(node);
+    }
+
+    @Override
+    public void caseABlocoCmdBloco(ABlocoCmdBloco node)
+    {
+        inABlocoCmdBloco(node);
+        if(node.getColcheteDir() != null)
+        {
+            node.getColcheteDir().apply(this);
+        }
+        if(node.getListaComando() != null)
+        {
+            node.getListaComando().apply(this);
+        }
+        if(node.getDeclsOpt() != null)
+        {
+            node.getDeclsOpt().apply(this);
+        }
+        if(node.getColcheteEsq() != null)
+        {
+            node.getColcheteEsq().apply(this);
+        }
+        outABlocoCmdBloco(node);
     }
 
     public void inADeclsOptVazioDeclsOpt(ADeclsOptVazioDeclsOpt node)
@@ -1772,44 +1801,6 @@ public class ReversedDepthFirstAdapter extends AnalysisAdapter
             node.getListaDeclaracao().apply(this);
         }
         outADeclsOptComDeclsOpt(node);
-    }
-
-    public void inACmdsOptVazioCmdsOpt(ACmdsOptVazioCmdsOpt node)
-    {
-        defaultIn(node);
-    }
-
-    public void outACmdsOptVazioCmdsOpt(ACmdsOptVazioCmdsOpt node)
-    {
-        defaultOut(node);
-    }
-
-    @Override
-    public void caseACmdsOptVazioCmdsOpt(ACmdsOptVazioCmdsOpt node)
-    {
-        inACmdsOptVazioCmdsOpt(node);
-        outACmdsOptVazioCmdsOpt(node);
-    }
-
-    public void inACmdsOptComCmdsOpt(ACmdsOptComCmdsOpt node)
-    {
-        defaultIn(node);
-    }
-
-    public void outACmdsOptComCmdsOpt(ACmdsOptComCmdsOpt node)
-    {
-        defaultOut(node);
-    }
-
-    @Override
-    public void caseACmdsOptComCmdsOpt(ACmdsOptComCmdsOpt node)
-    {
-        inACmdsOptComCmdsOpt(node);
-        if(node.getListaComando() != null)
-        {
-            node.getListaComando().apply(this);
-        }
-        outACmdsOptComCmdsOpt(node);
     }
 
     public void inAExp(AExp node)

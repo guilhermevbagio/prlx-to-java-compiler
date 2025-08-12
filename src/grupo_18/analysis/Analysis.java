@@ -71,11 +71,10 @@ public interface Analysis extends Switch
     void caseAListaVarContListaVarTail(AListaVarContListaVarTail node);
     void caseAListaVarFimListaVarTail(AListaVarFimListaVarTail node);
     void caseALexpHeadListaExpRparen(ALexpHeadListaExpRparen node);
-    void caseABlocoBlkBloco(ABlocoBlkBloco node);
+    void caseABlocoSemCmdBloco(ABlocoSemCmdBloco node);
+    void caseABlocoCmdBloco(ABlocoCmdBloco node);
     void caseADeclsOptVazioDeclsOpt(ADeclsOptVazioDeclsOpt node);
     void caseADeclsOptComDeclsOpt(ADeclsOptComDeclsOpt node);
-    void caseACmdsOptVazioCmdsOpt(ACmdsOptVazioCmdsOpt node);
-    void caseACmdsOptComCmdsOpt(ACmdsOptComCmdsOpt node);
     void caseAExp(AExp node);
     void caseAOrNormOrExp(AOrNormOrExp node);
     void caseAOrRparOrExpRparen(AOrRparOrExpRparen node);

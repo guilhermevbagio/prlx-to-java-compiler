@@ -268,17 +268,13 @@ lista_exp_rparen =
   ;
   
 bloco =
-    {bloco_blk} colchete_esq decls_opt cmds_opt colchete_dir
+    {bloco_sem_cmd} colchete_esq decls_opt colchete_dir
+  | {bloco_cmd}     colchete_esq decls_opt lista_comando colchete_dir
   ;
 
 decls_opt =
     {decls_opt_vazio}
   | {decls_opt_com} lista_declaracao
-  ;
-
-cmds_opt =
-    {cmds_opt_vazio}
-  | {cmds_opt_com} lista_comando
   ;
 
 exp = or_exp ;

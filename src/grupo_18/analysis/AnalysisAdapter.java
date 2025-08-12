@@ -429,7 +429,13 @@ public class AnalysisAdapter implements Analysis
     }
 
     @Override
-    public void caseABlocoBlkBloco(ABlocoBlkBloco node)
+    public void caseABlocoSemCmdBloco(ABlocoSemCmdBloco node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseABlocoCmdBloco(ABlocoCmdBloco node)
     {
         defaultCase(node);
     }
@@ -442,18 +448,6 @@ public class AnalysisAdapter implements Analysis
 
     @Override
     public void caseADeclsOptComDeclsOpt(ADeclsOptComDeclsOpt node)
-    {
-        defaultCase(node);
-    }
-
-    @Override
-    public void caseACmdsOptVazioCmdsOpt(ACmdsOptVazioCmdsOpt node)
-    {
-        defaultCase(node);
-    }
-
-    @Override
-    public void caseACmdsOptComCmdsOpt(ACmdsOptComCmdsOpt node)
     {
         defaultCase(node);
     }
