@@ -7,8 +7,9 @@ import grupo_18.analysis.*;
 @SuppressWarnings("nls")
 public final class AListaHeadListaComando extends PListaComando
 {
-    private PListaComandoTail _listaComandoTail_;
     private PComando _comando_;
+    private PListaComandoTail _listaComandoTail_;
+    private PListaFim _listaFim_;
 
     public AListaHeadListaComando()
     {
@@ -16,13 +17,16 @@ public final class AListaHeadListaComando extends PListaComando
     }
 
     public AListaHeadListaComando(
+        @SuppressWarnings("hiding") PComando _comando_,
         @SuppressWarnings("hiding") PListaComandoTail _listaComandoTail_,
-        @SuppressWarnings("hiding") PComando _comando_)
+        @SuppressWarnings("hiding") PListaFim _listaFim_)
     {
         // Constructor
+        setComando(_comando_);
+
         setListaComandoTail(_listaComandoTail_);
 
-        setComando(_comando_);
+        setListaFim(_listaFim_);
 
     }
 
@@ -30,39 +34,15 @@ public final class AListaHeadListaComando extends PListaComando
     public Object clone()
     {
         return new AListaHeadListaComando(
+            cloneNode(this._comando_),
             cloneNode(this._listaComandoTail_),
-            cloneNode(this._comando_));
+            cloneNode(this._listaFim_));
     }
 
     @Override
     public void apply(Switch sw)
     {
         ((Analysis) sw).caseAListaHeadListaComando(this);
-    }
-
-    public PListaComandoTail getListaComandoTail()
-    {
-        return this._listaComandoTail_;
-    }
-
-    public void setListaComandoTail(PListaComandoTail node)
-    {
-        if(this._listaComandoTail_ != null)
-        {
-            this._listaComandoTail_.parent(null);
-        }
-
-        if(node != null)
-        {
-            if(node.parent() != null)
-            {
-                node.parent().removeChild(node);
-            }
-
-            node.parent(this);
-        }
-
-        this._listaComandoTail_ = node;
     }
 
     public PComando getComando()
@@ -90,27 +70,84 @@ public final class AListaHeadListaComando extends PListaComando
         this._comando_ = node;
     }
 
+    public PListaComandoTail getListaComandoTail()
+    {
+        return this._listaComandoTail_;
+    }
+
+    public void setListaComandoTail(PListaComandoTail node)
+    {
+        if(this._listaComandoTail_ != null)
+        {
+            this._listaComandoTail_.parent(null);
+        }
+
+        if(node != null)
+        {
+            if(node.parent() != null)
+            {
+                node.parent().removeChild(node);
+            }
+
+            node.parent(this);
+        }
+
+        this._listaComandoTail_ = node;
+    }
+
+    public PListaFim getListaFim()
+    {
+        return this._listaFim_;
+    }
+
+    public void setListaFim(PListaFim node)
+    {
+        if(this._listaFim_ != null)
+        {
+            this._listaFim_.parent(null);
+        }
+
+        if(node != null)
+        {
+            if(node.parent() != null)
+            {
+                node.parent().removeChild(node);
+            }
+
+            node.parent(this);
+        }
+
+        this._listaFim_ = node;
+    }
+
     @Override
     public String toString()
     {
         return ""
+            + toString(this._comando_)
             + toString(this._listaComandoTail_)
-            + toString(this._comando_);
+            + toString(this._listaFim_);
     }
 
     @Override
     void removeChild(@SuppressWarnings("unused") Node child)
     {
         // Remove child
+        if(this._comando_ == child)
+        {
+            this._comando_ = null;
+            return;
+        }
+
         if(this._listaComandoTail_ == child)
         {
             this._listaComandoTail_ = null;
             return;
         }
 
-        if(this._comando_ == child)
+        if(this._listaFim_ == child)
         {
-            this._comando_ = null;
+            this._listaFim_ = null;
             return;
         }
 
@@ -121,15 +158,21 @@ public final class AListaHeadListaComando extends PListaComando
     void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
     {
         // Replace child
+        if(this._comando_ == oldChild)
+        {
+            setComando((PComando) newChild);
+            return;
+        }
+
         if(this._listaComandoTail_ == oldChild)
         {
             setListaComandoTail((PListaComandoTail) newChild);
             return;
         }
 
-        if(this._comando_ == oldChild)
+        if(this._listaFim_ == oldChild)
         {
-            setComando((PComando) newChild);
+            setListaFim((PListaFim) newChild);
             return;
         }
 

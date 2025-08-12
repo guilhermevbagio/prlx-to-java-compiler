@@ -17,9 +17,10 @@ public interface Analysis extends Switch
     void caseAListaDeclaracaoUnicaListaDeclaracao(AListaDeclaracaoUnicaListaDeclaracao node);
     void caseAListaDeclaracaoRecListaDeclaracao(AListaDeclaracaoRecListaDeclaracao node);
     void caseAComandosHeadComandos(AComandosHeadComandos node);
+    void caseAComandosHeadVazioComandos(AComandosHeadVazioComandos node);
     void caseAListaHeadListaComando(AListaHeadListaComando node);
     void caseAListaCtListaComandoTail(AListaCtListaComandoTail node);
-    void caseAListaFimListaComandoTail(AListaFimListaComandoTail node);
+    void caseAListaFim(AListaFim node);
     void caseADeclaracaoMutDeclaracao(ADeclaracaoMutDeclaracao node);
     void caseADeclaracaoUnaltDeclaracao(ADeclaracaoUnaltDeclaracao node);
     void caseADeclaracaoUnaltInitDeclaracao(ADeclaracaoUnaltInitDeclaracao node);

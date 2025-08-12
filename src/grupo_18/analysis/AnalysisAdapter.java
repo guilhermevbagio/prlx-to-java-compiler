@@ -105,6 +105,12 @@ public class AnalysisAdapter implements Analysis
     }
 
     @Override
+    public void caseAComandosHeadVazioComandos(AComandosHeadVazioComandos node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
     public void caseAListaHeadListaComando(AListaHeadListaComando node)
     {
         defaultCase(node);
@@ -117,7 +123,7 @@ public class AnalysisAdapter implements Analysis
     }
 
     @Override
-    public void caseAListaFimListaComandoTail(AListaFimListaComandoTail node)
+    public void caseAListaFim(AListaFim node)
     {
         defaultCase(node);
     }

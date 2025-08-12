@@ -217,6 +217,59 @@ public class DepthFirstAdapter extends AnalysisAdapter
         outAComandosHeadComandos(node);
     }
 
+    public void inAComandosHeadVazioComandos(AComandosHeadVazioComandos node)
+    {
+        defaultIn(node);
+    }
+
+    public void outAComandosHeadVazioComandos(AComandosHeadVazioComandos node)
+    {
+        defaultOut(node);
+    }
+
+    @Override
+    public void caseAComandosHeadVazioComandos(AComandosHeadVazioComandos node)
+    {
+        inAComandosHeadVazioComandos(node);
+        if(node.getLet() != null)
+        {
+            node.getLet().apply(this);
+        }
+        if(node.getUs() != null)
+        {
+            node.getUs().apply(this);
+        }
+        if(node.getBegin() != null)
+        {
+            node.getBegin().apply(this);
+        }
+        if(node.getDoisPontos() != null)
+        {
+            node.getDoisPontos().apply(this);
+        }
+        if(node.getThatKw() != null)
+        {
+            node.getThatKw().apply(this);
+        }
+        if(node.getWould() != null)
+        {
+            node.getWould().apply(this);
+        }
+        if(node.getBe() != null)
+        {
+            node.getBe().apply(this);
+        }
+        if(node.getAll() != null)
+        {
+            node.getAll().apply(this);
+        }
+        if(node.getPonto() != null)
+        {
+            node.getPonto().apply(this);
+        }
+        outAComandosHeadVazioComandos(node);
+    }
+
     public void inAListaHeadListaComando(AListaHeadListaComando node)
     {
         defaultIn(node);
@@ -231,13 +284,17 @@ public class DepthFirstAdapter extends AnalysisAdapter
     public void caseAListaHeadListaComando(AListaHeadListaComando node)
     {
         inAListaHeadListaComando(node);
+        if(node.getComando() != null)
+        {
+            node.getComando().apply(this);
+        }
         if(node.getListaComandoTail() != null)
         {
             node.getListaComandoTail().apply(this);
         }
-        if(node.getComando() != null)
+        if(node.getListaFim() != null)
         {
-            node.getComando().apply(this);
+            node.getListaFim().apply(this);
         }
         outAListaHeadListaComando(node);
     }
@@ -267,21 +324,21 @@ public class DepthFirstAdapter extends AnalysisAdapter
         outAListaCtListaComandoTail(node);
     }
 
-    public void inAListaFimListaComandoTail(AListaFimListaComandoTail node)
+    public void inAListaFim(AListaFim node)
     {
         defaultIn(node);
     }
 
-    public void outAListaFimListaComandoTail(AListaFimListaComandoTail node)
+    public void outAListaFim(AListaFim node)
     {
         defaultOut(node);
     }
 
     @Override
-    public void caseAListaFimListaComandoTail(AListaFimListaComandoTail node)
+    public void caseAListaFim(AListaFim node)
     {
-        inAListaFimListaComandoTail(node);
-        outAListaFimListaComandoTail(node);
+        inAListaFim(node);
+        outAListaFim(node);
     }
 
     public void inADeclaracaoMutDeclaracao(ADeclaracaoMutDeclaracao node)

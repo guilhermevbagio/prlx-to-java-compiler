@@ -124,16 +124,19 @@ lista_declaracao =
 
 comandos =
     {comandos_head} let us begin dois_pontos lista_comando that_kw would be all ponto
+  | {comandos_head_vazio} let us begin dois_pontos that_kw would be all ponto
   ;
 
 lista_comando =
-    {lista_head} lista_comando_tail comando
+    {lista_head} comando lista_comando_tail lista_fim
   ;
 
 lista_comando_tail =
 	  {lista_ct} comando lista_comando_tail
-	| {lista_fim}
+
 ;
+
+lista_fim = ;
 
 declaracao =
     {declaracao_mut}         alterable   tipo identificador ponto_e_virgula
