@@ -15,7 +15,6 @@ public final class AMatchedIfElseMatched extends PMatched
     private PExp _exp_;
     private TParDir _parDir_;
     private TDo _do_;
-    private PListaComando _listaComando_;
     private PMatchedTail _matchedTail_;
 
     public AMatchedIfElseMatched()
@@ -32,7 +31,6 @@ public final class AMatchedIfElseMatched extends PMatched
         @SuppressWarnings("hiding") PExp _exp_,
         @SuppressWarnings("hiding") TParDir _parDir_,
         @SuppressWarnings("hiding") TDo _do_,
-        @SuppressWarnings("hiding") PListaComando _listaComando_,
         @SuppressWarnings("hiding") PMatchedTail _matchedTail_)
     {
         // Constructor
@@ -52,8 +50,6 @@ public final class AMatchedIfElseMatched extends PMatched
 
         setDo(_do_);
 
-        setListaComando(_listaComando_);
-
         setMatchedTail(_matchedTail_);
 
     }
@@ -70,7 +66,6 @@ public final class AMatchedIfElseMatched extends PMatched
             cloneNode(this._exp_),
             cloneNode(this._parDir_),
             cloneNode(this._do_),
-            cloneNode(this._listaComando_),
             cloneNode(this._matchedTail_));
     }
 
@@ -280,31 +275,6 @@ public final class AMatchedIfElseMatched extends PMatched
         this._do_ = node;
     }
 
-    public PListaComando getListaComando()
-    {
-        return this._listaComando_;
-    }
-
-    public void setListaComando(PListaComando node)
-    {
-        if(this._listaComando_ != null)
-        {
-            this._listaComando_.parent(null);
-        }
-
-        if(node != null)
-        {
-            if(node.parent() != null)
-            {
-                node.parent().removeChild(node);
-            }
-
-            node.parent(this);
-        }
-
-        this._listaComando_ = node;
-    }
-
     public PMatchedTail getMatchedTail()
     {
         return this._matchedTail_;
@@ -342,7 +312,6 @@ public final class AMatchedIfElseMatched extends PMatched
             + toString(this._exp_)
             + toString(this._parDir_)
             + toString(this._do_)
-            + toString(this._listaComando_)
             + toString(this._matchedTail_);
     }
 
@@ -395,12 +364,6 @@ public final class AMatchedIfElseMatched extends PMatched
         if(this._do_ == child)
         {
             this._do_ = null;
-            return;
-        }
-
-        if(this._listaComando_ == child)
-        {
-            this._listaComando_ = null;
             return;
         }
 
@@ -462,12 +425,6 @@ public final class AMatchedIfElseMatched extends PMatched
         if(this._do_ == oldChild)
         {
             setDo((TDo) newChild);
-            return;
-        }
-
-        if(this._listaComando_ == oldChild)
-        {
-            setListaComando((PListaComando) newChild);
             return;
         }
 

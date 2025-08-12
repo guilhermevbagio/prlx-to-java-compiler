@@ -2,7 +2,7 @@
 
 package grupo_18.node;
 
-public abstract class PComandoSemCond extends Node
+public abstract class PListaVariosComandos extends Node
 {
     // Empty body
 }

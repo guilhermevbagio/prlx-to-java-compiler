@@ -105,13 +105,25 @@ public class AnalysisAdapter implements Analysis
     }
 
     @Override
-    public void caseAListaComandoUnicoListaComando(AListaComandoUnicoListaComando node)
+    public void caseAListaComando(AListaComando node)
     {
         defaultCase(node);
     }
 
     @Override
-    public void caseAListaComandoRecListaComando(AListaComandoRecListaComando node)
+    public void caseAListaComandoUnicoListaComandoRec(AListaComandoUnicoListaComandoRec node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseAListaComandoRec(AListaComandoRec node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseAListaVariosComandos(AListaVariosComandos node)
     {
         defaultCase(node);
     }
@@ -243,61 +255,73 @@ public class AnalysisAdapter implements Analysis
     }
 
     @Override
+    public void caseAComandoBlocoComandoSemIf(AComandoBlocoComandoSemIf node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseAComandoAtrComandoSemIf(AComandoAtrComandoSemIf node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseAComandoInitComandoSemIf(AComandoInitComandoSemIf node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseAComandoCaptureComandoSemIf(AComandoCaptureComandoSemIf node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseAComandoShowComandoSemIf(AComandoShowComandoSemIf node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseAComandoWhileComandoSemIf(AComandoWhileComandoSemIf node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseAComandoForComandoSemIf(AComandoForComandoSemIf node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseAComandoBreakComandoSemIf(AComandoBreakComandoSemIf node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseAComandoContinueComandoSemIf(AComandoContinueComandoSemIf node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseAComando(AComando node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
     public void caseAComandoCondComando(AComandoCondComando node)
     {
         defaultCase(node);
     }
 
     @Override
-    public void caseAComandoAtrComando(AComandoAtrComando node)
-    {
-        defaultCase(node);
-    }
-
-    @Override
-    public void caseAComandoInitComando(AComandoInitComando node)
-    {
-        defaultCase(node);
-    }
-
-    @Override
-    public void caseAComandoCaptureComando(AComandoCaptureComando node)
-    {
-        defaultCase(node);
-    }
-
-    @Override
-    public void caseAComandoShowComando(AComandoShowComando node)
-    {
-        defaultCase(node);
-    }
-
-    @Override
-    public void caseAComandoWhileComando(AComandoWhileComando node)
-    {
-        defaultCase(node);
-    }
-
-    @Override
-    public void caseAComandoForComando(AComandoForComando node)
-    {
-        defaultCase(node);
-    }
-
-    @Override
-    public void caseAComandoBreakComando(AComandoBreakComando node)
-    {
-        defaultCase(node);
-    }
-
-    @Override
-    public void caseAComandoContinueComando(AComandoContinueComando node)
-    {
-        defaultCase(node);
-    }
-
-    @Override
-    public void caseAComandoBlocoComando(AComandoBlocoComando node)
+    public void caseAPreCondicional(APreCondicional node)
     {
         defaultCase(node);
     }
@@ -322,6 +346,12 @@ public class AnalysisAdapter implements Analysis
 
     @Override
     public void caseAMatchedTail(AMatchedTail node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseAMatchedTailEnd(AMatchedTailEnd node)
     {
         defaultCase(node);
     }

@@ -7,8 +7,9 @@ import grupo_18.analysis.*;
 @SuppressWarnings("nls")
 public final class AMatchedTail extends PMatchedTail
 {
+    private PComando _comando_;
     private TOtherwise _otherwise_;
-    private PListaComando _listaComando_;
+    private PMatchedTailEnd _matchedTailEnd_;
 
     public AMatchedTail()
     {
@@ -16,13 +17,16 @@ public final class AMatchedTail extends PMatchedTail
     }
 
     public AMatchedTail(
+        @SuppressWarnings("hiding") PComando _comando_,
         @SuppressWarnings("hiding") TOtherwise _otherwise_,
-        @SuppressWarnings("hiding") PListaComando _listaComando_)
+        @SuppressWarnings("hiding") PMatchedTailEnd _matchedTailEnd_)
     {
         // Constructor
+        setComando(_comando_);
+
         setOtherwise(_otherwise_);
 
-        setListaComando(_listaComando_);
+        setMatchedTailEnd(_matchedTailEnd_);
 
     }
 
@@ -30,14 +34,40 @@ public final class AMatchedTail extends PMatchedTail
     public Object clone()
     {
         return new AMatchedTail(
+            cloneNode(this._comando_),
             cloneNode(this._otherwise_),
-            cloneNode(this._listaComando_));
+            cloneNode(this._matchedTailEnd_));
     }
 
     @Override
     public void apply(Switch sw)
     {
         ((Analysis) sw).caseAMatchedTail(this);
+    }
+
+    public PComando getComando()
+    {
+        return this._comando_;
+    }
+
+    public void setComando(PComando node)
+    {
+        if(this._comando_ != null)
+        {
+            this._comando_.parent(null);
+        }
+
+        if(node != null)
+        {
+            if(node.parent() != null)
+            {
+                node.parent().removeChild(node);
+            }
+
+            node.parent(this);
+        }
+
+        this._comando_ = node;
     }
 
     public TOtherwise getOtherwise()
@@ -65,16 +95,16 @@ public final class AMatchedTail extends PMatchedTail
         this._otherwise_ = node;
     }
 
-    public PListaComando getListaComando()
+    public PMatchedTailEnd getMatchedTailEnd()
     {
-        return this._listaComando_;
+        return this._matchedTailEnd_;
     }
 
-    public void setListaComando(PListaComando node)
+    public void setMatchedTailEnd(PMatchedTailEnd node)
     {
-        if(this._listaComando_ != null)
+        if(this._matchedTailEnd_ != null)
         {
-            this._listaComando_.parent(null);
+            this._matchedTailEnd_.parent(null);
         }
 
         if(node != null)
@@ -87,30 +117,37 @@ public final class AMatchedTail extends PMatchedTail
             node.parent(this);
         }
 
-        this._listaComando_ = node;
+        this._matchedTailEnd_ = node;
     }
 
     @Override
     public String toString()
     {
         return ""
+            + toString(this._comando_)
             + toString(this._otherwise_)
-            + toString(this._listaComando_);
+            + toString(this._matchedTailEnd_);
     }
 
     @Override
     void removeChild(@SuppressWarnings("unused") Node child)
     {
         // Remove child
+        if(this._comando_ == child)
+        {
+            this._comando_ = null;
+            return;
+        }
+
         if(this._otherwise_ == child)
         {
             this._otherwise_ = null;
             return;
         }
 
-        if(this._listaComando_ == child)
+        if(this._matchedTailEnd_ == child)
         {
-            this._listaComando_ = null;
+            this._matchedTailEnd_ = null;
             return;
         }
 
@@ -121,15 +158,21 @@ public final class AMatchedTail extends PMatchedTail
     void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
     {
         // Replace child
+        if(this._comando_ == oldChild)
+        {
+            setComando((PComando) newChild);
+            return;
+        }
+
         if(this._otherwise_ == oldChild)
         {
             setOtherwise((TOtherwise) newChild);
             return;
         }
 
-        if(this._listaComando_ == oldChild)
+        if(this._matchedTailEnd_ == oldChild)
         {
-            setListaComando((PListaComando) newChild);
+            setMatchedTailEnd((PMatchedTailEnd) newChild);
             return;
         }
 

@@ -5,46 +5,46 @@ package grupo_18.node;
 import grupo_18.analysis.*;
 
 @SuppressWarnings("nls")
-public final class AMatched extends PMatched
+public final class AListaComandoRec extends PListaComandoRec
 {
-    private PComandoSemCond _comandoSemCond_;
+    private PListaVariosComandos _listaVariosComandos_;
 
-    public AMatched()
+    public AListaComandoRec()
     {
         // Constructor
     }
 
-    public AMatched(
-        @SuppressWarnings("hiding") PComandoSemCond _comandoSemCond_)
+    public AListaComandoRec(
+        @SuppressWarnings("hiding") PListaVariosComandos _listaVariosComandos_)
     {
         // Constructor
-        setComandoSemCond(_comandoSemCond_);
+        setListaVariosComandos(_listaVariosComandos_);
 
     }
 
     @Override
     public Object clone()
     {
-        return new AMatched(
-            cloneNode(this._comandoSemCond_));
+        return new AListaComandoRec(
+            cloneNode(this._listaVariosComandos_));
     }
 
     @Override
     public void apply(Switch sw)
     {
-        ((Analysis) sw).caseAMatched(this);
+        ((Analysis) sw).caseAListaComandoRec(this);
     }
 
-    public PComandoSemCond getComandoSemCond()
+    public PListaVariosComandos getListaVariosComandos()
     {
-        return this._comandoSemCond_;
+        return this._listaVariosComandos_;
     }
 
-    public void setComandoSemCond(PComandoSemCond node)
+    public void setListaVariosComandos(PListaVariosComandos node)
     {
-        if(this._comandoSemCond_ != null)
+        if(this._listaVariosComandos_ != null)
         {
-            this._comandoSemCond_.parent(null);
+            this._listaVariosComandos_.parent(null);
         }
 
         if(node != null)
@@ -57,23 +57,23 @@ public final class AMatched extends PMatched
             node.parent(this);
         }
 
-        this._comandoSemCond_ = node;
+        this._listaVariosComandos_ = node;
     }
 
     @Override
     public String toString()
     {
         return ""
-            + toString(this._comandoSemCond_);
+            + toString(this._listaVariosComandos_);
     }
 
     @Override
     void removeChild(@SuppressWarnings("unused") Node child)
     {
         // Remove child
-        if(this._comandoSemCond_ == child)
+        if(this._listaVariosComandos_ == child)
         {
-            this._comandoSemCond_ = null;
+            this._listaVariosComandos_ = null;
             return;
         }
 
@@ -84,9 +84,9 @@ public final class AMatched extends PMatched
     void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
     {
         // Replace child
-        if(this._comandoSemCond_ == oldChild)
+        if(this._listaVariosComandos_ == oldChild)
         {
-            setComandoSemCond((PComandoSemCond) newChild);
+            setListaVariosComandos((PListaVariosComandos) newChild);
             return;
         }
 

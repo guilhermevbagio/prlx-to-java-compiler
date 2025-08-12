@@ -5,46 +5,46 @@ package grupo_18.node;
 import grupo_18.analysis.*;
 
 @SuppressWarnings("nls")
-public final class AMatchedSimpleMatched extends PMatched
+public final class APreCondicional extends PPreCondicional
 {
-    private PComandoSemCond _comandoSemCond_;
+    private PCondicional _condicional_;
 
-    public AMatchedSimpleMatched()
+    public APreCondicional()
     {
         // Constructor
     }
 
-    public AMatchedSimpleMatched(
-        @SuppressWarnings("hiding") PComandoSemCond _comandoSemCond_)
+    public APreCondicional(
+        @SuppressWarnings("hiding") PCondicional _condicional_)
     {
         // Constructor
-        setComandoSemCond(_comandoSemCond_);
+        setCondicional(_condicional_);
 
     }
 
     @Override
     public Object clone()
     {
-        return new AMatchedSimpleMatched(
-            cloneNode(this._comandoSemCond_));
+        return new APreCondicional(
+            cloneNode(this._condicional_));
     }
 
     @Override
     public void apply(Switch sw)
     {
-        ((Analysis) sw).caseAMatchedSimpleMatched(this);
+        ((Analysis) sw).caseAPreCondicional(this);
     }
 
-    public PComandoSemCond getComandoSemCond()
+    public PCondicional getCondicional()
     {
-        return this._comandoSemCond_;
+        return this._condicional_;
     }
 
-    public void setComandoSemCond(PComandoSemCond node)
+    public void setCondicional(PCondicional node)
     {
-        if(this._comandoSemCond_ != null)
+        if(this._condicional_ != null)
         {
-            this._comandoSemCond_.parent(null);
+            this._condicional_.parent(null);
         }
 
         if(node != null)
@@ -57,23 +57,23 @@ public final class AMatchedSimpleMatched extends PMatched
             node.parent(this);
         }
 
-        this._comandoSemCond_ = node;
+        this._condicional_ = node;
     }
 
     @Override
     public String toString()
     {
         return ""
-            + toString(this._comandoSemCond_);
+            + toString(this._condicional_);
     }
 
     @Override
     void removeChild(@SuppressWarnings("unused") Node child)
     {
         // Remove child
-        if(this._comandoSemCond_ == child)
+        if(this._condicional_ == child)
         {
-            this._comandoSemCond_ = null;
+            this._condicional_ = null;
             return;
         }
 
@@ -84,9 +84,9 @@ public final class AMatchedSimpleMatched extends PMatched
     void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
     {
         // Replace child
-        if(this._comandoSemCond_ == oldChild)
+        if(this._condicional_ == oldChild)
         {
-            setComandoSemCond((PComandoSemCond) newChild);
+            setCondicional((PCondicional) newChild);
             return;
         }
 

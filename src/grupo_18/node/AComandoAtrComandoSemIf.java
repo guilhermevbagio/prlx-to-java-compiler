@@ -5,19 +5,19 @@ package grupo_18.node;
 import grupo_18.analysis.*;
 
 @SuppressWarnings("nls")
-public final class AComandoAtrComandoSemCond extends PComandoSemCond
+public final class AComandoAtrComandoSemIf extends PComandoSemIf
 {
     private PVar _var_;
     private TAtribuicao _atribuicao_;
     private PExp _exp_;
     private TPontoEVirgula _pontoEVirgula_;
 
-    public AComandoAtrComandoSemCond()
+    public AComandoAtrComandoSemIf()
     {
         // Constructor
     }
 
-    public AComandoAtrComandoSemCond(
+    public AComandoAtrComandoSemIf(
         @SuppressWarnings("hiding") PVar _var_,
         @SuppressWarnings("hiding") TAtribuicao _atribuicao_,
         @SuppressWarnings("hiding") PExp _exp_,
@@ -37,7 +37,7 @@ public final class AComandoAtrComandoSemCond extends PComandoSemCond
     @Override
     public Object clone()
     {
-        return new AComandoAtrComandoSemCond(
+        return new AComandoAtrComandoSemIf(
             cloneNode(this._var_),
             cloneNode(this._atribuicao_),
             cloneNode(this._exp_),
@@ -47,7 +47,7 @@ public final class AComandoAtrComandoSemCond extends PComandoSemCond
     @Override
     public void apply(Switch sw)
     {
-        ((Analysis) sw).caseAComandoAtrComandoSemCond(this);
+        ((Analysis) sw).caseAComandoAtrComandoSemIf(this);
     }
 
     public PVar getVar()

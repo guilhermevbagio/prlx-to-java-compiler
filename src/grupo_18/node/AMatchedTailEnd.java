@@ -5,46 +5,46 @@ package grupo_18.node;
 import grupo_18.analysis.*;
 
 @SuppressWarnings("nls")
-public final class AComandoForComandoSemCond extends PComandoSemCond
+public final class AMatchedTailEnd extends PMatchedTailEnd
 {
-    private PForStmt _forStmt_;
+    private PComando _comando_;
 
-    public AComandoForComandoSemCond()
+    public AMatchedTailEnd()
     {
         // Constructor
     }
 
-    public AComandoForComandoSemCond(
-        @SuppressWarnings("hiding") PForStmt _forStmt_)
+    public AMatchedTailEnd(
+        @SuppressWarnings("hiding") PComando _comando_)
     {
         // Constructor
-        setForStmt(_forStmt_);
+        setComando(_comando_);
 
     }
 
     @Override
     public Object clone()
     {
-        return new AComandoForComandoSemCond(
-            cloneNode(this._forStmt_));
+        return new AMatchedTailEnd(
+            cloneNode(this._comando_));
     }
 
     @Override
     public void apply(Switch sw)
     {
-        ((Analysis) sw).caseAComandoForComandoSemCond(this);
+        ((Analysis) sw).caseAMatchedTailEnd(this);
     }
 
-    public PForStmt getForStmt()
+    public PComando getComando()
     {
-        return this._forStmt_;
+        return this._comando_;
     }
 
-    public void setForStmt(PForStmt node)
+    public void setComando(PComando node)
     {
-        if(this._forStmt_ != null)
+        if(this._comando_ != null)
         {
-            this._forStmt_.parent(null);
+            this._comando_.parent(null);
         }
 
         if(node != null)
@@ -57,23 +57,23 @@ public final class AComandoForComandoSemCond extends PComandoSemCond
             node.parent(this);
         }
 
-        this._forStmt_ = node;
+        this._comando_ = node;
     }
 
     @Override
     public String toString()
     {
         return ""
-            + toString(this._forStmt_);
+            + toString(this._comando_);
     }
 
     @Override
     void removeChild(@SuppressWarnings("unused") Node child)
     {
         // Remove child
-        if(this._forStmt_ == child)
+        if(this._comando_ == child)
         {
-            this._forStmt_ = null;
+            this._comando_ = null;
             return;
         }
 
@@ -84,9 +84,9 @@ public final class AComandoForComandoSemCond extends PComandoSemCond
     void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
     {
         // Replace child
-        if(this._forStmt_ == oldChild)
+        if(this._comando_ == oldChild)
         {
-            setForStmt((PForStmt) newChild);
+            setComando((PComando) newChild);
             return;
         }
 

@@ -5,30 +5,34 @@ package grupo_18.node;
 import grupo_18.analysis.*;
 
 @SuppressWarnings("nls")
-public final class AComandoInitComandoSemCond extends PComandoSemCond
+public final class AComandoContinueComandoSemIf extends PComandoSemIf
 {
-    private PUnalt _unalt_;
-    private TInicializacao _inicializacao_;
-    private PExp _exp_;
+    private TGo _go_;
+    private TTo _to_;
+    private TNext _next_;
+    private TIteration _iteration_;
     private TPontoEVirgula _pontoEVirgula_;
 
-    public AComandoInitComandoSemCond()
+    public AComandoContinueComandoSemIf()
     {
         // Constructor
     }
 
-    public AComandoInitComandoSemCond(
-        @SuppressWarnings("hiding") PUnalt _unalt_,
-        @SuppressWarnings("hiding") TInicializacao _inicializacao_,
-        @SuppressWarnings("hiding") PExp _exp_,
+    public AComandoContinueComandoSemIf(
+        @SuppressWarnings("hiding") TGo _go_,
+        @SuppressWarnings("hiding") TTo _to_,
+        @SuppressWarnings("hiding") TNext _next_,
+        @SuppressWarnings("hiding") TIteration _iteration_,
         @SuppressWarnings("hiding") TPontoEVirgula _pontoEVirgula_)
     {
         // Constructor
-        setUnalt(_unalt_);
+        setGo(_go_);
 
-        setInicializacao(_inicializacao_);
+        setTo(_to_);
 
-        setExp(_exp_);
+        setNext(_next_);
+
+        setIteration(_iteration_);
 
         setPontoEVirgula(_pontoEVirgula_);
 
@@ -37,29 +41,30 @@ public final class AComandoInitComandoSemCond extends PComandoSemCond
     @Override
     public Object clone()
     {
-        return new AComandoInitComandoSemCond(
-            cloneNode(this._unalt_),
-            cloneNode(this._inicializacao_),
-            cloneNode(this._exp_),
+        return new AComandoContinueComandoSemIf(
+            cloneNode(this._go_),
+            cloneNode(this._to_),
+            cloneNode(this._next_),
+            cloneNode(this._iteration_),
             cloneNode(this._pontoEVirgula_));
     }
 
     @Override
     public void apply(Switch sw)
     {
-        ((Analysis) sw).caseAComandoInitComandoSemCond(this);
+        ((Analysis) sw).caseAComandoContinueComandoSemIf(this);
     }
 
-    public PUnalt getUnalt()
+    public TGo getGo()
     {
-        return this._unalt_;
+        return this._go_;
     }
 
-    public void setUnalt(PUnalt node)
+    public void setGo(TGo node)
     {
-        if(this._unalt_ != null)
+        if(this._go_ != null)
         {
-            this._unalt_.parent(null);
+            this._go_.parent(null);
         }
 
         if(node != null)
@@ -72,19 +77,19 @@ public final class AComandoInitComandoSemCond extends PComandoSemCond
             node.parent(this);
         }
 
-        this._unalt_ = node;
+        this._go_ = node;
     }
 
-    public TInicializacao getInicializacao()
+    public TTo getTo()
     {
-        return this._inicializacao_;
+        return this._to_;
     }
 
-    public void setInicializacao(TInicializacao node)
+    public void setTo(TTo node)
     {
-        if(this._inicializacao_ != null)
+        if(this._to_ != null)
         {
-            this._inicializacao_.parent(null);
+            this._to_.parent(null);
         }
 
         if(node != null)
@@ -97,19 +102,19 @@ public final class AComandoInitComandoSemCond extends PComandoSemCond
             node.parent(this);
         }
 
-        this._inicializacao_ = node;
+        this._to_ = node;
     }
 
-    public PExp getExp()
+    public TNext getNext()
     {
-        return this._exp_;
+        return this._next_;
     }
 
-    public void setExp(PExp node)
+    public void setNext(TNext node)
     {
-        if(this._exp_ != null)
+        if(this._next_ != null)
         {
-            this._exp_.parent(null);
+            this._next_.parent(null);
         }
 
         if(node != null)
@@ -122,7 +127,32 @@ public final class AComandoInitComandoSemCond extends PComandoSemCond
             node.parent(this);
         }
 
-        this._exp_ = node;
+        this._next_ = node;
+    }
+
+    public TIteration getIteration()
+    {
+        return this._iteration_;
+    }
+
+    public void setIteration(TIteration node)
+    {
+        if(this._iteration_ != null)
+        {
+            this._iteration_.parent(null);
+        }
+
+        if(node != null)
+        {
+            if(node.parent() != null)
+            {
+                node.parent().removeChild(node);
+            }
+
+            node.parent(this);
+        }
+
+        this._iteration_ = node;
     }
 
     public TPontoEVirgula getPontoEVirgula()
@@ -154,9 +184,10 @@ public final class AComandoInitComandoSemCond extends PComandoSemCond
     public String toString()
     {
         return ""
-            + toString(this._unalt_)
-            + toString(this._inicializacao_)
-            + toString(this._exp_)
+            + toString(this._go_)
+            + toString(this._to_)
+            + toString(this._next_)
+            + toString(this._iteration_)
             + toString(this._pontoEVirgula_);
     }
 
@@ -164,21 +195,27 @@ public final class AComandoInitComandoSemCond extends PComandoSemCond
     void removeChild(@SuppressWarnings("unused") Node child)
     {
         // Remove child
-        if(this._unalt_ == child)
+        if(this._go_ == child)
         {
-            this._unalt_ = null;
+            this._go_ = null;
             return;
         }
 
-        if(this._inicializacao_ == child)
+        if(this._to_ == child)
         {
-            this._inicializacao_ = null;
+            this._to_ = null;
             return;
         }
 
-        if(this._exp_ == child)
+        if(this._next_ == child)
         {
-            this._exp_ = null;
+            this._next_ = null;
+            return;
+        }
+
+        if(this._iteration_ == child)
+        {
+            this._iteration_ = null;
             return;
         }
 
@@ -195,21 +232,27 @@ public final class AComandoInitComandoSemCond extends PComandoSemCond
     void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
     {
         // Replace child
-        if(this._unalt_ == oldChild)
+        if(this._go_ == oldChild)
         {
-            setUnalt((PUnalt) newChild);
+            setGo((TGo) newChild);
             return;
         }
 
-        if(this._inicializacao_ == oldChild)
+        if(this._to_ == oldChild)
         {
-            setInicializacao((TInicializacao) newChild);
+            setTo((TTo) newChild);
             return;
         }
 
-        if(this._exp_ == oldChild)
+        if(this._next_ == oldChild)
         {
-            setExp((PExp) newChild);
+            setNext((TNext) newChild);
+            return;
+        }
+
+        if(this._iteration_ == oldChild)
+        {
+            setIteration((TIteration) newChild);
             return;
         }
 

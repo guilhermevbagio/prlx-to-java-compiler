@@ -5,30 +5,34 @@ package grupo_18.node;
 import grupo_18.analysis.*;
 
 @SuppressWarnings("nls")
-public final class AComandoShowComandoSemCond extends PComandoSemCond
+public final class AComandoCaptureComandoSemIf extends PComandoSemIf
 {
-    private TShow _show_;
+    private TCapture _capture_;
     private TParEsq _parEsq_;
-    private PListaExpRparen _listaExpRparen_;
+    private PListaVar _listaVar_;
+    private TParDir _parDir_;
     private TPontoEVirgula _pontoEVirgula_;
 
-    public AComandoShowComandoSemCond()
+    public AComandoCaptureComandoSemIf()
     {
         // Constructor
     }
 
-    public AComandoShowComandoSemCond(
-        @SuppressWarnings("hiding") TShow _show_,
+    public AComandoCaptureComandoSemIf(
+        @SuppressWarnings("hiding") TCapture _capture_,
         @SuppressWarnings("hiding") TParEsq _parEsq_,
-        @SuppressWarnings("hiding") PListaExpRparen _listaExpRparen_,
+        @SuppressWarnings("hiding") PListaVar _listaVar_,
+        @SuppressWarnings("hiding") TParDir _parDir_,
         @SuppressWarnings("hiding") TPontoEVirgula _pontoEVirgula_)
     {
         // Constructor
-        setShow(_show_);
+        setCapture(_capture_);
 
         setParEsq(_parEsq_);
 
-        setListaExpRparen(_listaExpRparen_);
+        setListaVar(_listaVar_);
+
+        setParDir(_parDir_);
 
         setPontoEVirgula(_pontoEVirgula_);
 
@@ -37,29 +41,30 @@ public final class AComandoShowComandoSemCond extends PComandoSemCond
     @Override
     public Object clone()
     {
-        return new AComandoShowComandoSemCond(
-            cloneNode(this._show_),
+        return new AComandoCaptureComandoSemIf(
+            cloneNode(this._capture_),
             cloneNode(this._parEsq_),
-            cloneNode(this._listaExpRparen_),
+            cloneNode(this._listaVar_),
+            cloneNode(this._parDir_),
             cloneNode(this._pontoEVirgula_));
     }
 
     @Override
     public void apply(Switch sw)
     {
-        ((Analysis) sw).caseAComandoShowComandoSemCond(this);
+        ((Analysis) sw).caseAComandoCaptureComandoSemIf(this);
     }
 
-    public TShow getShow()
+    public TCapture getCapture()
     {
-        return this._show_;
+        return this._capture_;
     }
 
-    public void setShow(TShow node)
+    public void setCapture(TCapture node)
     {
-        if(this._show_ != null)
+        if(this._capture_ != null)
         {
-            this._show_.parent(null);
+            this._capture_.parent(null);
         }
 
         if(node != null)
@@ -72,7 +77,7 @@ public final class AComandoShowComandoSemCond extends PComandoSemCond
             node.parent(this);
         }
 
-        this._show_ = node;
+        this._capture_ = node;
     }
 
     public TParEsq getParEsq()
@@ -100,16 +105,16 @@ public final class AComandoShowComandoSemCond extends PComandoSemCond
         this._parEsq_ = node;
     }
 
-    public PListaExpRparen getListaExpRparen()
+    public PListaVar getListaVar()
     {
-        return this._listaExpRparen_;
+        return this._listaVar_;
     }
 
-    public void setListaExpRparen(PListaExpRparen node)
+    public void setListaVar(PListaVar node)
     {
-        if(this._listaExpRparen_ != null)
+        if(this._listaVar_ != null)
         {
-            this._listaExpRparen_.parent(null);
+            this._listaVar_.parent(null);
         }
 
         if(node != null)
@@ -122,7 +127,32 @@ public final class AComandoShowComandoSemCond extends PComandoSemCond
             node.parent(this);
         }
 
-        this._listaExpRparen_ = node;
+        this._listaVar_ = node;
+    }
+
+    public TParDir getParDir()
+    {
+        return this._parDir_;
+    }
+
+    public void setParDir(TParDir node)
+    {
+        if(this._parDir_ != null)
+        {
+            this._parDir_.parent(null);
+        }
+
+        if(node != null)
+        {
+            if(node.parent() != null)
+            {
+                node.parent().removeChild(node);
+            }
+
+            node.parent(this);
+        }
+
+        this._parDir_ = node;
     }
 
     public TPontoEVirgula getPontoEVirgula()
@@ -154,9 +184,10 @@ public final class AComandoShowComandoSemCond extends PComandoSemCond
     public String toString()
     {
         return ""
-            + toString(this._show_)
+            + toString(this._capture_)
             + toString(this._parEsq_)
-            + toString(this._listaExpRparen_)
+            + toString(this._listaVar_)
+            + toString(this._parDir_)
             + toString(this._pontoEVirgula_);
     }
 
@@ -164,9 +195,9 @@ public final class AComandoShowComandoSemCond extends PComandoSemCond
     void removeChild(@SuppressWarnings("unused") Node child)
     {
         // Remove child
-        if(this._show_ == child)
+        if(this._capture_ == child)
         {
-            this._show_ = null;
+            this._capture_ = null;
             return;
         }
 
@@ -176,9 +207,15 @@ public final class AComandoShowComandoSemCond extends PComandoSemCond
             return;
         }
 
-        if(this._listaExpRparen_ == child)
+        if(this._listaVar_ == child)
         {
-            this._listaExpRparen_ = null;
+            this._listaVar_ = null;
+            return;
+        }
+
+        if(this._parDir_ == child)
+        {
+            this._parDir_ = null;
             return;
         }
 
@@ -195,9 +232,9 @@ public final class AComandoShowComandoSemCond extends PComandoSemCond
     void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
     {
         // Replace child
-        if(this._show_ == oldChild)
+        if(this._capture_ == oldChild)
         {
-            setShow((TShow) newChild);
+            setCapture((TCapture) newChild);
             return;
         }
 
@@ -207,9 +244,15 @@ public final class AComandoShowComandoSemCond extends PComandoSemCond
             return;
         }
 
-        if(this._listaExpRparen_ == oldChild)
+        if(this._listaVar_ == oldChild)
         {
-            setListaExpRparen((PListaExpRparen) newChild);
+            setListaVar((PListaVar) newChild);
+            return;
+        }
+
+        if(this._parDir_ == oldChild)
+        {
+            setParDir((TParDir) newChild);
             return;
         }
 

@@ -217,50 +217,92 @@ public class DepthFirstAdapter extends AnalysisAdapter
         outAComandosHeadComandos(node);
     }
 
-    public void inAListaComandoUnicoListaComando(AListaComandoUnicoListaComando node)
+    public void inAListaComando(AListaComando node)
     {
         defaultIn(node);
     }
 
-    public void outAListaComandoUnicoListaComando(AListaComandoUnicoListaComando node)
+    public void outAListaComando(AListaComando node)
     {
         defaultOut(node);
     }
 
     @Override
-    public void caseAListaComandoUnicoListaComando(AListaComandoUnicoListaComando node)
+    public void caseAListaComando(AListaComando node)
     {
-        inAListaComandoUnicoListaComando(node);
-        if(node.getComando() != null)
+        inAListaComando(node);
+        if(node.getListaComandoRec() != null)
         {
-            node.getComando().apply(this);
+            node.getListaComandoRec().apply(this);
         }
-        outAListaComandoUnicoListaComando(node);
+        outAListaComando(node);
     }
 
-    public void inAListaComandoRecListaComando(AListaComandoRecListaComando node)
+    public void inAListaComandoUnicoListaComandoRec(AListaComandoUnicoListaComandoRec node)
     {
         defaultIn(node);
     }
 
-    public void outAListaComandoRecListaComando(AListaComandoRecListaComando node)
+    public void outAListaComandoUnicoListaComandoRec(AListaComandoUnicoListaComandoRec node)
     {
         defaultOut(node);
     }
 
     @Override
-    public void caseAListaComandoRecListaComando(AListaComandoRecListaComando node)
+    public void caseAListaComandoUnicoListaComandoRec(AListaComandoUnicoListaComandoRec node)
     {
-        inAListaComandoRecListaComando(node);
-        if(node.getListaComando() != null)
+        inAListaComandoUnicoListaComandoRec(node);
+        if(node.getComando() != null)
         {
-            node.getListaComando().apply(this);
+            node.getComando().apply(this);
+        }
+        outAListaComandoUnicoListaComandoRec(node);
+    }
+
+    public void inAListaComandoRec(AListaComandoRec node)
+    {
+        defaultIn(node);
+    }
+
+    public void outAListaComandoRec(AListaComandoRec node)
+    {
+        defaultOut(node);
+    }
+
+    @Override
+    public void caseAListaComandoRec(AListaComandoRec node)
+    {
+        inAListaComandoRec(node);
+        if(node.getListaVariosComandos() != null)
+        {
+            node.getListaVariosComandos().apply(this);
+        }
+        outAListaComandoRec(node);
+    }
+
+    public void inAListaVariosComandos(AListaVariosComandos node)
+    {
+        defaultIn(node);
+    }
+
+    public void outAListaVariosComandos(AListaVariosComandos node)
+    {
+        defaultOut(node);
+    }
+
+    @Override
+    public void caseAListaVariosComandos(AListaVariosComandos node)
+    {
+        inAListaVariosComandos(node);
+        if(node.getListaComandoRec() != null)
+        {
+            node.getListaComandoRec().apply(this);
         }
         if(node.getComando() != null)
         {
             node.getComando().apply(this);
         }
-        outAListaComandoRecListaComando(node);
+        outAListaVariosComandos(node);
     }
 
     public void inADeclaracaoMutDeclaracao(ADeclaracaoMutDeclaracao node)
@@ -800,41 +842,41 @@ public class DepthFirstAdapter extends AnalysisAdapter
         outAValorStrValor(node);
     }
 
-    public void inAComandoCondComando(AComandoCondComando node)
+    public void inAComandoBlocoComandoSemIf(AComandoBlocoComandoSemIf node)
     {
         defaultIn(node);
     }
 
-    public void outAComandoCondComando(AComandoCondComando node)
+    public void outAComandoBlocoComandoSemIf(AComandoBlocoComandoSemIf node)
     {
         defaultOut(node);
     }
 
     @Override
-    public void caseAComandoCondComando(AComandoCondComando node)
+    public void caseAComandoBlocoComandoSemIf(AComandoBlocoComandoSemIf node)
     {
-        inAComandoCondComando(node);
-        if(node.getCondicional() != null)
+        inAComandoBlocoComandoSemIf(node);
+        if(node.getBloco() != null)
         {
-            node.getCondicional().apply(this);
+            node.getBloco().apply(this);
         }
-        outAComandoCondComando(node);
+        outAComandoBlocoComandoSemIf(node);
     }
 
-    public void inAComandoAtrComando(AComandoAtrComando node)
+    public void inAComandoAtrComandoSemIf(AComandoAtrComandoSemIf node)
     {
         defaultIn(node);
     }
 
-    public void outAComandoAtrComando(AComandoAtrComando node)
+    public void outAComandoAtrComandoSemIf(AComandoAtrComandoSemIf node)
     {
         defaultOut(node);
     }
 
     @Override
-    public void caseAComandoAtrComando(AComandoAtrComando node)
+    public void caseAComandoAtrComandoSemIf(AComandoAtrComandoSemIf node)
     {
-        inAComandoAtrComando(node);
+        inAComandoAtrComandoSemIf(node);
         if(node.getVar() != null)
         {
             node.getVar().apply(this);
@@ -851,23 +893,23 @@ public class DepthFirstAdapter extends AnalysisAdapter
         {
             node.getPontoEVirgula().apply(this);
         }
-        outAComandoAtrComando(node);
+        outAComandoAtrComandoSemIf(node);
     }
 
-    public void inAComandoInitComando(AComandoInitComando node)
+    public void inAComandoInitComandoSemIf(AComandoInitComandoSemIf node)
     {
         defaultIn(node);
     }
 
-    public void outAComandoInitComando(AComandoInitComando node)
+    public void outAComandoInitComandoSemIf(AComandoInitComandoSemIf node)
     {
         defaultOut(node);
     }
 
     @Override
-    public void caseAComandoInitComando(AComandoInitComando node)
+    public void caseAComandoInitComandoSemIf(AComandoInitComandoSemIf node)
     {
-        inAComandoInitComando(node);
+        inAComandoInitComandoSemIf(node);
         if(node.getUnalt() != null)
         {
             node.getUnalt().apply(this);
@@ -884,23 +926,23 @@ public class DepthFirstAdapter extends AnalysisAdapter
         {
             node.getPontoEVirgula().apply(this);
         }
-        outAComandoInitComando(node);
+        outAComandoInitComandoSemIf(node);
     }
 
-    public void inAComandoCaptureComando(AComandoCaptureComando node)
+    public void inAComandoCaptureComandoSemIf(AComandoCaptureComandoSemIf node)
     {
         defaultIn(node);
     }
 
-    public void outAComandoCaptureComando(AComandoCaptureComando node)
+    public void outAComandoCaptureComandoSemIf(AComandoCaptureComandoSemIf node)
     {
         defaultOut(node);
     }
 
     @Override
-    public void caseAComandoCaptureComando(AComandoCaptureComando node)
+    public void caseAComandoCaptureComandoSemIf(AComandoCaptureComandoSemIf node)
     {
-        inAComandoCaptureComando(node);
+        inAComandoCaptureComandoSemIf(node);
         if(node.getCapture() != null)
         {
             node.getCapture().apply(this);
@@ -921,23 +963,23 @@ public class DepthFirstAdapter extends AnalysisAdapter
         {
             node.getPontoEVirgula().apply(this);
         }
-        outAComandoCaptureComando(node);
+        outAComandoCaptureComandoSemIf(node);
     }
 
-    public void inAComandoShowComando(AComandoShowComando node)
+    public void inAComandoShowComandoSemIf(AComandoShowComandoSemIf node)
     {
         defaultIn(node);
     }
 
-    public void outAComandoShowComando(AComandoShowComando node)
+    public void outAComandoShowComandoSemIf(AComandoShowComandoSemIf node)
     {
         defaultOut(node);
     }
 
     @Override
-    public void caseAComandoShowComando(AComandoShowComando node)
+    public void caseAComandoShowComandoSemIf(AComandoShowComandoSemIf node)
     {
-        inAComandoShowComando(node);
+        inAComandoShowComandoSemIf(node);
         if(node.getShow() != null)
         {
             node.getShow().apply(this);
@@ -954,65 +996,65 @@ public class DepthFirstAdapter extends AnalysisAdapter
         {
             node.getPontoEVirgula().apply(this);
         }
-        outAComandoShowComando(node);
+        outAComandoShowComandoSemIf(node);
     }
 
-    public void inAComandoWhileComando(AComandoWhileComando node)
+    public void inAComandoWhileComandoSemIf(AComandoWhileComandoSemIf node)
     {
         defaultIn(node);
     }
 
-    public void outAComandoWhileComando(AComandoWhileComando node)
+    public void outAComandoWhileComandoSemIf(AComandoWhileComandoSemIf node)
     {
         defaultOut(node);
     }
 
     @Override
-    public void caseAComandoWhileComando(AComandoWhileComando node)
+    public void caseAComandoWhileComandoSemIf(AComandoWhileComandoSemIf node)
     {
-        inAComandoWhileComando(node);
+        inAComandoWhileComandoSemIf(node);
         if(node.getWhileStmt() != null)
         {
             node.getWhileStmt().apply(this);
         }
-        outAComandoWhileComando(node);
+        outAComandoWhileComandoSemIf(node);
     }
 
-    public void inAComandoForComando(AComandoForComando node)
+    public void inAComandoForComandoSemIf(AComandoForComandoSemIf node)
     {
         defaultIn(node);
     }
 
-    public void outAComandoForComando(AComandoForComando node)
+    public void outAComandoForComandoSemIf(AComandoForComandoSemIf node)
     {
         defaultOut(node);
     }
 
     @Override
-    public void caseAComandoForComando(AComandoForComando node)
+    public void caseAComandoForComandoSemIf(AComandoForComandoSemIf node)
     {
-        inAComandoForComando(node);
+        inAComandoForComandoSemIf(node);
         if(node.getForStmt() != null)
         {
             node.getForStmt().apply(this);
         }
-        outAComandoForComando(node);
+        outAComandoForComandoSemIf(node);
     }
 
-    public void inAComandoBreakComando(AComandoBreakComando node)
+    public void inAComandoBreakComandoSemIf(AComandoBreakComandoSemIf node)
     {
         defaultIn(node);
     }
 
-    public void outAComandoBreakComando(AComandoBreakComando node)
+    public void outAComandoBreakComandoSemIf(AComandoBreakComandoSemIf node)
     {
         defaultOut(node);
     }
 
     @Override
-    public void caseAComandoBreakComando(AComandoBreakComando node)
+    public void caseAComandoBreakComandoSemIf(AComandoBreakComandoSemIf node)
     {
-        inAComandoBreakComando(node);
+        inAComandoBreakComandoSemIf(node);
         if(node.getAbandon() != null)
         {
             node.getAbandon().apply(this);
@@ -1021,23 +1063,23 @@ public class DepthFirstAdapter extends AnalysisAdapter
         {
             node.getPontoEVirgula().apply(this);
         }
-        outAComandoBreakComando(node);
+        outAComandoBreakComandoSemIf(node);
     }
 
-    public void inAComandoContinueComando(AComandoContinueComando node)
+    public void inAComandoContinueComandoSemIf(AComandoContinueComandoSemIf node)
     {
         defaultIn(node);
     }
 
-    public void outAComandoContinueComando(AComandoContinueComando node)
+    public void outAComandoContinueComandoSemIf(AComandoContinueComandoSemIf node)
     {
         defaultOut(node);
     }
 
     @Override
-    public void caseAComandoContinueComando(AComandoContinueComando node)
+    public void caseAComandoContinueComandoSemIf(AComandoContinueComandoSemIf node)
     {
-        inAComandoContinueComando(node);
+        inAComandoContinueComandoSemIf(node);
         if(node.getGo() != null)
         {
             node.getGo().apply(this);
@@ -1058,28 +1100,70 @@ public class DepthFirstAdapter extends AnalysisAdapter
         {
             node.getPontoEVirgula().apply(this);
         }
-        outAComandoContinueComando(node);
+        outAComandoContinueComandoSemIf(node);
     }
 
-    public void inAComandoBlocoComando(AComandoBlocoComando node)
+    public void inAComando(AComando node)
     {
         defaultIn(node);
     }
 
-    public void outAComandoBlocoComando(AComandoBlocoComando node)
+    public void outAComando(AComando node)
     {
         defaultOut(node);
     }
 
     @Override
-    public void caseAComandoBlocoComando(AComandoBlocoComando node)
+    public void caseAComando(AComando node)
     {
-        inAComandoBlocoComando(node);
-        if(node.getBloco() != null)
+        inAComando(node);
+        if(node.getComandoSemIf() != null)
         {
-            node.getBloco().apply(this);
+            node.getComandoSemIf().apply(this);
         }
-        outAComandoBlocoComando(node);
+        outAComando(node);
+    }
+
+    public void inAComandoCondComando(AComandoCondComando node)
+    {
+        defaultIn(node);
+    }
+
+    public void outAComandoCondComando(AComandoCondComando node)
+    {
+        defaultOut(node);
+    }
+
+    @Override
+    public void caseAComandoCondComando(AComandoCondComando node)
+    {
+        inAComandoCondComando(node);
+        if(node.getPreCondicional() != null)
+        {
+            node.getPreCondicional().apply(this);
+        }
+        outAComandoCondComando(node);
+    }
+
+    public void inAPreCondicional(APreCondicional node)
+    {
+        defaultIn(node);
+    }
+
+    public void outAPreCondicional(APreCondicional node)
+    {
+        defaultOut(node);
+    }
+
+    @Override
+    public void caseAPreCondicional(APreCondicional node)
+    {
+        inAPreCondicional(node);
+        if(node.getCondicional() != null)
+        {
+            node.getCondicional().apply(this);
+        }
+        outAPreCondicional(node);
     }
 
     public void inAMatchedCondCondicional(AMatchedCondCondicional node)
@@ -1170,10 +1254,6 @@ public class DepthFirstAdapter extends AnalysisAdapter
         {
             node.getDo().apply(this);
         }
-        if(node.getListaComando() != null)
-        {
-            node.getListaComando().apply(this);
-        }
         if(node.getMatchedTail() != null)
         {
             node.getMatchedTail().apply(this);
@@ -1195,15 +1275,40 @@ public class DepthFirstAdapter extends AnalysisAdapter
     public void caseAMatchedTail(AMatchedTail node)
     {
         inAMatchedTail(node);
+        if(node.getComando() != null)
+        {
+            node.getComando().apply(this);
+        }
         if(node.getOtherwise() != null)
         {
             node.getOtherwise().apply(this);
         }
-        if(node.getListaComando() != null)
+        if(node.getMatchedTailEnd() != null)
         {
-            node.getListaComando().apply(this);
+            node.getMatchedTailEnd().apply(this);
         }
         outAMatchedTail(node);
+    }
+
+    public void inAMatchedTailEnd(AMatchedTailEnd node)
+    {
+        defaultIn(node);
+    }
+
+    public void outAMatchedTailEnd(AMatchedTailEnd node)
+    {
+        defaultOut(node);
+    }
+
+    @Override
+    public void caseAMatchedTailEnd(AMatchedTailEnd node)
+    {
+        inAMatchedTailEnd(node);
+        if(node.getComando() != null)
+        {
+            node.getComando().apply(this);
+        }
+        outAMatchedTailEnd(node);
     }
 
     public void inAUnmatchedCmdUnmatched(AUnmatchedCmdUnmatched node)
@@ -1252,9 +1357,9 @@ public class DepthFirstAdapter extends AnalysisAdapter
         {
             node.getDo().apply(this);
         }
-        if(node.getListaComando() != null)
+        if(node.getComando() != null)
         {
-            node.getListaComando().apply(this);
+            node.getComando().apply(this);
         }
         outAUnmatchedCmdUnmatched(node);
     }

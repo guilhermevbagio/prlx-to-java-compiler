@@ -5,22 +5,22 @@ package grupo_18.node;
 import grupo_18.analysis.*;
 
 @SuppressWarnings("nls")
-public final class AListaComandoRecListaComando extends PListaComando
+public final class AListaVariosComandos extends PListaVariosComandos
 {
-    private PListaComando _listaComando_;
+    private PListaComandoRec _listaComandoRec_;
     private PComando _comando_;
 
-    public AListaComandoRecListaComando()
+    public AListaVariosComandos()
     {
         // Constructor
     }
 
-    public AListaComandoRecListaComando(
-        @SuppressWarnings("hiding") PListaComando _listaComando_,
+    public AListaVariosComandos(
+        @SuppressWarnings("hiding") PListaComandoRec _listaComandoRec_,
         @SuppressWarnings("hiding") PComando _comando_)
     {
         // Constructor
-        setListaComando(_listaComando_);
+        setListaComandoRec(_listaComandoRec_);
 
         setComando(_comando_);
 
@@ -29,27 +29,27 @@ public final class AListaComandoRecListaComando extends PListaComando
     @Override
     public Object clone()
     {
-        return new AListaComandoRecListaComando(
-            cloneNode(this._listaComando_),
+        return new AListaVariosComandos(
+            cloneNode(this._listaComandoRec_),
             cloneNode(this._comando_));
     }
 
     @Override
     public void apply(Switch sw)
     {
-        ((Analysis) sw).caseAListaComandoRecListaComando(this);
+        ((Analysis) sw).caseAListaVariosComandos(this);
     }
 
-    public PListaComando getListaComando()
+    public PListaComandoRec getListaComandoRec()
     {
-        return this._listaComando_;
+        return this._listaComandoRec_;
     }
 
-    public void setListaComando(PListaComando node)
+    public void setListaComandoRec(PListaComandoRec node)
     {
-        if(this._listaComando_ != null)
+        if(this._listaComandoRec_ != null)
         {
-            this._listaComando_.parent(null);
+            this._listaComandoRec_.parent(null);
         }
 
         if(node != null)
@@ -62,7 +62,7 @@ public final class AListaComandoRecListaComando extends PListaComando
             node.parent(this);
         }
 
-        this._listaComando_ = node;
+        this._listaComandoRec_ = node;
     }
 
     public PComando getComando()
@@ -94,7 +94,7 @@ public final class AListaComandoRecListaComando extends PListaComando
     public String toString()
     {
         return ""
-            + toString(this._listaComando_)
+            + toString(this._listaComandoRec_)
             + toString(this._comando_);
     }
 
@@ -102,9 +102,9 @@ public final class AListaComandoRecListaComando extends PListaComando
     void removeChild(@SuppressWarnings("unused") Node child)
     {
         // Remove child
-        if(this._listaComando_ == child)
+        if(this._listaComandoRec_ == child)
         {
-            this._listaComando_ = null;
+            this._listaComandoRec_ = null;
             return;
         }
 
@@ -121,9 +121,9 @@ public final class AListaComandoRecListaComando extends PListaComando
     void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
     {
         // Replace child
-        if(this._listaComando_ == oldChild)
+        if(this._listaComandoRec_ == oldChild)
         {
-            setListaComando((PListaComando) newChild);
+            setListaComandoRec((PListaComandoRec) newChild);
             return;
         }
 

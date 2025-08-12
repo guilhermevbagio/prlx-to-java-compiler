@@ -5,46 +5,46 @@ package grupo_18.node;
 import grupo_18.analysis.*;
 
 @SuppressWarnings("nls")
-public final class AComandoSCondComando extends PComando
+public final class AComando extends PComando
 {
-    private PComandoSemCond _comandoSemCond_;
+    private PComandoSemIf _comandoSemIf_;
 
-    public AComandoSCondComando()
+    public AComando()
     {
         // Constructor
     }
 
-    public AComandoSCondComando(
-        @SuppressWarnings("hiding") PComandoSemCond _comandoSemCond_)
+    public AComando(
+        @SuppressWarnings("hiding") PComandoSemIf _comandoSemIf_)
     {
         // Constructor
-        setComandoSemCond(_comandoSemCond_);
+        setComandoSemIf(_comandoSemIf_);
 
     }
 
     @Override
     public Object clone()
     {
-        return new AComandoSCondComando(
-            cloneNode(this._comandoSemCond_));
+        return new AComando(
+            cloneNode(this._comandoSemIf_));
     }
 
     @Override
     public void apply(Switch sw)
     {
-        ((Analysis) sw).caseAComandoSCondComando(this);
+        ((Analysis) sw).caseAComando(this);
     }
 
-    public PComandoSemCond getComandoSemCond()
+    public PComandoSemIf getComandoSemIf()
     {
-        return this._comandoSemCond_;
+        return this._comandoSemIf_;
     }
 
-    public void setComandoSemCond(PComandoSemCond node)
+    public void setComandoSemIf(PComandoSemIf node)
     {
-        if(this._comandoSemCond_ != null)
+        if(this._comandoSemIf_ != null)
         {
-            this._comandoSemCond_.parent(null);
+            this._comandoSemIf_.parent(null);
         }
 
         if(node != null)
@@ -57,23 +57,23 @@ public final class AComandoSCondComando extends PComando
             node.parent(this);
         }
 
-        this._comandoSemCond_ = node;
+        this._comandoSemIf_ = node;
     }
 
     @Override
     public String toString()
     {
         return ""
-            + toString(this._comandoSemCond_);
+            + toString(this._comandoSemIf_);
     }
 
     @Override
     void removeChild(@SuppressWarnings("unused") Node child)
     {
         // Remove child
-        if(this._comandoSemCond_ == child)
+        if(this._comandoSemIf_ == child)
         {
-            this._comandoSemCond_ = null;
+            this._comandoSemIf_ = null;
             return;
         }
 
@@ -84,9 +84,9 @@ public final class AComandoSCondComando extends PComando
     void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
     {
         // Replace child
-        if(this._comandoSemCond_ == oldChild)
+        if(this._comandoSemIf_ == oldChild)
         {
-            setComandoSemCond((PComandoSemCond) newChild);
+            setComandoSemIf((PComandoSemIf) newChild);
             return;
         }
 

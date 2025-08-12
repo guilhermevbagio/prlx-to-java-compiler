@@ -5,46 +5,46 @@ package grupo_18.node;
 import grupo_18.analysis.*;
 
 @SuppressWarnings("nls")
-public final class AListaComandoUnicoListaComando extends PListaComando
+public final class AListaComando extends PListaComando
 {
-    private PComando _comando_;
+    private PListaComandoRec _listaComandoRec_;
 
-    public AListaComandoUnicoListaComando()
+    public AListaComando()
     {
         // Constructor
     }
 
-    public AListaComandoUnicoListaComando(
-        @SuppressWarnings("hiding") PComando _comando_)
+    public AListaComando(
+        @SuppressWarnings("hiding") PListaComandoRec _listaComandoRec_)
     {
         // Constructor
-        setComando(_comando_);
+        setListaComandoRec(_listaComandoRec_);
 
     }
 
     @Override
     public Object clone()
     {
-        return new AListaComandoUnicoListaComando(
-            cloneNode(this._comando_));
+        return new AListaComando(
+            cloneNode(this._listaComandoRec_));
     }
 
     @Override
     public void apply(Switch sw)
     {
-        ((Analysis) sw).caseAListaComandoUnicoListaComando(this);
+        ((Analysis) sw).caseAListaComando(this);
     }
 
-    public PComando getComando()
+    public PListaComandoRec getListaComandoRec()
     {
-        return this._comando_;
+        return this._listaComandoRec_;
     }
 
-    public void setComando(PComando node)
+    public void setListaComandoRec(PListaComandoRec node)
     {
-        if(this._comando_ != null)
+        if(this._listaComandoRec_ != null)
         {
-            this._comando_.parent(null);
+            this._listaComandoRec_.parent(null);
         }
 
         if(node != null)
@@ -57,23 +57,23 @@ public final class AListaComandoUnicoListaComando extends PListaComando
             node.parent(this);
         }
 
-        this._comando_ = node;
+        this._listaComandoRec_ = node;
     }
 
     @Override
     public String toString()
     {
         return ""
-            + toString(this._comando_);
+            + toString(this._listaComandoRec_);
     }
 
     @Override
     void removeChild(@SuppressWarnings("unused") Node child)
     {
         // Remove child
-        if(this._comando_ == child)
+        if(this._listaComandoRec_ == child)
         {
-            this._comando_ = null;
+            this._listaComandoRec_ = null;
             return;
         }
 
@@ -84,9 +84,9 @@ public final class AListaComandoUnicoListaComando extends PListaComando
     void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
     {
         // Replace child
-        if(this._comando_ == oldChild)
+        if(this._listaComandoRec_ == oldChild)
         {
-            setComando((PComando) newChild);
+            setListaComandoRec((PListaComandoRec) newChild);
             return;
         }
 

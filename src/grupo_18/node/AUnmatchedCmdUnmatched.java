@@ -15,7 +15,7 @@ public final class AUnmatchedCmdUnmatched extends PUnmatched
     private PExp _exp_;
     private TParDir _parDir_;
     private TDo _do_;
-    private PListaComando _listaComando_;
+    private PComando _comando_;
 
     public AUnmatchedCmdUnmatched()
     {
@@ -31,7 +31,7 @@ public final class AUnmatchedCmdUnmatched extends PUnmatched
         @SuppressWarnings("hiding") PExp _exp_,
         @SuppressWarnings("hiding") TParDir _parDir_,
         @SuppressWarnings("hiding") TDo _do_,
-        @SuppressWarnings("hiding") PListaComando _listaComando_)
+        @SuppressWarnings("hiding") PComando _comando_)
     {
         // Constructor
         setJust(_just_);
@@ -50,7 +50,7 @@ public final class AUnmatchedCmdUnmatched extends PUnmatched
 
         setDo(_do_);
 
-        setListaComando(_listaComando_);
+        setComando(_comando_);
 
     }
 
@@ -66,7 +66,7 @@ public final class AUnmatchedCmdUnmatched extends PUnmatched
             cloneNode(this._exp_),
             cloneNode(this._parDir_),
             cloneNode(this._do_),
-            cloneNode(this._listaComando_));
+            cloneNode(this._comando_));
     }
 
     @Override
@@ -275,16 +275,16 @@ public final class AUnmatchedCmdUnmatched extends PUnmatched
         this._do_ = node;
     }
 
-    public PListaComando getListaComando()
+    public PComando getComando()
     {
-        return this._listaComando_;
+        return this._comando_;
     }
 
-    public void setListaComando(PListaComando node)
+    public void setComando(PComando node)
     {
-        if(this._listaComando_ != null)
+        if(this._comando_ != null)
         {
-            this._listaComando_.parent(null);
+            this._comando_.parent(null);
         }
 
         if(node != null)
@@ -297,7 +297,7 @@ public final class AUnmatchedCmdUnmatched extends PUnmatched
             node.parent(this);
         }
 
-        this._listaComando_ = node;
+        this._comando_ = node;
     }
 
     @Override
@@ -312,7 +312,7 @@ public final class AUnmatchedCmdUnmatched extends PUnmatched
             + toString(this._exp_)
             + toString(this._parDir_)
             + toString(this._do_)
-            + toString(this._listaComando_);
+            + toString(this._comando_);
     }
 
     @Override
@@ -367,9 +367,9 @@ public final class AUnmatchedCmdUnmatched extends PUnmatched
             return;
         }
 
-        if(this._listaComando_ == child)
+        if(this._comando_ == child)
         {
-            this._listaComando_ = null;
+            this._comando_ = null;
             return;
         }
 
@@ -428,9 +428,9 @@ public final class AUnmatchedCmdUnmatched extends PUnmatched
             return;
         }
 
-        if(this._listaComando_ == oldChild)
+        if(this._comando_ == oldChild)
         {
-            setListaComando((PListaComando) newChild);
+            setComando((PComando) newChild);
             return;
         }
 

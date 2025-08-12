@@ -5,46 +5,46 @@ package grupo_18.node;
 import grupo_18.analysis.*;
 
 @SuppressWarnings("nls")
-public final class AComandoWhileComandoSemCond extends PComandoSemCond
+public final class AComandoForComandoSemIf extends PComandoSemIf
 {
-    private PWhileStmt _whileStmt_;
+    private PForStmt _forStmt_;
 
-    public AComandoWhileComandoSemCond()
+    public AComandoForComandoSemIf()
     {
         // Constructor
     }
 
-    public AComandoWhileComandoSemCond(
-        @SuppressWarnings("hiding") PWhileStmt _whileStmt_)
+    public AComandoForComandoSemIf(
+        @SuppressWarnings("hiding") PForStmt _forStmt_)
     {
         // Constructor
-        setWhileStmt(_whileStmt_);
+        setForStmt(_forStmt_);
 
     }
 
     @Override
     public Object clone()
     {
-        return new AComandoWhileComandoSemCond(
-            cloneNode(this._whileStmt_));
+        return new AComandoForComandoSemIf(
+            cloneNode(this._forStmt_));
     }
 
     @Override
     public void apply(Switch sw)
     {
-        ((Analysis) sw).caseAComandoWhileComandoSemCond(this);
+        ((Analysis) sw).caseAComandoForComandoSemIf(this);
     }
 
-    public PWhileStmt getWhileStmt()
+    public PForStmt getForStmt()
     {
-        return this._whileStmt_;
+        return this._forStmt_;
     }
 
-    public void setWhileStmt(PWhileStmt node)
+    public void setForStmt(PForStmt node)
     {
-        if(this._whileStmt_ != null)
+        if(this._forStmt_ != null)
         {
-            this._whileStmt_.parent(null);
+            this._forStmt_.parent(null);
         }
 
         if(node != null)
@@ -57,23 +57,23 @@ public final class AComandoWhileComandoSemCond extends PComandoSemCond
             node.parent(this);
         }
 
-        this._whileStmt_ = node;
+        this._forStmt_ = node;
     }
 
     @Override
     public String toString()
     {
         return ""
-            + toString(this._whileStmt_);
+            + toString(this._forStmt_);
     }
 
     @Override
     void removeChild(@SuppressWarnings("unused") Node child)
     {
         // Remove child
-        if(this._whileStmt_ == child)
+        if(this._forStmt_ == child)
         {
-            this._whileStmt_ = null;
+            this._forStmt_ = null;
             return;
         }
 
@@ -84,9 +84,9 @@ public final class AComandoWhileComandoSemCond extends PComandoSemCond
     void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
     {
         // Replace child
-        if(this._whileStmt_ == oldChild)
+        if(this._forStmt_ == oldChild)
         {
-            setWhileStmt((PWhileStmt) newChild);
+            setForStmt((PForStmt) newChild);
             return;
         }
 

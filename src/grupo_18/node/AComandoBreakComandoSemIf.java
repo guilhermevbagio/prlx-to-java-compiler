@@ -5,17 +5,17 @@ package grupo_18.node;
 import grupo_18.analysis.*;
 
 @SuppressWarnings("nls")
-public final class AComandoBreakComandoSemCond extends PComandoSemCond
+public final class AComandoBreakComandoSemIf extends PComandoSemIf
 {
     private TAbandon _abandon_;
     private TPontoEVirgula _pontoEVirgula_;
 
-    public AComandoBreakComandoSemCond()
+    public AComandoBreakComandoSemIf()
     {
         // Constructor
     }
 
-    public AComandoBreakComandoSemCond(
+    public AComandoBreakComandoSemIf(
         @SuppressWarnings("hiding") TAbandon _abandon_,
         @SuppressWarnings("hiding") TPontoEVirgula _pontoEVirgula_)
     {
@@ -29,7 +29,7 @@ public final class AComandoBreakComandoSemCond extends PComandoSemCond
     @Override
     public Object clone()
     {
-        return new AComandoBreakComandoSemCond(
+        return new AComandoBreakComandoSemIf(
             cloneNode(this._abandon_),
             cloneNode(this._pontoEVirgula_));
     }
@@ -37,7 +37,7 @@ public final class AComandoBreakComandoSemCond extends PComandoSemCond
     @Override
     public void apply(Switch sw)
     {
-        ((Analysis) sw).caseAComandoBreakComandoSemCond(this);
+        ((Analysis) sw).caseAComandoBreakComandoSemIf(this);
     }
 
     public TAbandon getAbandon()

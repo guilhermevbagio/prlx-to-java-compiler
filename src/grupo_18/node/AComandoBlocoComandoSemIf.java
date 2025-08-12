@@ -5,46 +5,46 @@ package grupo_18.node;
 import grupo_18.analysis.*;
 
 @SuppressWarnings("nls")
-public final class AComandoCondComando extends PComando
+public final class AComandoBlocoComandoSemIf extends PComandoSemIf
 {
-    private PPreCondicional _preCondicional_;
+    private PBloco _bloco_;
 
-    public AComandoCondComando()
+    public AComandoBlocoComandoSemIf()
     {
         // Constructor
     }
 
-    public AComandoCondComando(
-        @SuppressWarnings("hiding") PPreCondicional _preCondicional_)
+    public AComandoBlocoComandoSemIf(
+        @SuppressWarnings("hiding") PBloco _bloco_)
     {
         // Constructor
-        setPreCondicional(_preCondicional_);
+        setBloco(_bloco_);
 
     }
 
     @Override
     public Object clone()
     {
-        return new AComandoCondComando(
-            cloneNode(this._preCondicional_));
+        return new AComandoBlocoComandoSemIf(
+            cloneNode(this._bloco_));
     }
 
     @Override
     public void apply(Switch sw)
     {
-        ((Analysis) sw).caseAComandoCondComando(this);
+        ((Analysis) sw).caseAComandoBlocoComandoSemIf(this);
     }
 
-    public PPreCondicional getPreCondicional()
+    public PBloco getBloco()
     {
-        return this._preCondicional_;
+        return this._bloco_;
     }
 
-    public void setPreCondicional(PPreCondicional node)
+    public void setBloco(PBloco node)
     {
-        if(this._preCondicional_ != null)
+        if(this._bloco_ != null)
         {
-            this._preCondicional_.parent(null);
+            this._bloco_.parent(null);
         }
 
         if(node != null)
@@ -57,23 +57,23 @@ public final class AComandoCondComando extends PComando
             node.parent(this);
         }
 
-        this._preCondicional_ = node;
+        this._bloco_ = node;
     }
 
     @Override
     public String toString()
     {
         return ""
-            + toString(this._preCondicional_);
+            + toString(this._bloco_);
     }
 
     @Override
     void removeChild(@SuppressWarnings("unused") Node child)
     {
         // Remove child
-        if(this._preCondicional_ == child)
+        if(this._bloco_ == child)
         {
-            this._preCondicional_ = null;
+            this._bloco_ = null;
             return;
         }
 
@@ -84,9 +84,9 @@ public final class AComandoCondComando extends PComando
     void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
     {
         // Replace child
-        if(this._preCondicional_ == oldChild)
+        if(this._bloco_ == oldChild)
         {
-            setPreCondicional((PPreCondicional) newChild);
+            setBloco((PBloco) newChild);
             return;
         }
 

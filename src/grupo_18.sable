@@ -127,9 +127,18 @@ comandos =
   ;
 
 lista_comando =
-    {lista_comando_unico} comando
-  | {lista_comando_rec}   lista_comando comando
+      lista_comando_rec
   ;
+
+lista_comando_rec =
+    {lista_comando_unico} comando
+    | lista_varios_comandos
+;
+  
+lista_varios_comandos =
+     lista_comando_rec comando 
+  ;
+  
 
 declaracao =
     {declaracao_mut}         alterable   tipo identificador ponto_e_virgula
@@ -159,7 +168,7 @@ var =
   ;
 
 lista_arg_rparen =
-    {larg_head} or_exp_rparen   /* reaproveita o mesmo “fechamento lógico” */
+    {larg_head} or_exp_rparen
   ;
 lista_arg =
     {lista_arg_primeiro} exp lista_arg_tail
@@ -183,7 +192,7 @@ valor =
 
 
 comando =
-    {comando_cond}     condicional
+    {comando_cond}     pre_condicional
   | {comando_atr}      var atribuicao exp ponto_e_virgula
   | {comando_init}     unalt inicializacao exp ponto_e_virgula
   | {comando_capture}  capture par_esq lista_var par_dir ponto_e_virgula
@@ -193,23 +202,32 @@ comando =
   | {comando_break}    abandon ponto_e_virgula
   | {comando_continue} go to next iteration ponto_e_virgula
   | {comando_bloco}    bloco
+
 ;
 
+pre_condicional =
+	 condicional
+ ;
+ 
 condicional =
     {matched_cond} matched
   | {unmatched_cond} unmatched
 ;
 
 matched =
-    {matched_if_else} just in case that_kw par_esq exp par_dir do lista_comando matched_tail
+    {matched_if_else} just in case that_kw par_esq exp par_dir do matched_tail
 ;
 
 matched_tail =
-	otherwise lista_comando
+	comando otherwise matched_tail_end
+;
+
+matched_tail_end =
+    comando
 ;
 
 unmatched =
-    {unmatched_cmd} just in case that_kw par_esq exp par_dir do lista_comando
+    {unmatched_cmd} just in case that_kw par_esq exp par_dir do comando
 ;
 
 as_long =
@@ -248,6 +266,7 @@ lista_var_tail =
 lista_exp_rparen =
     {lexp_head} or_exp_rparen
   ;
+  
 bloco =
     {bloco_blk} colchete_esq decls_opt cmds_opt colchete_dir
   ;
