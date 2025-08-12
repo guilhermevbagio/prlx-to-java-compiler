@@ -5,46 +5,46 @@ package grupo_18.node;
 import grupo_18.analysis.*;
 
 @SuppressWarnings("nls")
-public final class AMatchedTailEnd extends PMatchedTailEnd
+public final class AMatchedBaseMatched extends PMatched
 {
-    private PMatched _matched_;
+    private PComandoSemIf _comandoSemIf_;
 
-    public AMatchedTailEnd()
+    public AMatchedBaseMatched()
     {
         // Constructor
     }
 
-    public AMatchedTailEnd(
-        @SuppressWarnings("hiding") PMatched _matched_)
+    public AMatchedBaseMatched(
+        @SuppressWarnings("hiding") PComandoSemIf _comandoSemIf_)
     {
         // Constructor
-        setMatched(_matched_);
+        setComandoSemIf(_comandoSemIf_);
 
     }
 
     @Override
     public Object clone()
     {
-        return new AMatchedTailEnd(
-            cloneNode(this._matched_));
+        return new AMatchedBaseMatched(
+            cloneNode(this._comandoSemIf_));
     }
 
     @Override
     public void apply(Switch sw)
     {
-        ((Analysis) sw).caseAMatchedTailEnd(this);
+        ((Analysis) sw).caseAMatchedBaseMatched(this);
     }
 
-    public PMatched getMatched()
+    public PComandoSemIf getComandoSemIf()
     {
-        return this._matched_;
+        return this._comandoSemIf_;
     }
 
-    public void setMatched(PMatched node)
+    public void setComandoSemIf(PComandoSemIf node)
     {
-        if(this._matched_ != null)
+        if(this._comandoSemIf_ != null)
         {
-            this._matched_.parent(null);
+            this._comandoSemIf_.parent(null);
         }
 
         if(node != null)
@@ -57,23 +57,23 @@ public final class AMatchedTailEnd extends PMatchedTailEnd
             node.parent(this);
         }
 
-        this._matched_ = node;
+        this._comandoSemIf_ = node;
     }
 
     @Override
     public String toString()
     {
         return ""
-            + toString(this._matched_);
+            + toString(this._comandoSemIf_);
     }
 
     @Override
     void removeChild(@SuppressWarnings("unused") Node child)
     {
         // Remove child
-        if(this._matched_ == child)
+        if(this._comandoSemIf_ == child)
         {
-            this._matched_ = null;
+            this._comandoSemIf_ = null;
             return;
         }
 
@@ -84,9 +84,9 @@ public final class AMatchedTailEnd extends PMatchedTailEnd
     void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
     {
         // Replace child
-        if(this._matched_ == oldChild)
+        if(this._comandoSemIf_ == oldChild)
         {
-            setMatched((PMatched) newChild);
+            setComandoSemIf((PComandoSemIf) newChild);
             return;
         }
 

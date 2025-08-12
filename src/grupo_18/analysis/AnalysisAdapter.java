@@ -105,25 +105,19 @@ public class AnalysisAdapter implements Analysis
     }
 
     @Override
-    public void caseAListaComando(AListaComando node)
+    public void caseAListaHeadListaComando(AListaHeadListaComando node)
     {
         defaultCase(node);
     }
 
     @Override
-    public void caseAListaComandoUnicoListaComandoRec(AListaComandoUnicoListaComandoRec node)
+    public void caseAListaCtListaComandoTail(AListaCtListaComandoTail node)
     {
         defaultCase(node);
     }
 
     @Override
-    public void caseAListaComandoRec(AListaComandoRec node)
-    {
-        defaultCase(node);
-    }
-
-    @Override
-    public void caseAListaVariosComandos(AListaVariosComandos node)
+    public void caseAListaFimListaComandoTail(AListaFimListaComandoTail node)
     {
         defaultCase(node);
     }
@@ -255,12 +249,6 @@ public class AnalysisAdapter implements Analysis
     }
 
     @Override
-    public void caseAComandoBlocoComandoSemIf(AComandoBlocoComandoSemIf node)
-    {
-        defaultCase(node);
-    }
-
-    @Override
     public void caseAComandoAtrComandoSemIf(AComandoAtrComandoSemIf node)
     {
         defaultCase(node);
@@ -309,13 +297,19 @@ public class AnalysisAdapter implements Analysis
     }
 
     @Override
-    public void caseAComando(AComando node)
+    public void caseAComandoBlocoComandoSemIf(AComandoBlocoComandoSemIf node)
     {
         defaultCase(node);
     }
 
     @Override
     public void caseAComandoCondComando(AComandoCondComando node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseAComando(AComando node)
     {
         defaultCase(node);
     }
@@ -345,6 +339,12 @@ public class AnalysisAdapter implements Analysis
     }
 
     @Override
+    public void caseAMatchedBaseMatched(AMatchedBaseMatched node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
     public void caseAMatchedTail(AMatchedTail node)
     {
         defaultCase(node);
@@ -358,6 +358,12 @@ public class AnalysisAdapter implements Analysis
 
     @Override
     public void caseAUnmatchedCmdUnmatched(AUnmatchedCmdUnmatched node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseAUnmatchedBsUnmatched(AUnmatchedBsUnmatched node)
     {
         defaultCase(node);
     }

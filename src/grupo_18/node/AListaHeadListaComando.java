@@ -5,46 +5,46 @@ package grupo_18.node;
 import grupo_18.analysis.*;
 
 @SuppressWarnings("nls")
-public final class AMatchedTailEnd extends PMatchedTailEnd
+public final class AListaHeadListaComando extends PListaComando
 {
-    private PMatched _matched_;
+    private PListaComandoTail _listaComandoTail_;
 
-    public AMatchedTailEnd()
+    public AListaHeadListaComando()
     {
         // Constructor
     }
 
-    public AMatchedTailEnd(
-        @SuppressWarnings("hiding") PMatched _matched_)
+    public AListaHeadListaComando(
+        @SuppressWarnings("hiding") PListaComandoTail _listaComandoTail_)
     {
         // Constructor
-        setMatched(_matched_);
+        setListaComandoTail(_listaComandoTail_);
 
     }
 
     @Override
     public Object clone()
     {
-        return new AMatchedTailEnd(
-            cloneNode(this._matched_));
+        return new AListaHeadListaComando(
+            cloneNode(this._listaComandoTail_));
     }
 
     @Override
     public void apply(Switch sw)
     {
-        ((Analysis) sw).caseAMatchedTailEnd(this);
+        ((Analysis) sw).caseAListaHeadListaComando(this);
     }
 
-    public PMatched getMatched()
+    public PListaComandoTail getListaComandoTail()
     {
-        return this._matched_;
+        return this._listaComandoTail_;
     }
 
-    public void setMatched(PMatched node)
+    public void setListaComandoTail(PListaComandoTail node)
     {
-        if(this._matched_ != null)
+        if(this._listaComandoTail_ != null)
         {
-            this._matched_.parent(null);
+            this._listaComandoTail_.parent(null);
         }
 
         if(node != null)
@@ -57,23 +57,23 @@ public final class AMatchedTailEnd extends PMatchedTailEnd
             node.parent(this);
         }
 
-        this._matched_ = node;
+        this._listaComandoTail_ = node;
     }
 
     @Override
     public String toString()
     {
         return ""
-            + toString(this._matched_);
+            + toString(this._listaComandoTail_);
     }
 
     @Override
     void removeChild(@SuppressWarnings("unused") Node child)
     {
         // Remove child
-        if(this._matched_ == child)
+        if(this._listaComandoTail_ == child)
         {
-            this._matched_ = null;
+            this._listaComandoTail_ = null;
             return;
         }
 
@@ -84,9 +84,9 @@ public final class AMatchedTailEnd extends PMatchedTailEnd
     void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
     {
         // Replace child
-        if(this._matched_ == oldChild)
+        if(this._listaComandoTail_ == oldChild)
         {
-            setMatched((PMatched) newChild);
+            setListaComandoTail((PListaComandoTail) newChild);
             return;
         }
 

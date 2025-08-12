@@ -7,7 +7,7 @@ import grupo_18.analysis.*;
 @SuppressWarnings("nls")
 public final class AMatchedTail extends PMatchedTail
 {
-    private PComando _comando_;
+    private PMatched _matched_;
     private TOtherwise _otherwise_;
     private PMatchedTailEnd _matchedTailEnd_;
 
@@ -17,12 +17,12 @@ public final class AMatchedTail extends PMatchedTail
     }
 
     public AMatchedTail(
-        @SuppressWarnings("hiding") PComando _comando_,
+        @SuppressWarnings("hiding") PMatched _matched_,
         @SuppressWarnings("hiding") TOtherwise _otherwise_,
         @SuppressWarnings("hiding") PMatchedTailEnd _matchedTailEnd_)
     {
         // Constructor
-        setComando(_comando_);
+        setMatched(_matched_);
 
         setOtherwise(_otherwise_);
 
@@ -34,7 +34,7 @@ public final class AMatchedTail extends PMatchedTail
     public Object clone()
     {
         return new AMatchedTail(
-            cloneNode(this._comando_),
+            cloneNode(this._matched_),
             cloneNode(this._otherwise_),
             cloneNode(this._matchedTailEnd_));
     }
@@ -45,16 +45,16 @@ public final class AMatchedTail extends PMatchedTail
         ((Analysis) sw).caseAMatchedTail(this);
     }
 
-    public PComando getComando()
+    public PMatched getMatched()
     {
-        return this._comando_;
+        return this._matched_;
     }
 
-    public void setComando(PComando node)
+    public void setMatched(PMatched node)
     {
-        if(this._comando_ != null)
+        if(this._matched_ != null)
         {
-            this._comando_.parent(null);
+            this._matched_.parent(null);
         }
 
         if(node != null)
@@ -67,7 +67,7 @@ public final class AMatchedTail extends PMatchedTail
             node.parent(this);
         }
 
-        this._comando_ = node;
+        this._matched_ = node;
     }
 
     public TOtherwise getOtherwise()
@@ -124,7 +124,7 @@ public final class AMatchedTail extends PMatchedTail
     public String toString()
     {
         return ""
-            + toString(this._comando_)
+            + toString(this._matched_)
             + toString(this._otherwise_)
             + toString(this._matchedTailEnd_);
     }
@@ -133,9 +133,9 @@ public final class AMatchedTail extends PMatchedTail
     void removeChild(@SuppressWarnings("unused") Node child)
     {
         // Remove child
-        if(this._comando_ == child)
+        if(this._matched_ == child)
         {
-            this._comando_ = null;
+            this._matched_ = null;
             return;
         }
 
@@ -158,9 +158,9 @@ public final class AMatchedTail extends PMatchedTail
     void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
     {
         // Replace child
-        if(this._comando_ == oldChild)
+        if(this._matched_ == oldChild)
         {
-            setComando((PComando) newChild);
+            setMatched((PMatched) newChild);
             return;
         }
 

@@ -127,18 +127,13 @@ comandos =
   ;
 
 lista_comando =
-      lista_comando_rec
+    {lista_head} lista_comando_tail
   ;
 
-lista_comando_rec =
-    {lista_comando_unico} comando
-    | lista_varios_comandos
+lista_comando_tail =
+	  {lista_ct} comando lista_comando_tail
+	| {lista_fim}
 ;
-  
-lista_varios_comandos =
-     lista_comando_rec comando 
-  ;
-  
 
 declaracao =
     {declaracao_mut}         alterable   tipo identificador ponto_e_virgula
@@ -190,10 +185,8 @@ valor =
   | {valor_str}  literal
   ;
 
-
-comando =
-    {comando_cond}     pre_condicional
-  | {comando_atr}      var atribuicao exp ponto_e_virgula
+comando_sem_if =
+    {comando_atr}      var atribuicao exp ponto_e_virgula
   | {comando_init}     unalt inicializacao exp ponto_e_virgula
   | {comando_capture}  capture par_esq lista_var par_dir ponto_e_virgula
   | {comando_show}     show par_esq lista_exp_rparen ponto_e_virgula
@@ -202,6 +195,11 @@ comando =
   | {comando_break}    abandon ponto_e_virgula
   | {comando_continue} go to next iteration ponto_e_virgula
   | {comando_bloco}    bloco
+;
+
+comando =
+    {comando_cond}     pre_condicional
+	| comando_sem_if
 
 ;
 
@@ -216,18 +214,20 @@ condicional =
 
 matched =
     {matched_if_else} just in case that_kw par_esq exp par_dir do matched_tail
+  | {matched_base} comando_sem_if
 ;
 
 matched_tail =
-	comando otherwise matched_tail_end
+	matched otherwise matched_tail_end
 ;
 
 matched_tail_end =
-    comando
+    matched
 ;
 
 unmatched =
     {unmatched_cmd} just in case that_kw par_esq exp par_dir do comando
+  | {unmatched_bs}  just in case that_kw par_esq exp par_dir do matched otherwise unmatched
 ;
 
 as_long =
