@@ -8,6 +8,7 @@ import grupo_18.analysis.*;
 public final class AListaHeadListaComando extends PListaComando
 {
     private PListaComandoTail _listaComandoTail_;
+    private PComando _comando_;
 
     public AListaHeadListaComando()
     {
@@ -15,10 +16,13 @@ public final class AListaHeadListaComando extends PListaComando
     }
 
     public AListaHeadListaComando(
-        @SuppressWarnings("hiding") PListaComandoTail _listaComandoTail_)
+        @SuppressWarnings("hiding") PListaComandoTail _listaComandoTail_,
+        @SuppressWarnings("hiding") PComando _comando_)
     {
         // Constructor
         setListaComandoTail(_listaComandoTail_);
+
+        setComando(_comando_);
 
     }
 
@@ -26,7 +30,8 @@ public final class AListaHeadListaComando extends PListaComando
     public Object clone()
     {
         return new AListaHeadListaComando(
-            cloneNode(this._listaComandoTail_));
+            cloneNode(this._listaComandoTail_),
+            cloneNode(this._comando_));
     }
 
     @Override
@@ -60,11 +65,37 @@ public final class AListaHeadListaComando extends PListaComando
         this._listaComandoTail_ = node;
     }
 
+    public PComando getComando()
+    {
+        return this._comando_;
+    }
+
+    public void setComando(PComando node)
+    {
+        if(this._comando_ != null)
+        {
+            this._comando_.parent(null);
+        }
+
+        if(node != null)
+        {
+            if(node.parent() != null)
+            {
+                node.parent().removeChild(node);
+            }
+
+            node.parent(this);
+        }
+
+        this._comando_ = node;
+    }
+
     @Override
     public String toString()
     {
         return ""
-            + toString(this._listaComandoTail_);
+            + toString(this._listaComandoTail_)
+            + toString(this._comando_);
     }
 
     @Override
@@ -74,6 +105,12 @@ public final class AListaHeadListaComando extends PListaComando
         if(this._listaComandoTail_ == child)
         {
             this._listaComandoTail_ = null;
+            return;
+        }
+
+        if(this._comando_ == child)
+        {
+            this._comando_ = null;
             return;
         }
 
@@ -87,6 +124,12 @@ public final class AListaHeadListaComando extends PListaComando
         if(this._listaComandoTail_ == oldChild)
         {
             setListaComandoTail((PListaComandoTail) newChild);
+            return;
+        }
+
+        if(this._comando_ == oldChild)
+        {
+            setComando((PComando) newChild);
             return;
         }
 

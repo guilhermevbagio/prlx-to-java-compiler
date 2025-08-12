@@ -235,6 +235,10 @@ public class DepthFirstAdapter extends AnalysisAdapter
         {
             node.getListaComandoTail().apply(this);
         }
+        if(node.getComando() != null)
+        {
+            node.getComando().apply(this);
+        }
         outAListaHeadListaComando(node);
     }
 

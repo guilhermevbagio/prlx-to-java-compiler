@@ -127,7 +127,7 @@ comandos =
   ;
 
 lista_comando =
-    {lista_head} lista_comando_tail
+    {lista_head} lista_comando_tail comando
   ;
 
 lista_comando_tail =

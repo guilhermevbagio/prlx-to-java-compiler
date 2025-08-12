@@ -231,6 +231,10 @@ public class ReversedDepthFirstAdapter extends AnalysisAdapter
     public void caseAListaHeadListaComando(AListaHeadListaComando node)
     {
         inAListaHeadListaComando(node);
+        if(node.getComando() != null)
+        {
+            node.getComando().apply(this);
+        }
         if(node.getListaComandoTail() != null)
         {
             node.getListaComandoTail().apply(this);
