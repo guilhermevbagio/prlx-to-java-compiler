@@ -213,61 +213,103 @@ public class AnalysisAdapter implements Analysis
     }
 
     @Override
-    public void caseAComandoAtrComando(AComandoAtrComando node)
+    public void caseAAtrComandoSemBloco(AAtrComandoSemBloco node)
     {
         defaultCase(node);
     }
 
     @Override
-    public void caseAComandoInitComando(AComandoInitComando node)
+    public void caseAInitComandoSemBloco(AInitComandoSemBloco node)
     {
         defaultCase(node);
     }
 
     @Override
-    public void caseAComandoCaptureComando(AComandoCaptureComando node)
+    public void caseACapComandoSemBloco(ACapComandoSemBloco node)
     {
         defaultCase(node);
     }
 
     @Override
-    public void caseAComandoShowComando(AComandoShowComando node)
+    public void caseAShowComandoSemBloco(AShowComandoSemBloco node)
     {
         defaultCase(node);
     }
 
     @Override
-    public void caseAComandoWhileComando(AComandoWhileComando node)
+    public void caseAWhileComandoSemBloco(AWhileComandoSemBloco node)
     {
         defaultCase(node);
     }
 
     @Override
-    public void caseAComandoForComando(AComandoForComando node)
+    public void caseAForComandoSemBloco(AForComandoSemBloco node)
     {
         defaultCase(node);
     }
 
     @Override
-    public void caseAComandoBreakComando(AComandoBreakComando node)
+    public void caseABreakComandoSemBloco(ABreakComandoSemBloco node)
     {
         defaultCase(node);
     }
 
     @Override
-    public void caseAComandoContinueComando(AComandoContinueComando node)
+    public void caseAContComandoSemBloco(AContComandoSemBloco node)
     {
         defaultCase(node);
     }
 
     @Override
-    public void caseAComandoBlocoComando(AComandoBlocoComando node)
+    public void caseAIfHeadKwIfHead(AIfHeadKwIfHead node)
     {
         defaultCase(node);
     }
 
     @Override
-    public void caseAComandoCondComando(AComandoCondComando node)
+    public void caseAIfBlkIfBlk(AIfBlkIfBlk node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseAIfElseIfTailBlk(AIfElseIfTailBlk node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseAIfEndIfTailBlk(AIfEndIfTailBlk node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseAIfCmdIfCmd(AIfCmdIfCmd node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseACmdBlocoComando(ACmdBlocoComando node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseACmdIfblkComando(ACmdIfblkComando node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseACmdIfcmdComando(ACmdIfcmdComando node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseACmdCoreComando(ACmdCoreComando node)
     {
         defaultCase(node);
     }
