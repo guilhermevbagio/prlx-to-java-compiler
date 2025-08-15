@@ -148,9 +148,9 @@ public class ReversedDepthFirstAdapter extends AnalysisAdapter
         {
             node.getWould().apply(this);
         }
-        if(node.getThatKw() != null)
+        if(node.getThat() != null)
         {
-            node.getThatKw().apply(this);
+            node.getThat().apply(this);
         }
         {
             List<PComando> copy = new ArrayList<PComando>(node.getComando());
@@ -695,20 +695,20 @@ public class ReversedDepthFirstAdapter extends AnalysisAdapter
         outAValorStrValor(node);
     }
 
-    public void inAComandoAtrComando(AComandoAtrComando node)
+    public void inAAtrComandoSemBloco(AAtrComandoSemBloco node)
     {
         defaultIn(node);
     }
 
-    public void outAComandoAtrComando(AComandoAtrComando node)
+    public void outAAtrComandoSemBloco(AAtrComandoSemBloco node)
     {
         defaultOut(node);
     }
 
     @Override
-    public void caseAComandoAtrComando(AComandoAtrComando node)
+    public void caseAAtrComandoSemBloco(AAtrComandoSemBloco node)
     {
-        inAComandoAtrComando(node);
+        inAAtrComandoSemBloco(node);
         if(node.getPontoEVirgula() != null)
         {
             node.getPontoEVirgula().apply(this);
@@ -725,23 +725,23 @@ public class ReversedDepthFirstAdapter extends AnalysisAdapter
         {
             node.getVar().apply(this);
         }
-        outAComandoAtrComando(node);
+        outAAtrComandoSemBloco(node);
     }
 
-    public void inAComandoInitComando(AComandoInitComando node)
+    public void inAInitComandoSemBloco(AInitComandoSemBloco node)
     {
         defaultIn(node);
     }
 
-    public void outAComandoInitComando(AComandoInitComando node)
+    public void outAInitComandoSemBloco(AInitComandoSemBloco node)
     {
         defaultOut(node);
     }
 
     @Override
-    public void caseAComandoInitComando(AComandoInitComando node)
+    public void caseAInitComandoSemBloco(AInitComandoSemBloco node)
     {
-        inAComandoInitComando(node);
+        inAInitComandoSemBloco(node);
         if(node.getPontoEVirgula() != null)
         {
             node.getPontoEVirgula().apply(this);
@@ -758,23 +758,23 @@ public class ReversedDepthFirstAdapter extends AnalysisAdapter
         {
             node.getUnalt().apply(this);
         }
-        outAComandoInitComando(node);
+        outAInitComandoSemBloco(node);
     }
 
-    public void inAComandoCaptureComando(AComandoCaptureComando node)
+    public void inACapComandoSemBloco(ACapComandoSemBloco node)
     {
         defaultIn(node);
     }
 
-    public void outAComandoCaptureComando(AComandoCaptureComando node)
+    public void outACapComandoSemBloco(ACapComandoSemBloco node)
     {
         defaultOut(node);
     }
 
     @Override
-    public void caseAComandoCaptureComando(AComandoCaptureComando node)
+    public void caseACapComandoSemBloco(ACapComandoSemBloco node)
     {
-        inAComandoCaptureComando(node);
+        inACapComandoSemBloco(node);
         if(node.getPontoEVirgula() != null)
         {
             node.getPontoEVirgula().apply(this);
@@ -795,23 +795,23 @@ public class ReversedDepthFirstAdapter extends AnalysisAdapter
         {
             node.getCapture().apply(this);
         }
-        outAComandoCaptureComando(node);
+        outACapComandoSemBloco(node);
     }
 
-    public void inAComandoShowComando(AComandoShowComando node)
+    public void inAShowComandoSemBloco(AShowComandoSemBloco node)
     {
         defaultIn(node);
     }
 
-    public void outAComandoShowComando(AComandoShowComando node)
+    public void outAShowComandoSemBloco(AShowComandoSemBloco node)
     {
         defaultOut(node);
     }
 
     @Override
-    public void caseAComandoShowComando(AComandoShowComando node)
+    public void caseAShowComandoSemBloco(AShowComandoSemBloco node)
     {
-        inAComandoShowComando(node);
+        inAShowComandoSemBloco(node);
         if(node.getPontoEVirgula() != null)
         {
             node.getPontoEVirgula().apply(this);
@@ -828,65 +828,65 @@ public class ReversedDepthFirstAdapter extends AnalysisAdapter
         {
             node.getShow().apply(this);
         }
-        outAComandoShowComando(node);
+        outAShowComandoSemBloco(node);
     }
 
-    public void inAComandoWhileComando(AComandoWhileComando node)
+    public void inAWhileComandoSemBloco(AWhileComandoSemBloco node)
     {
         defaultIn(node);
     }
 
-    public void outAComandoWhileComando(AComandoWhileComando node)
+    public void outAWhileComandoSemBloco(AWhileComandoSemBloco node)
     {
         defaultOut(node);
     }
 
     @Override
-    public void caseAComandoWhileComando(AComandoWhileComando node)
+    public void caseAWhileComandoSemBloco(AWhileComandoSemBloco node)
     {
-        inAComandoWhileComando(node);
+        inAWhileComandoSemBloco(node);
         if(node.getWhileStmt() != null)
         {
             node.getWhileStmt().apply(this);
         }
-        outAComandoWhileComando(node);
+        outAWhileComandoSemBloco(node);
     }
 
-    public void inAComandoForComando(AComandoForComando node)
+    public void inAForComandoSemBloco(AForComandoSemBloco node)
     {
         defaultIn(node);
     }
 
-    public void outAComandoForComando(AComandoForComando node)
+    public void outAForComandoSemBloco(AForComandoSemBloco node)
     {
         defaultOut(node);
     }
 
     @Override
-    public void caseAComandoForComando(AComandoForComando node)
+    public void caseAForComandoSemBloco(AForComandoSemBloco node)
     {
-        inAComandoForComando(node);
+        inAForComandoSemBloco(node);
         if(node.getForStmt() != null)
         {
             node.getForStmt().apply(this);
         }
-        outAComandoForComando(node);
+        outAForComandoSemBloco(node);
     }
 
-    public void inAComandoBreakComando(AComandoBreakComando node)
+    public void inABreakComandoSemBloco(ABreakComandoSemBloco node)
     {
         defaultIn(node);
     }
 
-    public void outAComandoBreakComando(AComandoBreakComando node)
+    public void outABreakComandoSemBloco(ABreakComandoSemBloco node)
     {
         defaultOut(node);
     }
 
     @Override
-    public void caseAComandoBreakComando(AComandoBreakComando node)
+    public void caseABreakComandoSemBloco(ABreakComandoSemBloco node)
     {
-        inAComandoBreakComando(node);
+        inABreakComandoSemBloco(node);
         if(node.getPontoEVirgula() != null)
         {
             node.getPontoEVirgula().apply(this);
@@ -895,23 +895,23 @@ public class ReversedDepthFirstAdapter extends AnalysisAdapter
         {
             node.getAbandon().apply(this);
         }
-        outAComandoBreakComando(node);
+        outABreakComandoSemBloco(node);
     }
 
-    public void inAComandoContinueComando(AComandoContinueComando node)
+    public void inAContComandoSemBloco(AContComandoSemBloco node)
     {
         defaultIn(node);
     }
 
-    public void outAComandoContinueComando(AComandoContinueComando node)
+    public void outAContComandoSemBloco(AContComandoSemBloco node)
     {
         defaultOut(node);
     }
 
     @Override
-    public void caseAComandoContinueComando(AComandoContinueComando node)
+    public void caseAContComandoSemBloco(AContComandoSemBloco node)
     {
-        inAComandoContinueComando(node);
+        inAContComandoSemBloco(node);
         if(node.getPontoEVirgula() != null)
         {
             node.getPontoEVirgula().apply(this);
@@ -932,49 +932,240 @@ public class ReversedDepthFirstAdapter extends AnalysisAdapter
         {
             node.getGo().apply(this);
         }
-        outAComandoContinueComando(node);
+        outAContComandoSemBloco(node);
     }
 
-    public void inAComandoBlocoComando(AComandoBlocoComando node)
+    public void inAIfHeadKwIfHead(AIfHeadKwIfHead node)
     {
         defaultIn(node);
     }
 
-    public void outAComandoBlocoComando(AComandoBlocoComando node)
+    public void outAIfHeadKwIfHead(AIfHeadKwIfHead node)
     {
         defaultOut(node);
     }
 
     @Override
-    public void caseAComandoBlocoComando(AComandoBlocoComando node)
+    public void caseAIfHeadKwIfHead(AIfHeadKwIfHead node)
     {
-        inAComandoBlocoComando(node);
+        inAIfHeadKwIfHead(node);
+        if(node.getDo() != null)
+        {
+            node.getDo().apply(this);
+        }
+        if(node.getParDir() != null)
+        {
+            node.getParDir().apply(this);
+        }
+        if(node.getExp() != null)
+        {
+            node.getExp().apply(this);
+        }
+        if(node.getParEsq() != null)
+        {
+            node.getParEsq().apply(this);
+        }
+        if(node.getThatKw() != null)
+        {
+            node.getThatKw().apply(this);
+        }
+        if(node.getCase() != null)
+        {
+            node.getCase().apply(this);
+        }
+        if(node.getIn() != null)
+        {
+            node.getIn().apply(this);
+        }
+        if(node.getJust() != null)
+        {
+            node.getJust().apply(this);
+        }
+        outAIfHeadKwIfHead(node);
+    }
+
+    public void inAIfBlkIfBlk(AIfBlkIfBlk node)
+    {
+        defaultIn(node);
+    }
+
+    public void outAIfBlkIfBlk(AIfBlkIfBlk node)
+    {
+        defaultOut(node);
+    }
+
+    @Override
+    public void caseAIfBlkIfBlk(AIfBlkIfBlk node)
+    {
+        inAIfBlkIfBlk(node);
+        if(node.getIfTailBlk() != null)
+        {
+            node.getIfTailBlk().apply(this);
+        }
+        if(node.getThenBlk() != null)
+        {
+            node.getThenBlk().apply(this);
+        }
+        if(node.getIfHead() != null)
+        {
+            node.getIfHead().apply(this);
+        }
+        outAIfBlkIfBlk(node);
+    }
+
+    public void inAIfElseIfTailBlk(AIfElseIfTailBlk node)
+    {
+        defaultIn(node);
+    }
+
+    public void outAIfElseIfTailBlk(AIfElseIfTailBlk node)
+    {
+        defaultOut(node);
+    }
+
+    @Override
+    public void caseAIfElseIfTailBlk(AIfElseIfTailBlk node)
+    {
+        inAIfElseIfTailBlk(node);
+        if(node.getElseBlk() != null)
+        {
+            node.getElseBlk().apply(this);
+        }
+        if(node.getDo() != null)
+        {
+            node.getDo().apply(this);
+        }
+        if(node.getOtherwise() != null)
+        {
+            node.getOtherwise().apply(this);
+        }
+        outAIfElseIfTailBlk(node);
+    }
+
+    public void inAIfEndIfTailBlk(AIfEndIfTailBlk node)
+    {
+        defaultIn(node);
+    }
+
+    public void outAIfEndIfTailBlk(AIfEndIfTailBlk node)
+    {
+        defaultOut(node);
+    }
+
+    @Override
+    public void caseAIfEndIfTailBlk(AIfEndIfTailBlk node)
+    {
+        inAIfEndIfTailBlk(node);
+        outAIfEndIfTailBlk(node);
+    }
+
+    public void inAIfCmdIfCmd(AIfCmdIfCmd node)
+    {
+        defaultIn(node);
+    }
+
+    public void outAIfCmdIfCmd(AIfCmdIfCmd node)
+    {
+        defaultOut(node);
+    }
+
+    @Override
+    public void caseAIfCmdIfCmd(AIfCmdIfCmd node)
+    {
+        inAIfCmdIfCmd(node);
+        if(node.getThenCmd() != null)
+        {
+            node.getThenCmd().apply(this);
+        }
+        if(node.getIfHead() != null)
+        {
+            node.getIfHead().apply(this);
+        }
+        outAIfCmdIfCmd(node);
+    }
+
+    public void inACmdBlocoComando(ACmdBlocoComando node)
+    {
+        defaultIn(node);
+    }
+
+    public void outACmdBlocoComando(ACmdBlocoComando node)
+    {
+        defaultOut(node);
+    }
+
+    @Override
+    public void caseACmdBlocoComando(ACmdBlocoComando node)
+    {
+        inACmdBlocoComando(node);
         if(node.getBloco() != null)
         {
             node.getBloco().apply(this);
         }
-        outAComandoBlocoComando(node);
+        outACmdBlocoComando(node);
     }
 
-    public void inAComandoCondComando(AComandoCondComando node)
+    public void inACmdIfblkComando(ACmdIfblkComando node)
     {
         defaultIn(node);
     }
 
-    public void outAComandoCondComando(AComandoCondComando node)
+    public void outACmdIfblkComando(ACmdIfblkComando node)
     {
         defaultOut(node);
     }
 
     @Override
-    public void caseAComandoCondComando(AComandoCondComando node)
+    public void caseACmdIfblkComando(ACmdIfblkComando node)
     {
-        inAComandoCondComando(node);
-        if(node.getJustStmt() != null)
+        inACmdIfblkComando(node);
+        if(node.getIfBlk() != null)
         {
-            node.getJustStmt().apply(this);
+            node.getIfBlk().apply(this);
         }
-        outAComandoCondComando(node);
+        outACmdIfblkComando(node);
+    }
+
+    public void inACmdIfcmdComando(ACmdIfcmdComando node)
+    {
+        defaultIn(node);
+    }
+
+    public void outACmdIfcmdComando(ACmdIfcmdComando node)
+    {
+        defaultOut(node);
+    }
+
+    @Override
+    public void caseACmdIfcmdComando(ACmdIfcmdComando node)
+    {
+        inACmdIfcmdComando(node);
+        if(node.getIfCmd() != null)
+        {
+            node.getIfCmd().apply(this);
+        }
+        outACmdIfcmdComando(node);
+    }
+
+    public void inACmdCoreComando(ACmdCoreComando node)
+    {
+        defaultIn(node);
+    }
+
+    public void outACmdCoreComando(ACmdCoreComando node)
+    {
+        defaultOut(node);
+    }
+
+    @Override
+    public void caseACmdCoreComando(ACmdCoreComando node)
+    {
+        inACmdCoreComando(node);
+        if(node.getComandoSemBloco() != null)
+        {
+            node.getComandoSemBloco().apply(this);
+        }
+        outACmdCoreComando(node);
     }
 
     public void inAJustCondJustStmt(AJustCondJustStmt node)
