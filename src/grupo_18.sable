@@ -190,7 +190,7 @@ if_blk =
   ;
 
 if_tail_blk =
-    {if_else} otherwise do [else_blk]:bloco
+    {if_else} otherwise do [else_blk]:comando
   | {if_end}
   ;
 
@@ -204,11 +204,6 @@ if_cmd =
   | {cmd_ifcmd}  if_cmd
   | {cmd_core}   comando_sem_bloco
   ;
-  
-just_stmt = 
-    {just_cond} just in case that_kw par_esq exp par_dir do bloco
-  | {just_cond_else} just in case that_kw par_esq exp par_dir do bloco else_stms
-;
 
 else_stms =
 	otherwise do bloco
