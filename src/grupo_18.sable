@@ -169,46 +169,29 @@ valor =
   | {valor_num}  numero
   | {valor_str}  literal
   ;
-
-comando_sem_bloco =
+  
+comando =
+	{cmd_cnd}   comando_casado
+  | {cmd_solt}  if_solteiro
+  ;
+  
+comando_casado =
     {atr}      var atribuicao exp ponto_e_virgula
   | {init}     unalt inicializacao exp ponto_e_virgula
+  | {if_casa}  just in case that_kw par_esq exp par_dir [a]:do [bidi]:comando_casado otherwise [c]:do [dibi]:comando_casado
   | {cap}      capture par_esq lista_var par_dir ponto_e_virgula
   | {show}     show par_esq lista_exp_rparen ponto_e_virgula
   | {while}    while_stmt
   | {for}      for_stmt
   | {break}    abandon ponto_e_virgula
   | {cont}     go to next iteration ponto_e_virgula
+  | {cmd_blk}  bloco
   ;
 
-if_head =
-    {if_head_kw} just in case that_kw par_esq exp par_dir do
+if_solteiro = 
+    {if_s_cm}   just in case that_kw par_esq exp par_dir do comando
+  | {if_s_base} just in case that_kw par_esq exp par_dir [a]:do comando_casado otherwise [b]:do if_solteiro
   ;
-
-if_blk =
-    {if_blk} if_head [then_blk]:bloco if_tail_blk
-  ;
-
-if_tail_blk =
-    {if_else} otherwise do [else_blk]:comando
-  | {if_end}
-  ;
-
-if_cmd =
-    {if_cmd} if_head [then_cmd]:comando_sem_bloco
-  ;
-  
- comando =
-    {cmd_bloco}  bloco
-  | {cmd_ifblk}  if_blk
-  | {cmd_ifcmd}  if_cmd
-  | {cmd_core}   comando_sem_bloco
-  ;
-
-else_stms =
-	otherwise do bloco
-;
-
 
 as_long =
     {as_long_kw} as long
