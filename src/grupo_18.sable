@@ -172,7 +172,7 @@ valor =
   
 comando =
 	{cmd_cnd}   comando_casado
-  | {cmd_solt}  if_solteiro
+  | {cmd_solt}  comando_solteiro
   ;
   
 comando_casado =
@@ -188,33 +188,20 @@ comando_casado =
   | {cmd_blk}  bloco
   ;
 
-if_solteiro = 
-    {if_s_cm}   just in case that_kw par_esq exp par_dir do comando
-  | {if_s_base} just in case that_kw par_esq exp par_dir [a]:do comando_casado otherwise [b]:do if_solteiro
+comando_solteiro = 
+      {if_s_cm}  just in case that_kw par_esq exp par_dir do comando
+    | {if_s_mix} just in case that_kw par_esq exp par_dir [a]:do comando_casado otherwise [b]:do comando_solteiro
+
   ;
 
-as_long =
-    {as_long_kw} as long
-  ;
+
   
 while_stmt =
-    {while_stmt_kw} as_long as par_esq exp par_dir do comando
+    {while_stmt_kw} [a]:as long [b]:as par_esq exp par_dir do comando_casado
   ;
 
 for_stmt =
-    {for_stmt_kw} considering var for_from
-  ;
-
-for_from =
-    {for_from_kw} from exp for_to
-  ;
-
-for_to =
-    {for_to_kw} to exp for_by
-  ;
-
-for_by =
-    {for_by_kw} by exp do comando
+    {for_stmt_kw} considering var from to [a]:exp by [b]:exp do comando_casado
   ;
 
 lista_var =
