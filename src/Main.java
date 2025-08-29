@@ -1,5 +1,5 @@
-import grupo_18.lexer.*;
-import grupo_18.node.*;
+import prolixa.lexer.*;
+import prolixa.node.*;
 import java.io.*;
 
 public class Main
