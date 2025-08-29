@@ -5,38 +5,42 @@ package prolixa.node;
 import prolixa.analysis.*;
 
 @SuppressWarnings("nls")
-public final class AWhileStmtKwWhileStmt extends PWhileStmt
+public final class AIfSCmComandoSolteiro extends PComandoSolteiro
 {
-    private TAs _a_;
-    private TLong _long_;
-    private TAs _b_;
+    private TJust _just_;
+    private TIn _in_;
+    private TCase _case_;
+    private TThatKw _thatKw_;
     private TParEsq _parEsq_;
     private PExp _exp_;
     private TParDir _parDir_;
     private TDo _do_;
-    private PComandoCasado _comandoCasado_;
+    private PComando _comando_;
 
-    public AWhileStmtKwWhileStmt()
+    public AIfSCmComandoSolteiro()
     {
         // Constructor
     }
 
-    public AWhileStmtKwWhileStmt(
-        @SuppressWarnings("hiding") TAs _a_,
-        @SuppressWarnings("hiding") TLong _long_,
-        @SuppressWarnings("hiding") TAs _b_,
+    public AIfSCmComandoSolteiro(
+        @SuppressWarnings("hiding") TJust _just_,
+        @SuppressWarnings("hiding") TIn _in_,
+        @SuppressWarnings("hiding") TCase _case_,
+        @SuppressWarnings("hiding") TThatKw _thatKw_,
         @SuppressWarnings("hiding") TParEsq _parEsq_,
         @SuppressWarnings("hiding") PExp _exp_,
         @SuppressWarnings("hiding") TParDir _parDir_,
         @SuppressWarnings("hiding") TDo _do_,
-        @SuppressWarnings("hiding") PComandoCasado _comandoCasado_)
+        @SuppressWarnings("hiding") PComando _comando_)
     {
         // Constructor
-        setA(_a_);
+        setJust(_just_);
 
-        setLong(_long_);
+        setIn(_in_);
 
-        setB(_b_);
+        setCase(_case_);
+
+        setThatKw(_thatKw_);
 
         setParEsq(_parEsq_);
 
@@ -46,40 +50,41 @@ public final class AWhileStmtKwWhileStmt extends PWhileStmt
 
         setDo(_do_);
 
-        setComandoCasado(_comandoCasado_);
+        setComando(_comando_);
 
     }
 
     @Override
     public Object clone()
     {
-        return new AWhileStmtKwWhileStmt(
-            cloneNode(this._a_),
-            cloneNode(this._long_),
-            cloneNode(this._b_),
+        return new AIfSCmComandoSolteiro(
+            cloneNode(this._just_),
+            cloneNode(this._in_),
+            cloneNode(this._case_),
+            cloneNode(this._thatKw_),
             cloneNode(this._parEsq_),
             cloneNode(this._exp_),
             cloneNode(this._parDir_),
             cloneNode(this._do_),
-            cloneNode(this._comandoCasado_));
+            cloneNode(this._comando_));
     }
 
     @Override
     public void apply(Switch sw)
     {
-        ((Analysis) sw).caseAWhileStmtKwWhileStmt(this);
+        ((Analysis) sw).caseAIfSCmComandoSolteiro(this);
     }
 
-    public TAs getA()
+    public TJust getJust()
     {
-        return this._a_;
+        return this._just_;
     }
 
-    public void setA(TAs node)
+    public void setJust(TJust node)
     {
-        if(this._a_ != null)
+        if(this._just_ != null)
         {
-            this._a_.parent(null);
+            this._just_.parent(null);
         }
 
         if(node != null)
@@ -92,19 +97,19 @@ public final class AWhileStmtKwWhileStmt extends PWhileStmt
             node.parent(this);
         }
 
-        this._a_ = node;
+        this._just_ = node;
     }
 
-    public TLong getLong()
+    public TIn getIn()
     {
-        return this._long_;
+        return this._in_;
     }
 
-    public void setLong(TLong node)
+    public void setIn(TIn node)
     {
-        if(this._long_ != null)
+        if(this._in_ != null)
         {
-            this._long_.parent(null);
+            this._in_.parent(null);
         }
 
         if(node != null)
@@ -117,19 +122,19 @@ public final class AWhileStmtKwWhileStmt extends PWhileStmt
             node.parent(this);
         }
 
-        this._long_ = node;
+        this._in_ = node;
     }
 
-    public TAs getB()
+    public TCase getCase()
     {
-        return this._b_;
+        return this._case_;
     }
 
-    public void setB(TAs node)
+    public void setCase(TCase node)
     {
-        if(this._b_ != null)
+        if(this._case_ != null)
         {
-            this._b_.parent(null);
+            this._case_.parent(null);
         }
 
         if(node != null)
@@ -142,7 +147,32 @@ public final class AWhileStmtKwWhileStmt extends PWhileStmt
             node.parent(this);
         }
 
-        this._b_ = node;
+        this._case_ = node;
+    }
+
+    public TThatKw getThatKw()
+    {
+        return this._thatKw_;
+    }
+
+    public void setThatKw(TThatKw node)
+    {
+        if(this._thatKw_ != null)
+        {
+            this._thatKw_.parent(null);
+        }
+
+        if(node != null)
+        {
+            if(node.parent() != null)
+            {
+                node.parent().removeChild(node);
+            }
+
+            node.parent(this);
+        }
+
+        this._thatKw_ = node;
     }
 
     public TParEsq getParEsq()
@@ -245,16 +275,16 @@ public final class AWhileStmtKwWhileStmt extends PWhileStmt
         this._do_ = node;
     }
 
-    public PComandoCasado getComandoCasado()
+    public PComando getComando()
     {
-        return this._comandoCasado_;
+        return this._comando_;
     }
 
-    public void setComandoCasado(PComandoCasado node)
+    public void setComando(PComando node)
     {
-        if(this._comandoCasado_ != null)
+        if(this._comando_ != null)
         {
-            this._comandoCasado_.parent(null);
+            this._comando_.parent(null);
         }
 
         if(node != null)
@@ -267,42 +297,49 @@ public final class AWhileStmtKwWhileStmt extends PWhileStmt
             node.parent(this);
         }
 
-        this._comandoCasado_ = node;
+        this._comando_ = node;
     }
 
     @Override
     public String toString()
     {
         return ""
-            + toString(this._a_)
-            + toString(this._long_)
-            + toString(this._b_)
+            + toString(this._just_)
+            + toString(this._in_)
+            + toString(this._case_)
+            + toString(this._thatKw_)
             + toString(this._parEsq_)
             + toString(this._exp_)
             + toString(this._parDir_)
             + toString(this._do_)
-            + toString(this._comandoCasado_);
+            + toString(this._comando_);
     }
 
     @Override
     void removeChild(@SuppressWarnings("unused") Node child)
     {
         // Remove child
-        if(this._a_ == child)
+        if(this._just_ == child)
         {
-            this._a_ = null;
+            this._just_ = null;
             return;
         }
 
-        if(this._long_ == child)
+        if(this._in_ == child)
         {
-            this._long_ = null;
+            this._in_ = null;
             return;
         }
 
-        if(this._b_ == child)
+        if(this._case_ == child)
         {
-            this._b_ = null;
+            this._case_ = null;
+            return;
+        }
+
+        if(this._thatKw_ == child)
+        {
+            this._thatKw_ = null;
             return;
         }
 
@@ -330,9 +367,9 @@ public final class AWhileStmtKwWhileStmt extends PWhileStmt
             return;
         }
 
-        if(this._comandoCasado_ == child)
+        if(this._comando_ == child)
         {
-            this._comandoCasado_ = null;
+            this._comando_ = null;
             return;
         }
 
@@ -343,21 +380,27 @@ public final class AWhileStmtKwWhileStmt extends PWhileStmt
     void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
     {
         // Replace child
-        if(this._a_ == oldChild)
+        if(this._just_ == oldChild)
         {
-            setA((TAs) newChild);
+            setJust((TJust) newChild);
             return;
         }
 
-        if(this._long_ == oldChild)
+        if(this._in_ == oldChild)
         {
-            setLong((TLong) newChild);
+            setIn((TIn) newChild);
             return;
         }
 
-        if(this._b_ == oldChild)
+        if(this._case_ == oldChild)
         {
-            setB((TAs) newChild);
+            setCase((TCase) newChild);
+            return;
+        }
+
+        if(this._thatKw_ == oldChild)
+        {
+            setThatKw((TThatKw) newChild);
             return;
         }
 
@@ -385,9 +428,9 @@ public final class AWhileStmtKwWhileStmt extends PWhileStmt
             return;
         }
 
-        if(this._comandoCasado_ == oldChild)
+        if(this._comando_ == oldChild)
         {
-            setComandoCasado((PComandoCasado) newChild);
+            setComando((PComando) newChild);
             return;
         }
 

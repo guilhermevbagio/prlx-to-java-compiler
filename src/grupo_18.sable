@@ -169,52 +169,39 @@ valor =
   | {valor_num}  numero
   | {valor_str}  literal
   ;
-
+  
 comando =
-    {comando_atr}      var atribuicao exp ponto_e_virgula
-  | {comando_init}     unalt inicializacao exp ponto_e_virgula
-  | {comando_capture}  capture par_esq lista_var par_dir ponto_e_virgula
-  | {comando_show}     show par_esq lista_exp_rparen ponto_e_virgula
-  | {comando_while}    while_stmt
-  | {comando_for}      for_stmt
-  | {comando_break}    abandon ponto_e_virgula
-  | {comando_continue} go to next iteration ponto_e_virgula
-  | {comando_bloco}    bloco
-  | {comando_cond}     just_stmt
-;
-
-just_stmt = 
-    {just_cond} just in case that_kw par_esq exp par_dir do bloco
-  | {just_cond_else} just in case that_kw par_esq exp par_dir do bloco else_stms
-;
-
-else_stms =
-	otherwise do bloco
-;
-
-
-as_long =
-    {as_long_kw} as long
+	{cmd_cnd}   comando_casado
+  | {cmd_solt}  comando_solteiro
   ;
   
+comando_casado =
+    {atr}      var atribuicao exp ponto_e_virgula
+  | {init}     unalt inicializacao exp ponto_e_virgula
+  | {if_casa}  just in case that_kw par_esq exp par_dir [a]:do [bidi]:comando_casado otherwise [c]:do [dibi]:comando_casado
+  | {cap}      capture par_esq lista_var par_dir ponto_e_virgula
+  | {show}     show par_esq lista_exp_rparen ponto_e_virgula
+  | {while}    while_stmt
+  | {for}      for_stmt
+  | {break}    abandon ponto_e_virgula
+  | {cont}     go to next iteration ponto_e_virgula
+  | {cmd_blk}  bloco
+  ;
+
+comando_solteiro = 
+      {if_s_cm}  just in case that_kw par_esq exp par_dir do comando
+    | {if_s_mix} just in case that_kw par_esq exp par_dir [a]:do comando_casado otherwise [b]:do comando_solteiro
+
+  ;
+
+
+  
 while_stmt =
-    {while_stmt_kw} as_long as par_esq exp par_dir do comando
+    {while_stmt_kw} [a]:as long [b]:as par_esq exp par_dir do comando_casado
   ;
 
 for_stmt =
-    {for_stmt_kw} considering var for_from
-  ;
-
-for_from =
-    {for_from_kw} from exp for_to
-  ;
-
-for_to =
-    {for_to_kw} to exp for_by
-  ;
-
-for_by =
-    {for_by_kw} by exp do comando
+    {for_stmt_kw} considering var from to [a]:exp by [b]:exp do comando_casado
   ;
 
 lista_var =

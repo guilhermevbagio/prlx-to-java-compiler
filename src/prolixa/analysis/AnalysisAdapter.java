@@ -213,85 +213,85 @@ public class AnalysisAdapter implements Analysis
     }
 
     @Override
-    public void caseAComandoAtrComando(AComandoAtrComando node)
+    public void caseACmdCndComando(ACmdCndComando node)
     {
         defaultCase(node);
     }
 
     @Override
-    public void caseAComandoInitComando(AComandoInitComando node)
+    public void caseACmdSoltComando(ACmdSoltComando node)
     {
         defaultCase(node);
     }
 
     @Override
-    public void caseAComandoCaptureComando(AComandoCaptureComando node)
+    public void caseAAtrComandoCasado(AAtrComandoCasado node)
     {
         defaultCase(node);
     }
 
     @Override
-    public void caseAComandoShowComando(AComandoShowComando node)
+    public void caseAInitComandoCasado(AInitComandoCasado node)
     {
         defaultCase(node);
     }
 
     @Override
-    public void caseAComandoWhileComando(AComandoWhileComando node)
+    public void caseAIfCasaComandoCasado(AIfCasaComandoCasado node)
     {
         defaultCase(node);
     }
 
     @Override
-    public void caseAComandoForComando(AComandoForComando node)
+    public void caseACapComandoCasado(ACapComandoCasado node)
     {
         defaultCase(node);
     }
 
     @Override
-    public void caseAComandoBreakComando(AComandoBreakComando node)
+    public void caseAShowComandoCasado(AShowComandoCasado node)
     {
         defaultCase(node);
     }
 
     @Override
-    public void caseAComandoContinueComando(AComandoContinueComando node)
+    public void caseAWhileComandoCasado(AWhileComandoCasado node)
     {
         defaultCase(node);
     }
 
     @Override
-    public void caseAComandoBlocoComando(AComandoBlocoComando node)
+    public void caseAForComandoCasado(AForComandoCasado node)
     {
         defaultCase(node);
     }
 
     @Override
-    public void caseAComandoCondComando(AComandoCondComando node)
+    public void caseABreakComandoCasado(ABreakComandoCasado node)
     {
         defaultCase(node);
     }
 
     @Override
-    public void caseAJustCondJustStmt(AJustCondJustStmt node)
+    public void caseAContComandoCasado(AContComandoCasado node)
     {
         defaultCase(node);
     }
 
     @Override
-    public void caseAJustCondElseJustStmt(AJustCondElseJustStmt node)
+    public void caseACmdBlkComandoCasado(ACmdBlkComandoCasado node)
     {
         defaultCase(node);
     }
 
     @Override
-    public void caseAElseStms(AElseStms node)
+    public void caseAIfSCmComandoSolteiro(AIfSCmComandoSolteiro node)
     {
         defaultCase(node);
     }
 
     @Override
-    public void caseAAsLongKwAsLong(AAsLongKwAsLong node)
+    public void caseAIfSMixComandoSolteiro(AIfSMixComandoSolteiro node)
     {
         defaultCase(node);
     }
@@ -304,24 +304,6 @@ public class AnalysisAdapter implements Analysis
 
     @Override
     public void caseAForStmtKwForStmt(AForStmtKwForStmt node)
-    {
-        defaultCase(node);
-    }
-
-    @Override
-    public void caseAForFromKwForFrom(AForFromKwForFrom node)
-    {
-        defaultCase(node);
-    }
-
-    @Override
-    public void caseAForToKwForTo(AForToKwForTo node)
-    {
-        defaultCase(node);
-    }
-
-    @Override
-    public void caseAForByKwForBy(AForByKwForBy node)
     {
         defaultCase(node);
     }

@@ -9,7 +9,13 @@ public final class AForStmtKwForStmt extends PForStmt
 {
     private TConsidering _considering_;
     private PVar _var_;
-    private PForFrom _forFrom_;
+    private TFrom _from_;
+    private TTo _to_;
+    private PExp _a_;
+    private TBy _by_;
+    private PExp _b_;
+    private TDo _do_;
+    private PComandoCasado _comandoCasado_;
 
     public AForStmtKwForStmt()
     {
@@ -19,14 +25,32 @@ public final class AForStmtKwForStmt extends PForStmt
     public AForStmtKwForStmt(
         @SuppressWarnings("hiding") TConsidering _considering_,
         @SuppressWarnings("hiding") PVar _var_,
-        @SuppressWarnings("hiding") PForFrom _forFrom_)
+        @SuppressWarnings("hiding") TFrom _from_,
+        @SuppressWarnings("hiding") TTo _to_,
+        @SuppressWarnings("hiding") PExp _a_,
+        @SuppressWarnings("hiding") TBy _by_,
+        @SuppressWarnings("hiding") PExp _b_,
+        @SuppressWarnings("hiding") TDo _do_,
+        @SuppressWarnings("hiding") PComandoCasado _comandoCasado_)
     {
         // Constructor
         setConsidering(_considering_);
 
         setVar(_var_);
 
-        setForFrom(_forFrom_);
+        setFrom(_from_);
+
+        setTo(_to_);
+
+        setA(_a_);
+
+        setBy(_by_);
+
+        setB(_b_);
+
+        setDo(_do_);
+
+        setComandoCasado(_comandoCasado_);
 
     }
 
@@ -36,7 +60,13 @@ public final class AForStmtKwForStmt extends PForStmt
         return new AForStmtKwForStmt(
             cloneNode(this._considering_),
             cloneNode(this._var_),
-            cloneNode(this._forFrom_));
+            cloneNode(this._from_),
+            cloneNode(this._to_),
+            cloneNode(this._a_),
+            cloneNode(this._by_),
+            cloneNode(this._b_),
+            cloneNode(this._do_),
+            cloneNode(this._comandoCasado_));
     }
 
     @Override
@@ -95,16 +125,16 @@ public final class AForStmtKwForStmt extends PForStmt
         this._var_ = node;
     }
 
-    public PForFrom getForFrom()
+    public TFrom getFrom()
     {
-        return this._forFrom_;
+        return this._from_;
     }
 
-    public void setForFrom(PForFrom node)
+    public void setFrom(TFrom node)
     {
-        if(this._forFrom_ != null)
+        if(this._from_ != null)
         {
-            this._forFrom_.parent(null);
+            this._from_.parent(null);
         }
 
         if(node != null)
@@ -117,7 +147,157 @@ public final class AForStmtKwForStmt extends PForStmt
             node.parent(this);
         }
 
-        this._forFrom_ = node;
+        this._from_ = node;
+    }
+
+    public TTo getTo()
+    {
+        return this._to_;
+    }
+
+    public void setTo(TTo node)
+    {
+        if(this._to_ != null)
+        {
+            this._to_.parent(null);
+        }
+
+        if(node != null)
+        {
+            if(node.parent() != null)
+            {
+                node.parent().removeChild(node);
+            }
+
+            node.parent(this);
+        }
+
+        this._to_ = node;
+    }
+
+    public PExp getA()
+    {
+        return this._a_;
+    }
+
+    public void setA(PExp node)
+    {
+        if(this._a_ != null)
+        {
+            this._a_.parent(null);
+        }
+
+        if(node != null)
+        {
+            if(node.parent() != null)
+            {
+                node.parent().removeChild(node);
+            }
+
+            node.parent(this);
+        }
+
+        this._a_ = node;
+    }
+
+    public TBy getBy()
+    {
+        return this._by_;
+    }
+
+    public void setBy(TBy node)
+    {
+        if(this._by_ != null)
+        {
+            this._by_.parent(null);
+        }
+
+        if(node != null)
+        {
+            if(node.parent() != null)
+            {
+                node.parent().removeChild(node);
+            }
+
+            node.parent(this);
+        }
+
+        this._by_ = node;
+    }
+
+    public PExp getB()
+    {
+        return this._b_;
+    }
+
+    public void setB(PExp node)
+    {
+        if(this._b_ != null)
+        {
+            this._b_.parent(null);
+        }
+
+        if(node != null)
+        {
+            if(node.parent() != null)
+            {
+                node.parent().removeChild(node);
+            }
+
+            node.parent(this);
+        }
+
+        this._b_ = node;
+    }
+
+    public TDo getDo()
+    {
+        return this._do_;
+    }
+
+    public void setDo(TDo node)
+    {
+        if(this._do_ != null)
+        {
+            this._do_.parent(null);
+        }
+
+        if(node != null)
+        {
+            if(node.parent() != null)
+            {
+                node.parent().removeChild(node);
+            }
+
+            node.parent(this);
+        }
+
+        this._do_ = node;
+    }
+
+    public PComandoCasado getComandoCasado()
+    {
+        return this._comandoCasado_;
+    }
+
+    public void setComandoCasado(PComandoCasado node)
+    {
+        if(this._comandoCasado_ != null)
+        {
+            this._comandoCasado_.parent(null);
+        }
+
+        if(node != null)
+        {
+            if(node.parent() != null)
+            {
+                node.parent().removeChild(node);
+            }
+
+            node.parent(this);
+        }
+
+        this._comandoCasado_ = node;
     }
 
     @Override
@@ -126,7 +306,13 @@ public final class AForStmtKwForStmt extends PForStmt
         return ""
             + toString(this._considering_)
             + toString(this._var_)
-            + toString(this._forFrom_);
+            + toString(this._from_)
+            + toString(this._to_)
+            + toString(this._a_)
+            + toString(this._by_)
+            + toString(this._b_)
+            + toString(this._do_)
+            + toString(this._comandoCasado_);
     }
 
     @Override
@@ -145,9 +331,45 @@ public final class AForStmtKwForStmt extends PForStmt
             return;
         }
 
-        if(this._forFrom_ == child)
+        if(this._from_ == child)
         {
-            this._forFrom_ = null;
+            this._from_ = null;
+            return;
+        }
+
+        if(this._to_ == child)
+        {
+            this._to_ = null;
+            return;
+        }
+
+        if(this._a_ == child)
+        {
+            this._a_ = null;
+            return;
+        }
+
+        if(this._by_ == child)
+        {
+            this._by_ = null;
+            return;
+        }
+
+        if(this._b_ == child)
+        {
+            this._b_ = null;
+            return;
+        }
+
+        if(this._do_ == child)
+        {
+            this._do_ = null;
+            return;
+        }
+
+        if(this._comandoCasado_ == child)
+        {
+            this._comandoCasado_ = null;
             return;
         }
 
@@ -170,9 +392,45 @@ public final class AForStmtKwForStmt extends PForStmt
             return;
         }
 
-        if(this._forFrom_ == oldChild)
+        if(this._from_ == oldChild)
         {
-            setForFrom((PForFrom) newChild);
+            setFrom((TFrom) newChild);
+            return;
+        }
+
+        if(this._to_ == oldChild)
+        {
+            setTo((TTo) newChild);
+            return;
+        }
+
+        if(this._a_ == oldChild)
+        {
+            setA((PExp) newChild);
+            return;
+        }
+
+        if(this._by_ == oldChild)
+        {
+            setBy((TBy) newChild);
+            return;
+        }
+
+        if(this._b_ == oldChild)
+        {
+            setB((PExp) newChild);
+            return;
+        }
+
+        if(this._do_ == oldChild)
+        {
+            setDo((TDo) newChild);
+            return;
+        }
+
+        if(this._comandoCasado_ == oldChild)
+        {
+            setComandoCasado((PComandoCasado) newChild);
             return;
         }
 

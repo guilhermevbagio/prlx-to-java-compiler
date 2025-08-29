@@ -13,7 +13,7 @@ public final class AComandosHeadComandos extends PComandos
     private TBegin _begin_;
     private TDoisPontos _doisPontos_;
     private final LinkedList<PComando> _comando_ = new LinkedList<PComando>();
-    private TThatKw _thatKw_;
+    private TThat _that_;
     private TWould _would_;
     private TBe _be_;
     private TAll _all_;
@@ -30,7 +30,7 @@ public final class AComandosHeadComandos extends PComandos
         @SuppressWarnings("hiding") TBegin _begin_,
         @SuppressWarnings("hiding") TDoisPontos _doisPontos_,
         @SuppressWarnings("hiding") List<?> _comando_,
-        @SuppressWarnings("hiding") TThatKw _thatKw_,
+        @SuppressWarnings("hiding") TThat _that_,
         @SuppressWarnings("hiding") TWould _would_,
         @SuppressWarnings("hiding") TBe _be_,
         @SuppressWarnings("hiding") TAll _all_,
@@ -47,7 +47,7 @@ public final class AComandosHeadComandos extends PComandos
 
         setComando(_comando_);
 
-        setThatKw(_thatKw_);
+        setThat(_that_);
 
         setWould(_would_);
 
@@ -68,7 +68,7 @@ public final class AComandosHeadComandos extends PComandos
             cloneNode(this._begin_),
             cloneNode(this._doisPontos_),
             cloneList(this._comando_),
-            cloneNode(this._thatKw_),
+            cloneNode(this._that_),
             cloneNode(this._would_),
             cloneNode(this._be_),
             cloneNode(this._all_),
@@ -207,16 +207,16 @@ public final class AComandosHeadComandos extends PComandos
         }
     }
 
-    public TThatKw getThatKw()
+    public TThat getThat()
     {
-        return this._thatKw_;
+        return this._that_;
     }
 
-    public void setThatKw(TThatKw node)
+    public void setThat(TThat node)
     {
-        if(this._thatKw_ != null)
+        if(this._that_ != null)
         {
-            this._thatKw_.parent(null);
+            this._that_.parent(null);
         }
 
         if(node != null)
@@ -229,7 +229,7 @@ public final class AComandosHeadComandos extends PComandos
             node.parent(this);
         }
 
-        this._thatKw_ = node;
+        this._that_ = node;
     }
 
     public TWould getWould()
@@ -341,7 +341,7 @@ public final class AComandosHeadComandos extends PComandos
             + toString(this._begin_)
             + toString(this._doisPontos_)
             + toString(this._comando_)
-            + toString(this._thatKw_)
+            + toString(this._that_)
             + toString(this._would_)
             + toString(this._be_)
             + toString(this._all_)
@@ -381,9 +381,9 @@ public final class AComandosHeadComandos extends PComandos
             return;
         }
 
-        if(this._thatKw_ == child)
+        if(this._that_ == child)
         {
-            this._thatKw_ = null;
+            this._that_ = null;
             return;
         }
 
@@ -460,9 +460,9 @@ public final class AComandosHeadComandos extends PComandos
             }
         }
 
-        if(this._thatKw_ == oldChild)
+        if(this._that_ == oldChild)
         {
-            setThatKw((TThatKw) newChild);
+            setThat((TThat) newChild);
             return;
         }
 
