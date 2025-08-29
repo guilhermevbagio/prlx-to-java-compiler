@@ -1,5 +1,5 @@
-import grupo_18.lexer.*;
-import grupo_18.node.*;
+import lexer.*;
+import node.*;
 import java.io.*;
 
 public class Main
@@ -24,8 +24,8 @@ public class Main
 				System.out.println("-------------" + file.getName().toUpperCase() + "-------------");
 				
 				while(!((token = lexer.next()) instanceof EOF)) {
-					System.out.println(token.getClass());
-					System.out.println(" ( "+token.toString()+")");
+					System.out.println(token.getClass() + "PENIS GIGANTE");
+					//System.out.println(": "+token.toString()+" \n");
 				}
 			}
 		}

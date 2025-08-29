@@ -7,9 +7,7 @@ import prolixa.analysis.*;
 @SuppressWarnings("nls")
 public final class ATamanhosUnitTamanhos extends PTamanhos
 {
-    private TParEsq _parEsq_;
-    private TNumero _numero_;
-    private TParDir _parDir_;
+    private TInteiro _inteiro_;
 
     public ATamanhosUnitTamanhos()
     {
@@ -17,16 +15,10 @@ public final class ATamanhosUnitTamanhos extends PTamanhos
     }
 
     public ATamanhosUnitTamanhos(
-        @SuppressWarnings("hiding") TParEsq _parEsq_,
-        @SuppressWarnings("hiding") TNumero _numero_,
-        @SuppressWarnings("hiding") TParDir _parDir_)
+        @SuppressWarnings("hiding") TInteiro _inteiro_)
     {
         // Constructor
-        setParEsq(_parEsq_);
-
-        setNumero(_numero_);
-
-        setParDir(_parDir_);
+        setInteiro(_inteiro_);
 
     }
 
@@ -34,9 +26,7 @@ public final class ATamanhosUnitTamanhos extends PTamanhos
     public Object clone()
     {
         return new ATamanhosUnitTamanhos(
-            cloneNode(this._parEsq_),
-            cloneNode(this._numero_),
-            cloneNode(this._parDir_));
+            cloneNode(this._inteiro_));
     }
 
     @Override
@@ -45,16 +35,16 @@ public final class ATamanhosUnitTamanhos extends PTamanhos
         ((Analysis) sw).caseATamanhosUnitTamanhos(this);
     }
 
-    public TParEsq getParEsq()
+    public TInteiro getInteiro()
     {
-        return this._parEsq_;
+        return this._inteiro_;
     }
 
-    public void setParEsq(TParEsq node)
+    public void setInteiro(TInteiro node)
     {
-        if(this._parEsq_ != null)
+        if(this._inteiro_ != null)
         {
-            this._parEsq_.parent(null);
+            this._inteiro_.parent(null);
         }
 
         if(node != null)
@@ -67,87 +57,23 @@ public final class ATamanhosUnitTamanhos extends PTamanhos
             node.parent(this);
         }
 
-        this._parEsq_ = node;
-    }
-
-    public TNumero getNumero()
-    {
-        return this._numero_;
-    }
-
-    public void setNumero(TNumero node)
-    {
-        if(this._numero_ != null)
-        {
-            this._numero_.parent(null);
-        }
-
-        if(node != null)
-        {
-            if(node.parent() != null)
-            {
-                node.parent().removeChild(node);
-            }
-
-            node.parent(this);
-        }
-
-        this._numero_ = node;
-    }
-
-    public TParDir getParDir()
-    {
-        return this._parDir_;
-    }
-
-    public void setParDir(TParDir node)
-    {
-        if(this._parDir_ != null)
-        {
-            this._parDir_.parent(null);
-        }
-
-        if(node != null)
-        {
-            if(node.parent() != null)
-            {
-                node.parent().removeChild(node);
-            }
-
-            node.parent(this);
-        }
-
-        this._parDir_ = node;
+        this._inteiro_ = node;
     }
 
     @Override
     public String toString()
     {
         return ""
-            + toString(this._parEsq_)
-            + toString(this._numero_)
-            + toString(this._parDir_);
+            + toString(this._inteiro_);
     }
 
     @Override
     void removeChild(@SuppressWarnings("unused") Node child)
     {
         // Remove child
-        if(this._parEsq_ == child)
+        if(this._inteiro_ == child)
         {
-            this._parEsq_ = null;
-            return;
-        }
-
-        if(this._numero_ == child)
-        {
-            this._numero_ = null;
-            return;
-        }
-
-        if(this._parDir_ == child)
-        {
-            this._parDir_ = null;
+            this._inteiro_ = null;
             return;
         }
 
@@ -158,21 +84,9 @@ public final class ATamanhosUnitTamanhos extends PTamanhos
     void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
     {
         // Replace child
-        if(this._parEsq_ == oldChild)
+        if(this._inteiro_ == oldChild)
         {
-            setParEsq((TParEsq) newChild);
-            return;
-        }
-
-        if(this._numero_ == oldChild)
-        {
-            setNumero((TNumero) newChild);
-            return;
-        }
-
-        if(this._parDir_ == oldChild)
-        {
-            setParDir((TParDir) newChild);
+            setInteiro((TInteiro) newChild);
             return;
         }
 

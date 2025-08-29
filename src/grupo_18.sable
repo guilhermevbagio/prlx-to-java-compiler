@@ -12,10 +12,14 @@ Helpers
  underline = '_';
  comentario_inicio = '{';
  comentario_fim = '}';
- single_quote = 39;
+ single_quote = ''';
+
 
 Tokens
 
+ inteiro = digito+;
+ vector_matrix = digito+ ('x' digito+)+; 
+ vezes = 'x';
  ponto = '.';
  dois_pontos = ':';
  virgula = ',';
@@ -23,9 +27,6 @@ Tokens
  simbolo = '\' (char | '\\n' | '\\t') '\';
  valor_booleano = 'yes' | 'no';
 
- vector_matrix = digito 'x' digito;
- vezes = 'x';
- 
  this = 'This';
  is = 'is';
  program = 'program';
@@ -95,15 +96,14 @@ Tokens
  colchete_esq = '[';
  colchete_dir = ']';
 
-
  vazio = (espaco | rc | nl)+;
  comentario = comentario_inicio (char | espaco )* comentario_fim;
  
  numero = digito+ ('.' digito+)?; 
  identificador = letra_maiuscula (letra_maiuscula | letra_minuscula | underline)*;
 
- 
- symbol_value = single_quote char single_quote;
+ symbol_value = ''' char ''';
+
 
 
 Ignored Tokens
@@ -127,14 +127,13 @@ declaracao =
     {declaracao_mut}         alterable   tipo identificador ponto_e_virgula
   | {declaracao_unalt}       unalterable tipo identificador ponto_e_virgula
   | {declaracao_unalt_init}  unalterable tipo identificador inicializacao valor ponto_e_virgula
-  | {declaracao_vec}         vector of tipo tamanhos identificador ponto_e_virgula
+  | {declaracao_vec}         vector of tipo par_esq tamanhos par_dir identificador ponto_e_virgula
   ;
 
 tamanhos =
-    {tamanhos_matriz} par_esq vector_matrix par_dir
-  | {tamanhos_unit}   par_esq numero par_dir
+	{tamanhos_unit}   inteiro
+  | {tamanhos_matriz} tamanhos vezes inteiro
   ;
-
 
 tipo =
     {tipo_number} number
@@ -191,10 +190,7 @@ comando_casado =
 comando_solteiro = 
       {if_s_cm}  just in case that_kw par_esq exp par_dir do comando
     | {if_s_mix} just in case that_kw par_esq exp par_dir [a]:do comando_casado otherwise [b]:do comando_solteiro
-
   ;
-
-
   
 while_stmt =
     {while_stmt_kw} [a]:as long [b]:as par_esq exp par_dir do comando_casado

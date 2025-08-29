@@ -117,13 +117,13 @@ public class AnalysisAdapter implements Analysis
     }
 
     @Override
-    public void caseATamanhosMatrizTamanhos(ATamanhosMatrizTamanhos node)
+    public void caseATamanhosUnitTamanhos(ATamanhosUnitTamanhos node)
     {
         defaultCase(node);
     }
 
     @Override
-    public void caseATamanhosUnitTamanhos(ATamanhosUnitTamanhos node)
+    public void caseATamanhosMatrizTamanhos(ATamanhosMatrizTamanhos node)
     {
         defaultCase(node);
     }
@@ -585,6 +585,24 @@ public class AnalysisAdapter implements Analysis
     }
 
     @Override
+    public void caseTInteiro(TInteiro node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseTVectorMatrix(TVectorMatrix node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseTVezes(TVezes node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
     public void caseTPonto(TPonto node)
     {
         defaultCase(node);
@@ -616,18 +634,6 @@ public class AnalysisAdapter implements Analysis
 
     @Override
     public void caseTValorBooleano(TValorBooleano node)
-    {
-        defaultCase(node);
-    }
-
-    @Override
-    public void caseTVectorMatrix(TVectorMatrix node)
-    {
-        defaultCase(node);
-    }
-
-    @Override
-    public void caseTVezes(TVezes node)
     {
         defaultCase(node);
     }

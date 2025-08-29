@@ -19,8 +19,8 @@ public interface Analysis extends Switch
     void caseADeclaracaoUnaltDeclaracao(ADeclaracaoUnaltDeclaracao node);
     void caseADeclaracaoUnaltInitDeclaracao(ADeclaracaoUnaltInitDeclaracao node);
     void caseADeclaracaoVecDeclaracao(ADeclaracaoVecDeclaracao node);
-    void caseATamanhosMatrizTamanhos(ATamanhosMatrizTamanhos node);
     void caseATamanhosUnitTamanhos(ATamanhosUnitTamanhos node);
+    void caseATamanhosMatrizTamanhos(ATamanhosMatrizTamanhos node);
     void caseATipoNumberTipo(ATipoNumberTipo node);
     void caseATipoAnswerTipo(ATipoAnswerTipo node);
     void caseATipoSymbolTipo(ATipoSymbolTipo node);
@@ -98,14 +98,15 @@ public interface Analysis extends Switch
     void caseAUnVarUnaryExp(AUnVarUnaryExp node);
     void caseAUnValUnaryExp(AUnValUnaryExp node);
 
+    void caseTInteiro(TInteiro node);
+    void caseTVectorMatrix(TVectorMatrix node);
+    void caseTVezes(TVezes node);
     void caseTPonto(TPonto node);
     void caseTDoisPontos(TDoisPontos node);
     void caseTVirgula(TVirgula node);
     void caseTPontoEVirgula(TPontoEVirgula node);
     void caseTSimbolo(TSimbolo node);
     void caseTValorBooleano(TValorBooleano node);
-    void caseTVectorMatrix(TVectorMatrix node);
-    void caseTVezes(TVezes node);
     void caseTThis(TThis node);
     void caseTIs(TIs node);
     void caseTProgram(TProgram node);

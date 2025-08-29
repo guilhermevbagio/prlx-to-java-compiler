@@ -10,7 +10,9 @@ public final class ADeclaracaoVecDeclaracao extends PDeclaracao
     private TVector _vector_;
     private TOf _of_;
     private PTipo _tipo_;
+    private TParEsq _parEsq_;
     private PTamanhos _tamanhos_;
+    private TParDir _parDir_;
     private TIdentificador _identificador_;
     private TPontoEVirgula _pontoEVirgula_;
 
@@ -23,7 +25,9 @@ public final class ADeclaracaoVecDeclaracao extends PDeclaracao
         @SuppressWarnings("hiding") TVector _vector_,
         @SuppressWarnings("hiding") TOf _of_,
         @SuppressWarnings("hiding") PTipo _tipo_,
+        @SuppressWarnings("hiding") TParEsq _parEsq_,
         @SuppressWarnings("hiding") PTamanhos _tamanhos_,
+        @SuppressWarnings("hiding") TParDir _parDir_,
         @SuppressWarnings("hiding") TIdentificador _identificador_,
         @SuppressWarnings("hiding") TPontoEVirgula _pontoEVirgula_)
     {
@@ -34,7 +38,11 @@ public final class ADeclaracaoVecDeclaracao extends PDeclaracao
 
         setTipo(_tipo_);
 
+        setParEsq(_parEsq_);
+
         setTamanhos(_tamanhos_);
+
+        setParDir(_parDir_);
 
         setIdentificador(_identificador_);
 
@@ -49,7 +57,9 @@ public final class ADeclaracaoVecDeclaracao extends PDeclaracao
             cloneNode(this._vector_),
             cloneNode(this._of_),
             cloneNode(this._tipo_),
+            cloneNode(this._parEsq_),
             cloneNode(this._tamanhos_),
+            cloneNode(this._parDir_),
             cloneNode(this._identificador_),
             cloneNode(this._pontoEVirgula_));
     }
@@ -135,6 +145,31 @@ public final class ADeclaracaoVecDeclaracao extends PDeclaracao
         this._tipo_ = node;
     }
 
+    public TParEsq getParEsq()
+    {
+        return this._parEsq_;
+    }
+
+    public void setParEsq(TParEsq node)
+    {
+        if(this._parEsq_ != null)
+        {
+            this._parEsq_.parent(null);
+        }
+
+        if(node != null)
+        {
+            if(node.parent() != null)
+            {
+                node.parent().removeChild(node);
+            }
+
+            node.parent(this);
+        }
+
+        this._parEsq_ = node;
+    }
+
     public PTamanhos getTamanhos()
     {
         return this._tamanhos_;
@@ -158,6 +193,31 @@ public final class ADeclaracaoVecDeclaracao extends PDeclaracao
         }
 
         this._tamanhos_ = node;
+    }
+
+    public TParDir getParDir()
+    {
+        return this._parDir_;
+    }
+
+    public void setParDir(TParDir node)
+    {
+        if(this._parDir_ != null)
+        {
+            this._parDir_.parent(null);
+        }
+
+        if(node != null)
+        {
+            if(node.parent() != null)
+            {
+                node.parent().removeChild(node);
+            }
+
+            node.parent(this);
+        }
+
+        this._parDir_ = node;
     }
 
     public TIdentificador getIdentificador()
@@ -217,7 +277,9 @@ public final class ADeclaracaoVecDeclaracao extends PDeclaracao
             + toString(this._vector_)
             + toString(this._of_)
             + toString(this._tipo_)
+            + toString(this._parEsq_)
             + toString(this._tamanhos_)
+            + toString(this._parDir_)
             + toString(this._identificador_)
             + toString(this._pontoEVirgula_);
     }
@@ -244,9 +306,21 @@ public final class ADeclaracaoVecDeclaracao extends PDeclaracao
             return;
         }
 
+        if(this._parEsq_ == child)
+        {
+            this._parEsq_ = null;
+            return;
+        }
+
         if(this._tamanhos_ == child)
         {
             this._tamanhos_ = null;
+            return;
+        }
+
+        if(this._parDir_ == child)
+        {
+            this._parDir_ = null;
             return;
         }
 
@@ -287,9 +361,21 @@ public final class ADeclaracaoVecDeclaracao extends PDeclaracao
             return;
         }
 
+        if(this._parEsq_ == oldChild)
+        {
+            setParEsq((TParEsq) newChild);
+            return;
+        }
+
         if(this._tamanhos_ == oldChild)
         {
             setTamanhos((PTamanhos) newChild);
+            return;
+        }
+
+        if(this._parDir_ == oldChild)
+        {
+            setParDir((TParDir) newChild);
             return;
         }
 

@@ -310,9 +310,17 @@ public class DepthFirstAdapter extends AnalysisAdapter
         {
             node.getTipo().apply(this);
         }
+        if(node.getParEsq() != null)
+        {
+            node.getParEsq().apply(this);
+        }
         if(node.getTamanhos() != null)
         {
             node.getTamanhos().apply(this);
+        }
+        if(node.getParDir() != null)
+        {
+            node.getParDir().apply(this);
         }
         if(node.getIdentificador() != null)
         {
@@ -323,35 +331,6 @@ public class DepthFirstAdapter extends AnalysisAdapter
             node.getPontoEVirgula().apply(this);
         }
         outADeclaracaoVecDeclaracao(node);
-    }
-
-    public void inATamanhosMatrizTamanhos(ATamanhosMatrizTamanhos node)
-    {
-        defaultIn(node);
-    }
-
-    public void outATamanhosMatrizTamanhos(ATamanhosMatrizTamanhos node)
-    {
-        defaultOut(node);
-    }
-
-    @Override
-    public void caseATamanhosMatrizTamanhos(ATamanhosMatrizTamanhos node)
-    {
-        inATamanhosMatrizTamanhos(node);
-        if(node.getParEsq() != null)
-        {
-            node.getParEsq().apply(this);
-        }
-        if(node.getVectorMatrix() != null)
-        {
-            node.getVectorMatrix().apply(this);
-        }
-        if(node.getParDir() != null)
-        {
-            node.getParDir().apply(this);
-        }
-        outATamanhosMatrizTamanhos(node);
     }
 
     public void inATamanhosUnitTamanhos(ATamanhosUnitTamanhos node)
@@ -368,19 +347,40 @@ public class DepthFirstAdapter extends AnalysisAdapter
     public void caseATamanhosUnitTamanhos(ATamanhosUnitTamanhos node)
     {
         inATamanhosUnitTamanhos(node);
-        if(node.getParEsq() != null)
+        if(node.getInteiro() != null)
         {
-            node.getParEsq().apply(this);
-        }
-        if(node.getNumero() != null)
-        {
-            node.getNumero().apply(this);
-        }
-        if(node.getParDir() != null)
-        {
-            node.getParDir().apply(this);
+            node.getInteiro().apply(this);
         }
         outATamanhosUnitTamanhos(node);
+    }
+
+    public void inATamanhosMatrizTamanhos(ATamanhosMatrizTamanhos node)
+    {
+        defaultIn(node);
+    }
+
+    public void outATamanhosMatrizTamanhos(ATamanhosMatrizTamanhos node)
+    {
+        defaultOut(node);
+    }
+
+    @Override
+    public void caseATamanhosMatrizTamanhos(ATamanhosMatrizTamanhos node)
+    {
+        inATamanhosMatrizTamanhos(node);
+        if(node.getTamanhos() != null)
+        {
+            node.getTamanhos().apply(this);
+        }
+        if(node.getVezes() != null)
+        {
+            node.getVezes().apply(this);
+        }
+        if(node.getInteiro() != null)
+        {
+            node.getInteiro().apply(this);
+        }
+        outATamanhosMatrizTamanhos(node);
     }
 
     public void inATipoNumberTipo(ATipoNumberTipo node)

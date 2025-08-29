@@ -1,0 +1,6 @@
+This is program DeclaracoesMultidimensionais.
+It presents:
+   vector of number (3) Vetor;
+   vector of number (3x3) Matriz;
+   vector of number (3x3x3) Cubo;
+

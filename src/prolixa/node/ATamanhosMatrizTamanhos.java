@@ -7,9 +7,9 @@ import prolixa.analysis.*;
 @SuppressWarnings("nls")
 public final class ATamanhosMatrizTamanhos extends PTamanhos
 {
-    private TParEsq _parEsq_;
-    private TVectorMatrix _vectorMatrix_;
-    private TParDir _parDir_;
+    private PTamanhos _tamanhos_;
+    private TVezes _vezes_;
+    private TInteiro _inteiro_;
 
     public ATamanhosMatrizTamanhos()
     {
@@ -17,16 +17,16 @@ public final class ATamanhosMatrizTamanhos extends PTamanhos
     }
 
     public ATamanhosMatrizTamanhos(
-        @SuppressWarnings("hiding") TParEsq _parEsq_,
-        @SuppressWarnings("hiding") TVectorMatrix _vectorMatrix_,
-        @SuppressWarnings("hiding") TParDir _parDir_)
+        @SuppressWarnings("hiding") PTamanhos _tamanhos_,
+        @SuppressWarnings("hiding") TVezes _vezes_,
+        @SuppressWarnings("hiding") TInteiro _inteiro_)
     {
         // Constructor
-        setParEsq(_parEsq_);
+        setTamanhos(_tamanhos_);
 
-        setVectorMatrix(_vectorMatrix_);
+        setVezes(_vezes_);
 
-        setParDir(_parDir_);
+        setInteiro(_inteiro_);
 
     }
 
@@ -34,9 +34,9 @@ public final class ATamanhosMatrizTamanhos extends PTamanhos
     public Object clone()
     {
         return new ATamanhosMatrizTamanhos(
-            cloneNode(this._parEsq_),
-            cloneNode(this._vectorMatrix_),
-            cloneNode(this._parDir_));
+            cloneNode(this._tamanhos_),
+            cloneNode(this._vezes_),
+            cloneNode(this._inteiro_));
     }
 
     @Override
@@ -45,16 +45,16 @@ public final class ATamanhosMatrizTamanhos extends PTamanhos
         ((Analysis) sw).caseATamanhosMatrizTamanhos(this);
     }
 
-    public TParEsq getParEsq()
+    public PTamanhos getTamanhos()
     {
-        return this._parEsq_;
+        return this._tamanhos_;
     }
 
-    public void setParEsq(TParEsq node)
+    public void setTamanhos(PTamanhos node)
     {
-        if(this._parEsq_ != null)
+        if(this._tamanhos_ != null)
         {
-            this._parEsq_.parent(null);
+            this._tamanhos_.parent(null);
         }
 
         if(node != null)
@@ -67,19 +67,19 @@ public final class ATamanhosMatrizTamanhos extends PTamanhos
             node.parent(this);
         }
 
-        this._parEsq_ = node;
+        this._tamanhos_ = node;
     }
 
-    public TVectorMatrix getVectorMatrix()
+    public TVezes getVezes()
     {
-        return this._vectorMatrix_;
+        return this._vezes_;
     }
 
-    public void setVectorMatrix(TVectorMatrix node)
+    public void setVezes(TVezes node)
     {
-        if(this._vectorMatrix_ != null)
+        if(this._vezes_ != null)
         {
-            this._vectorMatrix_.parent(null);
+            this._vezes_.parent(null);
         }
 
         if(node != null)
@@ -92,19 +92,19 @@ public final class ATamanhosMatrizTamanhos extends PTamanhos
             node.parent(this);
         }
 
-        this._vectorMatrix_ = node;
+        this._vezes_ = node;
     }
 
-    public TParDir getParDir()
+    public TInteiro getInteiro()
     {
-        return this._parDir_;
+        return this._inteiro_;
     }
 
-    public void setParDir(TParDir node)
+    public void setInteiro(TInteiro node)
     {
-        if(this._parDir_ != null)
+        if(this._inteiro_ != null)
         {
-            this._parDir_.parent(null);
+            this._inteiro_.parent(null);
         }
 
         if(node != null)
@@ -117,37 +117,37 @@ public final class ATamanhosMatrizTamanhos extends PTamanhos
             node.parent(this);
         }
 
-        this._parDir_ = node;
+        this._inteiro_ = node;
     }
 
     @Override
     public String toString()
     {
         return ""
-            + toString(this._parEsq_)
-            + toString(this._vectorMatrix_)
-            + toString(this._parDir_);
+            + toString(this._tamanhos_)
+            + toString(this._vezes_)
+            + toString(this._inteiro_);
     }
 
     @Override
     void removeChild(@SuppressWarnings("unused") Node child)
     {
         // Remove child
-        if(this._parEsq_ == child)
+        if(this._tamanhos_ == child)
         {
-            this._parEsq_ = null;
+            this._tamanhos_ = null;
             return;
         }
 
-        if(this._vectorMatrix_ == child)
+        if(this._vezes_ == child)
         {
-            this._vectorMatrix_ = null;
+            this._vezes_ = null;
             return;
         }
 
-        if(this._parDir_ == child)
+        if(this._inteiro_ == child)
         {
-            this._parDir_ = null;
+            this._inteiro_ = null;
             return;
         }
 
@@ -158,21 +158,21 @@ public final class ATamanhosMatrizTamanhos extends PTamanhos
     void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
     {
         // Replace child
-        if(this._parEsq_ == oldChild)
+        if(this._tamanhos_ == oldChild)
         {
-            setParEsq((TParEsq) newChild);
+            setTamanhos((PTamanhos) newChild);
             return;
         }
 
-        if(this._vectorMatrix_ == oldChild)
+        if(this._vezes_ == oldChild)
         {
-            setVectorMatrix((TVectorMatrix) newChild);
+            setVezes((TVezes) newChild);
             return;
         }
 
-        if(this._parDir_ == oldChild)
+        if(this._inteiro_ == oldChild)
         {
-            setParDir((TParDir) newChild);
+            setInteiro((TInteiro) newChild);
             return;
         }
 
