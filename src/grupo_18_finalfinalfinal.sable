@@ -1,0 +1,356 @@
+Package prolixa;
+
+Helpers
+ digito = ['0' .. '9'];
+ espaco = ' ';
+ letra_maiuscula = ['A' .. 'Z'];
+ letra_minuscula = ['a' .. 'z'];
+ char = [[31 .. 255] - 34];
+ letra = (letra_minuscula | letra_maiuscula);
+ rc = 13;        
+ nl = 10;        			
+ underline = '_';
+ comentario_inicio = '{';
+ comentario_fim = '}';
+ single_quote = 39;
+
+Tokens
+
+ ponto = '.';
+ dois_pontos = ':';
+ virgula = ',';
+ ponto_e_virgula = ';';
+ simbolo = '\' (char | '\\n' | '\\t') '\';
+ valor_booleano = 'yes' | 'no';
+
+ vezes = 'x';
+
+ this = 'This';
+ is = 'is';
+ program = 'program';
+ it = 'It';
+ presents = 'presents';
+ let = 'Let';
+ us = 'us';
+ begin = 'begin';
+ that = 'That';
+ would = 'would';
+ be = 'be';
+ all = 'all';
+
+ alterable = 'alterable';
+ unalterable = 'unalterable';
+ vector = 'vector';
+ of = 'of';
+ number = 'number';
+ answer = 'answer';
+ symbol = 'symbol';
+
+ capture = 'capture';
+ show = 'show';
+
+ just = 'just';
+ in = 'in';
+ case = 'case';
+ that_kw = 'that';
+ do = 'do';
+ otherwise = 'otherwise';
+ as = 'as';
+ long = 'long';
+ considering = 'considering';
+ from = 'from';
+ to = 'to';
+ by = 'by';
+
+ abandon = 'abandon';
+ go = 'go';
+ next = 'next';
+ iteration = 'iteration';
+
+ inicializacao = '=';
+ atribuicao = ':=';
+ igual = '==';
+ diferente = '!=';
+ maiorigual = '>=';
+ menorigual = '<=';
+ maior = '>';
+ menor = '<';
+
+ soma = '+';
+ menos = '-';
+ mult = '*';
+ div = '/';
+ mod = '//';
+
+ and = 'and';
+ or = 'or';
+ not = '!';
+ xor = 'xor';
+
+ literal = '"' char* '"';
+
+ par_esq = '(';
+ par_dir = ')';
+ colchete_esq = '[';
+ colchete_dir = ']';
+
+
+ vazio = (espaco | rc | nl)+;
+ comentario = comentario_inicio (char | espaco )* comentario_fim;
+
+ numero = digito+ ('.' digito+)?; 
+ identificador = letra_maiuscula (letra_maiuscula | letra_minuscula | underline)*;
+
+
+ symbol_value = single_quote char single_quote;
+
+
+Ignored Tokens
+
+ vazio, comentario;
+
+
+
+
+Productions
+
+programa =
+   {programa} this is program identificador ponto declaracoes? comandos?
+   {-> New programa(identificador, [declaracoes.declaracao], [comandos.comando])}
+   ;
+
+declaracoes {-> declaracao*} =
+    {declaracoes_head} it presents dois_pontos declaracao*
+    {-> [declaracao.declaracao]}
+    ;
+
+comandos {-> comando*} =
+    {comandos_head} let us begin dois_pontos comando+ that would be all ponto
+    {-> [comando.comando]}
+    ;
+
+declaracao {-> declaracao} =
+    {declaracao_mut}        alterable   tipo identificador ponto_e_virgula
+      {-> New declaracao.mut(tipo, identificador)}
+  | {declaracao_unalt}      unalterable tipo identificador ponto_e_virgula
+      {-> New declaracao.unalt(tipo, identificador)}
+  | {declaracao_unalt_init} unalterable tipo identificador inicializacao valor ponto_e_virgula
+      {-> New declaracao.unalt_init(tipo, identificador, valor)}
+  | {declaracao_vec}        vector of tipo tamanhos identificador ponto_e_virgula
+      {-> New declaracao.vec(tipo, tamanhos, identificador)}
+  ;
+
+vector_matrix {-> numero+} =
+    [nm]:numero [vmabc]:vector_matrix_tail* {-> [nm, vmabc.numero]}
+  ;
+
+vector_matrix_tail {-> numero} =
+   vezes [nm]:numero {-> nm}
+   ;
+
+tamanhos {-> tamanhos} =
+    {tamanhos_matriz} par_esq [vmaaa]:vector_matrix par_dir
+      {-> New tamanhos.matriz([vmaaa.numero])}
+  ;
+
+tipo {-> tipo} =
+    {tipo_number} number  {-> New tipo.number()}
+  | {tipo_answer} answer  {-> New tipo.answer()}
+  | {tipo_symbol} symbol  {-> New tipo.symbol()}
+  ;
+
+var {-> var} =
+    {var_id}   identificador
+      {-> New var.id(identificador)}
+  | {var_call} identificador par_esq lista_arg par_dir
+      {-> New var.call(identificador, [lista_arg.exp])}
+  ;
+
+// lista de argumentos: exp (',' exp)*
+lista_arg {-> exp*} =
+    {um}   [e]:exp                       {-> [e.exp]}
+  | {mais} [e]:exp virgula [t]:lista_arg {-> [e.exp, t.exp]}
+  ;
+
+// lista de variáveis: var (',' var)*
+lista_var {-> var*} =
+    {um}   [v]:var                       {-> [v.var]}
+  | {mais} [v]:var virgula [t]:lista_var {-> [v.var, t.var]}
+  ;
+
+
+unalt {-> identificador} =
+    {unalt_id} [id]:identificador {-> id}
+  ;
+
+
+valor {-> valor} =
+    {valor_symb} simbolo
+      {-> New valor.symb(simbolo)}
+  | {valor_bool} valor_booleano
+      {-> New valor.bool(valor_booleano)}
+  | {valor_num}  numero
+      {-> New valor.num(numero)}
+  | {valor_str}  literal
+      {-> New valor.str(literal)}
+  ;
+
+comando {-> comando} =
+    {cmd_cnd}     comando_casado   {-> comando_casado.comando}
+  | {cmd_solt}    comando_solteiro {-> comando_solteiro.comando}
+  ;
+
+comando_casado {-> comando} =
+    {atr}   [v]:var atribuicao [e]:exp ponto_e_virgula
+      {-> New comando.atr(v.var, e.exp)}
+  | {init}  [id]:unalt inicializacao [e]:exp ponto_e_virgula
+      {-> New comando.init(id.identificador, e.exp)}
+  | {if_casa} just in case that_kw par_esq [c]:exp par_dir [a]:do [t]:comando_casado otherwise [b]:do [f]:comando_casado
+      {-> New comando.if_then_else(c.exp, t.comando, f.comando)}
+  | {cap}   capture par_esq [lv]:lista_var par_dir ponto_e_virgula
+      {-> New comando.cap([lv.var])}
+  | {show}  show par_esq [la]:lista_arg par_dir ponto_e_virgula
+      {-> New comando.show([la.exp])}
+  | {while} [a]:as long [b]:as par_esq [c]:exp par_dir do [w]:comando_casado
+      {-> New comando.while(c.exp, w.comando)}
+  | {for} considering [it]:var from [ini]:exp to [fim]:exp by [inc]:exp do [body]:comando_casado
+      {-> New comando.for(it.var, ini.exp, fim.exp, inc.exp, body.comando)}
+  | {break} abandon ponto_e_virgula
+      {-> New comando.break()}
+  | {cont}  go to next iteration ponto_e_virgula
+      {-> New comando.cont()}
+  | {cmd_blk} [b]:bloco
+      {-> b.comando}
+  ;
+
+comando_solteiro {-> comando} =
+    {if_s_cm}  just in case that_kw par_esq [c]:exp par_dir do [k]:comando
+      {-> New comando.if_then(c.exp, k.comando)}
+  | {if_s_mix} just in case that_kw par_esq [c]:exp par_dir [a]:do [t]:comando_casado otherwise [b]:do [f]:comando_solteiro
+      {-> New comando.if_then_else(c.exp, t.comando, f.comando)}
+  ;
+
+bloco {-> comando} =
+    {bloco_dec} colchete_esq declaracao* colchete_dir
+      {-> New comando.bloco([declaracao.declaracao], [])}
+  | {bloco_cmd} colchete_esq declaracao* comando+ colchete_dir
+      {-> New comando.bloco([declaracao.declaracao], [comando.comando])}
+  ;
+
+
+exp {-> exp} =
+    {exp_from_or} [e]:or_exp
+      {-> e.exp}
+      
+  ;
+
+or_exp {-> exp} =
+    {or_one}   [l]:and_exp                    {-> l.exp}
+  | {or_more}  [l]:and_exp or  [r]:or_exp     {-> New exp.or(l.exp, r.exp)}
+  | {xor_more} [l]:and_exp xor [r]:or_exp     {-> New exp.xor(l.exp, r.exp)}
+  ;
+
+and_exp {-> exp} =
+    {and_one}  [l]:rel_exp                    {-> l.exp}
+  | {and_more} [l]:rel_exp and [r]:and_exp    {-> New exp.and(l.exp, r.exp)}
+  ;
+
+rel_exp {-> exp} =
+    {rel_term} [l]:add_exp                            {-> l.exp}
+  | {rel_gt}   [l]:add_exp maior      [r]:rel_exp     {-> New exp.gt(l.exp, r.exp)}
+  | {rel_lt}   [l]:add_exp menor      [r]:rel_exp     {-> New exp.lt(l.exp, r.exp)}
+  | {rel_ge}   [l]:add_exp maiorigual [r]:rel_exp     {-> New exp.ge(l.exp, r.exp)}
+  | {rel_le}   [l]:add_exp menorigual [r]:rel_exp     {-> New exp.le(l.exp, r.exp)}
+  | {rel_eq}   [l]:add_exp igual      [r]:rel_exp     {-> New exp.eq(l.exp, r.exp)}
+  | {rel_ne}   [l]:add_exp diferente  [r]:rel_exp     {-> New exp.ne(l.exp, r.exp)}
+  ;
+
+add_exp {-> exp} =
+    {add_one}   [l]:mul_exp                       {-> l.exp}
+  | {add_plus}  [l]:mul_exp soma  [r]:add_exp     {-> New exp.add(l.exp, r.exp)}
+  | {add_minus} [l]:mul_exp menos [r]:add_exp     {-> New exp.sub(l.exp, r.exp)}
+  ;
+
+mul_exp {-> exp} =
+    {mul_one}   [l]:unary_exp                     {-> l.exp}
+  | {mul_times} [l]:unary_exp mult [r]:mul_exp    {-> New exp.mul(l.exp, r.exp)}
+  | {mul_div}   [l]:unary_exp div  [r]:mul_exp    {-> New exp.div(l.exp, r.exp)}
+  | {mul_mod}   [l]:unary_exp mod  [r]:mul_exp    {-> New exp.mod(l.exp, r.exp)}
+  ;
+
+unary_exp {-> exp} =
+    {un_neg}   menos [u]:unary_exp                {-> New exp.neg(u.exp)}
+  | {un_paren} par_esq [e]:exp par_dir            {-> e.exp}
+  | {un_var}   [v]:var                            {-> New exp.var(v.var)}
+  | {un_val}   [c]:valor                          {-> New exp.val(c.valor)}
+  ;
+
+
+Abstract Syntax Tree
+
+programa =
+    identificador declaracao* comando*
+    ;
+
+declaracao =
+      {mut}        tipo identificador
+    | {unalt}      tipo identificador
+    | {unalt_init} tipo identificador valor
+    | {vec}        tipo tamanhos identificador
+    ;
+
+tamanhos =
+      {matriz} numero+
+    ;
+
+tipo =
+      {number}
+    | {answer}
+    | {symbol}
+    ;
+
+var =
+      {id} identificador
+    | {call} identificador exp*
+    ;
+
+valor =
+      {symb} simbolo
+    | {bool} valor_booleano
+    | {num}  numero
+    | {str}  literal
+    ;
+
+comando =
+      {atr}          var exp
+    | {init}        identificador exp
+    | {if_then_else} exp [a]:comando [b]:comando
+    | {if_then}      exp comando
+    | {cap}          var*
+    | {show}         exp*
+    | {while}        exp comando
+    | {for}         var [a]:exp [b]:exp [c]:exp comando
+    | {break}
+    | {cont}
+    | {bloco}        declaracao* comando*
+    ;
+
+exp =
+    {or} [esq]:exp [dir]:exp
+    | {xor} [esq]:exp [dir]:exp
+    | {and} [esq]:exp [dir]:exp
+    | {gt} [esq]:exp [dir]:exp
+    | {lt} [esq]:exp [dir]:exp
+    | {ge} [esq]:exp [dir]:exp
+    | {le} [esq]:exp [dir]:exp
+    | {eq} [esq]:exp [dir]:exp
+    | {ne} [esq]:exp [dir]:exp
+    | {add} [esq]:exp [dir]:exp
+    | {sub} [esq]:exp [dir]:exp
+    | {mul} [esq]:exp [dir]:exp
+    | {div} [esq]:exp [dir]:exp
+    | {mod} [esq]:exp [dir]:exp
+    | {neg} [exp]:exp
+    | {var} [var]:var
+    | {val} [valor]:valor
+    ;

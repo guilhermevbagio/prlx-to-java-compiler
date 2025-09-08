@@ -17,7 +17,7 @@ Let us begin:
         capture(Notas(I_));
         Soma := Soma + Notas(I_);
         I_ := I_ + 1;
-    ];
+    ]
 
     Media := Soma / 5;
 
