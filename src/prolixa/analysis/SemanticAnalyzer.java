@@ -453,7 +453,7 @@ public class SemanticAnalyzer extends DepthFirstAdapter {
     	VariableType leftType = getExpressionType(left);
     	VariableType rightType = getExpressionType(right);
         
-        if (leftType != VariableType.NUMBER || rightType != VariableType.NUMBER) {
+        if ((leftType != VariableType.NUMBER || rightType != VariableType.NUMBER) && rightType != VariableType.ERRO && leftType != VariableType.ERRO) {
             reportError("operation requires number operands: " + left.toString() + " " + right.toString(), node);
         }
     }
