@@ -5,14 +5,27 @@ import prolixa.node.*;
 
 public class SemanticAnalyzer extends DepthFirstAdapter {
     
+	private enum VariableType {
+		NUMBER,
+		ANSWER,
+		SYMBOL,
+		ERRO
+	}
+	private enum VariableKind {
+		ALTERABLE,
+		UNALTERABLE,
+		VECTOR,
+		ERRO
+	}
+	
     private class VariableData {
-        String type;        // "number", "answer", "symbol"
-        String kind;        // "alterable", "unalterable", "vector"
+        VariableType type;
+        VariableKind kind;
         boolean initialized;
         int scopeLevel;
-        List<Integer> dimensions; // para vetores
+        List<Integer> dimensions;
         
-        VariableData(String type, String kind, boolean initialized, int scopeLevel) {
+        VariableData(VariableType type, VariableKind kind, boolean initialized, int scopeLevel) {
             this.type = type;
             this.kind = kind;
             this.initialized = initialized;
@@ -21,7 +34,7 @@ public class SemanticAnalyzer extends DepthFirstAdapter {
         }
         
         //veotr
-        VariableData(String type, String kind, List<Integer> dimensions, int scopeLevel) {
+        VariableData(VariableType type, VariableKind kind, List<Integer> dimensions, int scopeLevel) {
             this.type = type;
             this.kind = kind;
             this.initialized = false;
@@ -30,18 +43,21 @@ public class SemanticAnalyzer extends DepthFirstAdapter {
         }
     }
     
-    private String getTypeString(PTipo tipo) {
-        if (tipo instanceof ANumberTipo) return "number";
-        if (tipo instanceof AAnswerTipo) return "answer";
-        if (tipo instanceof ASymbolTipo) return "symbol";
-        return "erro";
+
+	}
+
+    private VariableType getTypeString(PTipo tipo) {
+        if (tipo instanceof ANumberTipo) return VariableType.NUMBER;
+        if (tipo instanceof AAnswerTipo) return VariableType.ANSWER;
+        if (tipo instanceof ASymbolTipo) return VariableType.SYMBOL;
+        return VariableType.ERRO;
     }
-    private String getValueType(PValor valor) {
-        if (valor instanceof ANumValor) return "number";
-        if (valor instanceof ABoolValor) return "answer";
-        if (valor instanceof ASymbValor) return "symbol";
-        if (valor instanceof AStrValor) return "symbol";
-        return "erro";
+    private VariableType getValueType(PValor valor) {
+        if (valor instanceof ANumValor)  return VariableType.NUMBER;
+        if (valor instanceof ABoolValor) return VariableType.ANSWER;
+        if (valor instanceof ASymbValor) return VariableType.SYMBOL;
+        if (valor instanceof AStrValor)  return VariableType.SYMBOL;
+        return VariableType.ERRO;
     }
     
     private Stack<Map<String, VariableData>> scopeStack = new Stack<>();
@@ -92,7 +108,7 @@ public class SemanticAnalyzer extends DepthFirstAdapter {
         return scopeStack.peek().containsKey(name);
     }
 
-    private String getExpressionType(PExp exp) {
+    private VariableType getExpressionType(PExp exp) {
         if (exp instanceof AValExp) {
             AValExp valExp = (AValExp) exp;
             
@@ -110,29 +126,29 @@ public class SemanticAnalyzer extends DepthFirstAdapter {
                 String name = idVar.getIdentificador().getText();
                 VariableData info = getVariableScope(name);
                 
-                return info != null ? info.type : "erro";
+                return info != null ? info.type : VariableType.ERRO;
             }
         }
         
         if (exp instanceof AAddExp || exp instanceof ASubExp || exp instanceof AMulExp
         		|| exp instanceof ADivExp || exp instanceof AModExp) {
-            return "number";
+            return VariableType.NUMBER;
         }
         
         if (exp instanceof AGtExp || exp instanceof ALtExp || exp instanceof AGeExp
         		|| exp instanceof ALeExp || exp instanceof AEqExp || exp instanceof ANeExp) {
-            return "answer";
+            return VariableType.ANSWER;
         }
         
         if (exp instanceof AAndExp || exp instanceof AOrExp || exp instanceof AXorExp) {
-            return "answer";
+            return VariableType.ANSWER;
         }
         
         if (exp instanceof ANegExp) {
-            return "number";
+            return VariableType.NUMBER;
         }
         
-        return "erro";
+        return VariableType.ERRO;
     }
     
     private void reportError(String message, Node node) {
@@ -145,7 +161,7 @@ public class SemanticAnalyzer extends DepthFirstAdapter {
     @Override
     public void outAMutDeclaracao(AMutDeclaracao node) {
         String id = node.getIdentificador().getText();
-        String type = getTypeString(node.getTipo());
+        VariableType type = getTypeString(node.getTipo());
         
         System.out.println("declaring: " + id);
         
@@ -158,7 +174,7 @@ public class SemanticAnalyzer extends DepthFirstAdapter {
         
         VariableData info = new VariableData(
         		type, 
-        		"alterable",
+        		VariableKind.ALTERABLE,
         		false, 
         		currentScopeLevel
         	);
@@ -170,7 +186,7 @@ public class SemanticAnalyzer extends DepthFirstAdapter {
     @Override
     public void outAUnaltDeclaracao(AUnaltDeclaracao node) {
         String id = node.getIdentificador().getText();
-        String type = getTypeString(node.getTipo());
+        VariableType type = getTypeString(node.getTipo());
         
         System.out.println("declaring: " + id);
         
@@ -180,14 +196,14 @@ public class SemanticAnalyzer extends DepthFirstAdapter {
             return;
         }
         
-        VariableData info = new VariableData(type, "unalterable", false, currentScopeLevel);
+        VariableData info = new VariableData(type, VariableKind.UNALTERABLE, false, currentScopeLevel);
         declarar(id, info);
     }
     
     @Override
     public void outAUnaltInitDeclaracao(AUnaltInitDeclaracao node) {
         String id = node.getIdentificador().getText();
-        String type = getTypeString(node.getTipo());
+        VariableType type = getTypeString(node.getTipo());
         
         System.out.println("declaring: " + id);
         
@@ -196,14 +212,14 @@ public class SemanticAnalyzer extends DepthFirstAdapter {
             return;
         }
         
-        String valueType = getValueType(node.getValor());
-        if (!type.equals(valueType)) {
+        VariableType valueType = getValueType(node.getValor());
+        if (type != valueType) {
             reportError("Type mismatch:'" + type + "' vs '" + valueType + "'", node);
         }
         
         VariableData info = new VariableData(
         		type, 
-        		"unalterable", 
+        		VariableKind.UNALTERABLE, 
         		true, 
         		currentScopeLevel
     		);
@@ -213,7 +229,7 @@ public class SemanticAnalyzer extends DepthFirstAdapter {
     @Override
     public void outAVecDeclaracao(AVecDeclaracao node) {
         String id = node.getIdentificador().getText();
-        String type = getTypeString(node.getTipo());
+        VariableType type = getTypeString(node.getTipo());
         
         System.out.println("declaring: " + id);
         
@@ -238,7 +254,7 @@ public class SemanticAnalyzer extends DepthFirstAdapter {
             }
         }
         
-        VariableData info = new VariableData(type, "vector", dimensions, currentScopeLevel);
+        VariableData info = new VariableData(type, VariableKind.VECTOR, dimensions, currentScopeLevel);
         declarar(id, info);
     }
 
@@ -269,15 +285,15 @@ public class SemanticAnalyzer extends DepthFirstAdapter {
                 return;
             }
             
-            if ("unalterable".equals(info.kind) && info.initialized) {
+            if (info.kind == VariableKind.UNALTERABLE && info.initialized) {
                 reportError("Cant change unalterable variable '" + varName + "'", node);
                 return;
             }
             
             
             
-            String expType = getExpressionType(node.getExp());
-            if (!info.type.equals(expType) && !"erro".equals(expType)) {
+            VariableType expType = getExpressionType(node.getExp());
+            if (info.type != expType) {
                 reportError("Type mismatch: expected '" + info.type + 
                            "' but got '" + expType + "'", node);
             }
@@ -296,7 +312,7 @@ public class SemanticAnalyzer extends DepthFirstAdapter {
             return;
         }
         
-        if (!info.kind.equals("unalterable")) {
+        if (info.kind != VariableKind.UNALTERABLE) {
             reportError("Can only initialize unalterable variables", node);
             return;
         }
@@ -308,8 +324,8 @@ public class SemanticAnalyzer extends DepthFirstAdapter {
         
         
         
-        String expType = getExpressionType(node.getExp());
-        if (!info.type.equals(expType) && !expType.equals("erro")) {
+        VariableType expType = getExpressionType(node.getExp());
+        if (info.type != expType && expType != VariableType.ERRO) {
             reportError("Type mismatch in initialization: expected '" + info.type + 
                        "' but got '" + expType + "'", node);
         }
@@ -321,8 +337,8 @@ public class SemanticAnalyzer extends DepthFirstAdapter {
     public void inAWhileComando(AWhileComando node) {
         loopDepth++;
         
-        String condType = getExpressionType(node.getExp());
-        if (!condType.equals("answer")) {
+        VariableType condType = getExpressionType(node.getExp());
+        if (condType != VariableType.ANSWER) {
             reportError("While condition must be of type 'answer'", node);
         }
     }
@@ -342,17 +358,17 @@ public class SemanticAnalyzer extends DepthFirstAdapter {
         if (var instanceof AIdVar) {
             String iterName = ((AIdVar) var).getIdentificador().getText();
 
-            VariableData iterInfo = new VariableData("number", "alterable", true, currentScopeLevel);
+            VariableData iterInfo = new VariableData(VariableType.NUMBER, VariableKind.ALTERABLE, true, currentScopeLevel);
             
             declarar(iterName, iterInfo);
         }
         
-        String fromType = getExpressionType(node.getA());
-        String toType = getExpressionType(node.getB());
-        String byType = getExpressionType(node.getC());
+        VariableType fromType = getExpressionType(node.getA());
+        VariableType toType = getExpressionType(node.getB());
+        VariableType byType = getExpressionType(node.getC());
         
-        if (!"number".equals(fromType) && !"number".equals(toType) && !"number".equals(byType)) {
-            reportError("For loop expression must be a number", node);
+        if (!(fromType == VariableType.NUMBER) && toType != VariableType.NUMBER && byType != VariableType.NUMBER) {
+            reportError("For loop expressions must be a number", node);
         }
     }
     
@@ -378,16 +394,16 @@ public class SemanticAnalyzer extends DepthFirstAdapter {
     
     @Override
     public void outAIfThenElseComando(AIfThenElseComando node) {
-        String condType = getExpressionType(node.getExp());
-        if (!"answer".equals(condType) && !"erro".equals(condType)) {
+        VariableType condType = getExpressionType(node.getExp());
+        if (condType != VariableType.ANSWER) {
             reportError("If condition must be of type 'answer'", node);
         }
     }
     
     @Override
     public void outAIfThenComando(AIfThenComando node) {
-        String condType = getExpressionType(node.getExp());
-        if (!"answer".equals(condType) && !"erro".equals(condType)) {
+    	VariableType condType = getExpressionType(node.getExp());
+        if (condType != VariableType.ANSWER) {
             reportError("If condition must be of type 'answer'", node);
         }
     }
@@ -401,7 +417,7 @@ public class SemanticAnalyzer extends DepthFirstAdapter {
 
                 if (info == null) {
                     reportError("Undefined variable '" + name + "' in capture", node);
-                } else if ("unalterable".equals(info.kind)) {
+                } else if (info.kind == VariableKind.UNALTERABLE) {
                     reportError("Cannot capture into unalterable variable '" + name + "'", node);
                 }
                 else {
@@ -429,28 +445,28 @@ public class SemanticAnalyzer extends DepthFirstAdapter {
         if (info == null) {
             reportError("Undefined variable '" + id + "'", node);
             
-        } else if (!info.initialized && "unalterable".equals(info.kind)) {
-            reportError("Variable '" + id + "' used before initialization", node);
+        } else if (!info.initialized && info.kind == VariableKind.UNALTERABLE) {
+            reportError("'" + id + "' used before initialization", node);
         }
     }
     
     private void checkBinaryArithmeticOp(PExp left, PExp right, Node node) {
     	
-        String leftType = getExpressionType(left);
-        String rightType = getExpressionType(right);
+    	VariableType leftType = getExpressionType(left);
+    	VariableType rightType = getExpressionType(right);
         
-        if ((!"number".equals(leftType)) || (!"number".equals(rightType))) {
+        if (leftType != VariableType.NUMBER || rightType != VariableType.NUMBER) {
             reportError("operation requires number operands", node);
         }
     }
     
     private void checkBinaryLogicalOp(PExp left, PExp right, Node node) {
-        String leftType = getExpressionType(left);
-        String rightType = getExpressionType(right);
+    	VariableType leftType = getExpressionType(left);
+    	VariableType rightType = getExpressionType(right);
         
-        if ((!"answer".equals(leftType) && !"erro".equals(leftType)) ||
-            (!"answer".equals(rightType) && !"erro".equals(rightType))) {
-            reportError("Logical operation requires answer (boolean) operands", node);
+        if (leftType != VariableType.ANSWER ||
+            rightType != VariableType.ANSWER) {
+            reportError("operation requires answer operands", node);
         }
     }
     
@@ -496,17 +512,17 @@ public class SemanticAnalyzer extends DepthFirstAdapter {
     
     @Override
     public void outANegExp(ANegExp node) {
-        String type = getExpressionType(node.getExp());
-        if (!"number".equals(type) && !"erro".equals(type)) {
-            reportError("Negation requires number operand", node);
+    	VariableType type = getExpressionType(node.getExp());
+		if (type != VariableType.NUMBER) {
+            reportError("Negative requires number operand", node);
         }
     }
     
     private void checkComparisonOp(PExp left, PExp right, Node node) {
-        String leftType = getExpressionType(left);
-        String rightType = getExpressionType(right);
+    	VariableType leftType = getExpressionType(left);
+    	VariableType rightType = getExpressionType(right);
         
-        if (!leftType.equals(rightType) || "erro".equals(leftType)) {
+        if (rightType != leftType || leftType == VariableType.ERRO) {
             reportError("Invalid operands in compariosn", node);
         }
     }
