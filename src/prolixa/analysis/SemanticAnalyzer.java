@@ -42,9 +42,7 @@ public class SemanticAnalyzer extends DepthFirstAdapter {
             this.dimensions = dimensions;
         }
     }
-    
 
-	}
 
     private VariableType getTypeString(PTipo tipo) {
         if (tipo instanceof ANumberTipo) return VariableType.NUMBER;
@@ -456,7 +454,7 @@ public class SemanticAnalyzer extends DepthFirstAdapter {
     	VariableType rightType = getExpressionType(right);
         
         if (leftType != VariableType.NUMBER || rightType != VariableType.NUMBER) {
-            reportError("operation requires number operands", node);
+            reportError("operation requires number operands: " + left.toString() + " " + right.toString(), node);
         }
     }
     
